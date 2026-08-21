@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>創業經營管理 Entrepreneurship｜18週全英教學課程</title>
+<meta name="description" content="國立高雄餐旅大學 ITM 學程「創業經營管理 Entrepreneurship」18週全英教學課程介紹：Design Thinking、Business Model Canvas、Business Plan、Pitch 完整實作歷程。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12262a;
+    --teal:#1f3a3d;
+    --teal-deep:#0e1f22;
+    --gold:#d4a24c;
+    --rust:#b5533c;
+    --paper:#efe7d8;
+    --paper-bright:#f7f2e7;
+    --line: rgba(18,38,42,0.14);
+
+    --bg: var(--paper-bright);
+    --surface:#ffffff;
+    --surface-alt: var(--paper);
+    --text: var(--ink);
+    --text-muted:#5b6f6c;
+    --border: var(--line);
+    --shadow: 0 1px 2px rgba(14,31,34,0.06), 0 8px 24px rgba(14,31,34,0.08);
+    --radius: 14px;
+    --serif:'Fraunces', Georgia, "Noto Serif TC", serif;
+    --sans:'Work Sans', -apple-system, "PingFang TC", "Microsoft JhengHei", sans-serif;
+    --mono:'IBM Plex Mono', ui-monospace, monospace;
+
+    --phase1: var(--rust);
+    --phase2: var(--gold);
+    --phase3:#4f7a5c;
+    --phase4:#3d6a8a;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: var(--teal-deep);
+      --surface:#152c2f;
+      --surface-alt:#1a3336;
+      --text: var(--paper-bright);
+      --text-muted:#b9c7c4;
+      --border: rgba(247,242,231,0.14);
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+      --phase3:#7fae8d;
+      --phase4:#7fb0d6;
+    }
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--rust);}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+
+  header.hero{
+    padding:96px 0 64px;
+    border-bottom:1px solid var(--border);
+    background:
+      radial-gradient(700px 340px at 88% -10%, color-mix(in srgb, var(--gold) 16%, transparent), transparent),
+      radial-gradient(700px 340px at 8% -20%, color-mix(in srgb, var(--rust) 12%, transparent), transparent);
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    text-transform:uppercase;
+    letter-spacing:.14em;
+    color:var(--rust);
+    font-size:.82rem;
+    margin:0 0 14px;
+  }
+  h1{
+    font-family:var(--serif);
+    font-size:clamp(2.1rem, 4vw, 3.3rem);
+    line-height:1.12;
+    margin:0 0 18px;
+    font-weight:700;
+  }
+  h1 .en{
+    display:block;
+    font-size:.48em;
+    font-weight:500;
+    font-style:italic;
+    color:var(--text-muted);
+    letter-spacing:.01em;
+    margin-top:10px;
+  }
+  .lede{
+    max-width:640px;
+    font-size:1.08rem;
+    color:var(--text-muted);
+    margin:0 0 28px;
+  }
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;}
+  .pill{
+    display:inline-flex;align-items:center;gap:6px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    padding:7px 14px;
+    border-radius:999px;
+    font-size:.84rem;
+    font-family:var(--mono);
+    color:var(--text);
+  }
+
+  section{padding:64px 0;}
+  section.alt{background:var(--surface-alt);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  .section-head{max-width:680px;margin:0 0 40px;}
+  .section-head .kicker{
+    font-family:var(--mono);
+    font-size:.76rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--rust);margin:0 0 10px;
+  }
+  .section-head h2{
+    font-family:var(--serif);
+    font-size:clamp(1.5rem,2.6vw,2rem);
+    margin:0 0 10px;
+    font-weight:600;
+  }
+  .section-head p{color:var(--text-muted);margin:0;}
+
+  .journey{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+  }
+  .journey .step{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:20px;box-shadow:var(--shadow);
+  }
+  .journey .step .num{font-family:var(--serif);font-size:1.6rem;font-weight:700;}
+  .journey .step h3{margin:6px 0 6px;font-size:1.02rem;font-family:var(--serif);font-weight:600;}
+  .journey .step p{margin:0;color:var(--text-muted);font-size:.9rem;}
+  .journey .step:nth-child(1){border-top:3px solid var(--phase1);}
+  .journey .step:nth-child(2){border-top:3px solid var(--phase2);}
+  .journey .step:nth-child(3){border-top:3px solid var(--phase3);}
+  .journey .step:nth-child(4){border-top:3px solid var(--phase4);}
+
+  .phase-block{margin-bottom:56px;}
+  .phase-block:last-child{margin-bottom:0;}
+  .phase-header{
+    display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+    margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid var(--phase-color);
+  }
+  .phase-tag{
+    font-family:var(--mono);font-weight:500;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;color:var(--phase-color);
+  }
+  .phase-header h3{margin:0;font-size:1.15rem;font-weight:600;font-family:var(--serif);}
+  .phase-header .weeks-range{color:var(--text-muted);font-size:.85rem;margin-left:auto;font-family:var(--mono);}
+  .phase-desc{color:var(--text-muted);margin:0 0 22px;max-width:720px;font-size:.96rem;}
+
+  .week-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;
+  }
+  .week-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:18px 20px;box-shadow:var(--shadow);
+    position:relative;
+  }
+  .week-card .wk-num{
+    display:inline-block;font-size:.72rem;font-family:var(--mono);letter-spacing:.06em;
+    color:var(--phase-color);text-transform:uppercase;margin-bottom:8px;
+  }
+  .week-card h4{
+    margin:0 0 8px;font-size:1.02rem;line-height:1.35;font-weight:600;font-family:var(--serif);
+  }
+  .week-card .topic{font-size:.88rem;color:var(--text);margin:0 0 10px;}
+  .week-card .activity{
+    font-size:.85rem;color:var(--text-muted);margin:0;
+    border-top:1px dashed var(--border);padding-top:10px;
+  }
+  .week-card .activity b{color:var(--text);font-weight:600;}
+  .milestone::after{
+    content:"MILESTONE";
+    position:absolute;top:16px;right:16px;
+    font-family:var(--mono);
+    font-size:.6rem;font-weight:500;letter-spacing:.08em;
+    color:var(--phase-color);background:color-mix(in srgb, var(--phase-color) 16%, transparent);
+    padding:3px 8px;border-radius:6px;
+  }
+  .week-card .materials-link{
+    display:inline-flex;align-items:center;gap:5px;
+    margin-top:12px;font-size:.82rem;font-family:var(--mono);
+    color:var(--rust);text-decoration:none;font-weight:500;
+  }
+  .week-card .materials-link:hover{text-decoration:underline;}
+
+  #phase1{--phase-color:var(--phase1);}
+  #phase2{--phase-color:var(--phase2);}
+  #phase3{--phase-color:var(--phase3);}
+  #phase4{--phase-color:var(--phase4);}
+
+  .grading{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;
+  }
+  .grade-item{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:20px;box-shadow:var(--shadow);
+  }
+  .grade-item .pct{font-family:var(--serif);font-size:2rem;font-weight:700;color:var(--rust);}
+  .grade-item .label{font-size:.9rem;color:var(--text-muted);margin-top:4px;}
+  .bar{height:8px;border-radius:4px;background:var(--surface-alt);margin-top:12px;overflow:hidden;border:1px solid var(--border);}
+  .bar span{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--rust));}
+
+  footer{
+    padding:40px 0 60px;text-align:center;color:var(--text-muted);font-size:.85rem;font-family:var(--mono);
+  }
+
+  @media (max-width: 860px){
+    .journey{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width: 560px){
+    header.hero{padding:64px 0 44px;}
+    .journey{grid-template-columns:1fr;}
+    section{padding:48px 0;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">NKUHT · International Tourism Management (ITM)</p>
+    <h1>創業經營管理
+      <span class="en">Entrepreneurship — An 18-Week EMI Studio Course</span>
+    </h1>
+    <p class="lede">
+      國立高雄餐旅大學 ITM 學程全英語授課課程。18週、3學分，實作導向：
+      學生從校園生活與餐旅觀光產業出發，運用 Design Thinking 找出真實痛點，
+      透過 Business Model Canvas 建構商業模式，最終完成一份可上台 Pitch 的
+      Business Plan，並在 Demo Day 接受評審提問。
+    </p>
+    <div class="meta-row">
+      <span class="pill">18 WEEKS</span>
+      <span class="pill">3 CREDITS</span>
+      <span class="pill">EMI · 全英教學</span>
+      <span class="pill">DESIGN THINKING → BMC → BP → PITCH</span>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <p class="kicker">Course Journey</p>
+      <h2>四個階段,一場從「痛點」到「Demo Day」的旅程</h2>
+      <p>課程分為四個 Phase,環環相扣:先建立創業心態與同理心,再收斂成商業模式,
+        接著動手做原型與試算財務,最後整合成一份完整的商業計畫並站上台 Pitch。</p>
+    </div>
+    <div class="journey">
+      <div class="step">
+        <div class="num" style="color:var(--phase1)">01</div>
+        <h3>Mindset &amp; Ideation</h3>
+        <p>Week 1–5・建立創業家精神,透過 Design Thinking 找出校園與餐旅市場的真實痛點。</p>
+      </div>
+      <div class="step">
+        <div class="num" style="color:var(--phase2)">02</div>
+        <h3>Business Models &amp; Validation</h3>
+        <p>Week 6–9・用 Business Model Canvas 把創意變成商業模型,並以市場調查驗證需求。</p>
+      </div>
+      <div class="step">
+        <div class="num" style="color:var(--phase3)">03</div>
+        <h3>Prototyping &amp; Finance</h3>
+        <p>Week 10–13・動手做原型、規劃行銷通路,估算成本、營收與損益兩平點。</p>
+      </div>
+      <div class="step">
+        <div class="num" style="color:var(--phase4)">04</div>
+        <h3>Business Plan &amp; Pitching</h3>
+        <p>Week 14–18・撰寫正式商業計畫書、打磨簡報技巧,迎戰 Final Demo Day。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="kicker">Syllabus</p>
+      <h2>18週完整課綱</h2>
+      <p>每週 3 小時,理論講解搭配動手實作活動;Week 9 為期中里程碑,Week 17–18 為期末總驗收。</p>
+    </div>
+
+    <!-- Phase 1 -->
+    <div class="phase-block" id="phase1">
+      <div class="phase-header">
+        <span class="phase-tag">Phase 1</span>
+        <h3>Mindset &amp; Ideation</h3>
+        <span class="weeks-range">Week 1–5</span>
+      </div>
+      <p class="phase-desc">焦點:建立創業家精神、學習設計思考方法,尋找校園與餐旅市場的真實痛點。</p>
+      <div class="week-grid">
+        <div class="week-card">
+          <span class="wk-num">Week 1</span>
+          <h4>Course Introduction &amp; The Entrepreneurial Mindset</h4>
+          <p class="topic">課程地圖、評分方式,定義餐旅觀光產業中的創業精神。</p>
+          <p class="activity"><b>Activity —</b> The Paperclip Challenge:團隊用一根迴紋針,在校園內以物易物換取更高價值的東西,體會「價值創造」。</p>
+          <a class="materials-link" href="weeks/week1.html">→ 查看 Week 1 教材</a>
+        </div>
+        <div class="week-card">
+          <span class="wk-num">Week 2</span>
+          <h4>Design Thinking I: Empathize &amp; Define</h4>
+          <p class="topic">在校園活動或在地觀光場域中找出痛點。</p>
+          <p class="activity"><b>Activity —</b> Campus Observation Safari:訪談同學,找出校園活動與流程中的低效環節。</p>
+        </div>
+        <div class="week-card">
+          <span class="wk-num">Week 3</span>
+          <h4>Design Thinking II: Ideation &amp; Brainstorming</h4>
+          <p class="topic">發散思考 vs. 收斂思考;把抱怨轉化為商機。</p>
+          <p class="activity"><b>Activity —</b> Crazy Eights:8 分鐘內畫出 8 個不同的產品／服務點子。</p>
+        </div>
+        <div class="week-card">
+          <span class="wk-num">Week 4</span>
+          <h4>Value Proposition &amp; Customer Segments</h4>
+          <p class="topic">你的顧客是誰?填寫 Value Proposition Canvas。</p>
+          <p class="activity"><b>Activity —</b> 建立 2 個對比鮮明的顧客畫像(例如:交換學生 vs. 通勤學生)。</p>
+        </div>
+        <div class="week-card">
+          <span class="wk-num">Week 5</span>
+          <h4>Team Formation &amp; Core Idea Selection</h4>
+          <p class="topic">團隊動力學、角色分工(CEO／CFO／CMO／CTO),確立最終專案方向。</p>
+          <p class="activity"><b>Activity —</b> Idea Marketplace:學生向同儕推銷自己的點子招募隊友,簽署 Co-founder Agreement。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="phase-block" id="phase2">
+      <div class="phase-header">
+        <span class="phase-tag">Phase 2</span>
+        <h3>Business Models &amp; Market Validation</h3>
+        <span class="weeks-range">Week 6–9</span>
+      </div>
+      <p class="phase-desc">焦點:將創意轉化為商業模式,並進入市場以真實數據驗證。</p>
+      <div class="week-grid">
+        <div class="week-card">
+          <span class="wk-num">Week 6</span>
+          <h4>Business Model Canvas (BMC) Part 1</h4>
+          <p class="topic">基礎建設與提供物:Key Partners、Key Activities、Key Resources、Value Propositions。</p>
+          <p class="activity"><b>Activity —</b> 分析知名觀光新創案例(如 KKday／Klook 的初期商業模式)。</p>
+        </div>
+        <div class="week-card">
+          <span class="wk-num">Week 7</span>
+          <h4>Business Model Canvas (BMC) Part 2</h4>
+          <p class="topic">顧客與財務:Customer Relationships、Channels、Cost Structure、Revenue Streams。</p>
+          <p class="activity"><b>Activity —</b> 完成團隊的第一版一頁式 BMC。</p>
+        </div>
+        <div class="week-card">
+          <span class="wk-num">Week 8</span>
+          <h4>Market Research &amp; Competitor Analysis</h4>
+          <p class="topic">一手 vs. 二手研究;設計 Google Form 問卷、分析在地競品。</p>
+          <p class="activity"><b>Activity —</b> 團隊設計線上問卷驗證校園產品需求(目標:至少 30 份回覆)。</p>
+        </div>
+        <div class="week-card milestone">
+          <span class="wk-num">Week 9</span>
+          <h4>Midterm Progress Report (Milestone 1)</h4>
+          <p class="topic">呈現已驗證的問題、驗證過的解決方案,以及初版 BMC。</p>
+          <p class="activity"><b>Activity —</b> Peer-Review Panel:團隊進行 5 分鐘簡報,由老師與同學共同回饋。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 3 -->
+    <div class="phase-block" id="phase3">
+      <div class="phase-header">
+        <span class="phase-tag">Phase 3</span>
+        <h3>Prototyping &amp; Financial Fundamentals</h3>
+        <span class="weeks-range">Week 10–13</span>
+      </div>
+      <p class="phase-desc">焦點:動手做原型、估算開辦成本與營收,評估財務可行性。</p>
+      <div class="week-grid">
+        <div class="week-card">
+          <span class="wk-num">Week 10</span>
+          <h4>Minimum Viable Product (MVP) &amp; Prototyping</h4>
+          <p class="topic">邊做邊學;低擬真度 vs. 高擬真度原型。</p>
+          <p class="activity"><b>Activity —</b> UI/UX 或實體 Mockup Studio:製作 Landing Page、數位線框稿(Figma／Canva)或實體原型模型。</p>
+        </div>
+        <div class="week-card">
+          <span class="wk-num">Week 11</span>
+          <h4>Marketing Strategy &amp; Go-To-Market (GTM) Plan</h4>
+          <p class="topic">將行銷 4P 應用於新創上市;數位行銷基礎。</p>
+          <p class="activity"><b>Activity —</b> 規劃一份 4 週的上市行銷計畫,運用 Instagram／LINE 行銷策略。</p>
+        </div>
+        <div class="week-card">
+          <span class="wk-num">Week 12</span>
+          <h4>Startup Finance I: Cost Structure &amp; Pricing</h4>
+          <p class="topic">固定成本 vs. 變動成本;成本加成定價 vs. 價值定價。</p>
+          <p class="activity"><b>Activity —</b> 計算產品／服務的銷貨成本(COGS),並訂出單價。</p>
+        </div>
+        <div class="week-card">
+          <span class="wk-num">Week 13</span>
+          <h4>Startup Finance II: Revenue Projections &amp; Break-Even Analysis</h4>
+          <p class="topic">銷售預測、損益兩平點(BEP)計算。</p>
+          <p class="activity"><b>Activity —</b> 填寫簡化版 Excel 試算表,計算每月燒錢速度與現金存活期。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 4 -->
+    <div class="phase-block" id="phase4">
+      <div class="phase-header">
+        <span class="phase-tag">Phase 4</span>
+        <h3>Crafting the Business Plan &amp; Pitching</h3>
+        <span class="weeks-range">Week 14–18</span>
+      </div>
+      <p class="phase-desc">焦點:整合所有內容撰寫商業計畫書、精煉簡報技巧,迎戰 Demo Day。</p>
+      <div class="week-grid">
+        <div class="week-card">
+          <span class="wk-num">Week 14</span>
+          <h4>Writing the Professional Business Plan (BP)</h4>
+          <p class="topic">書面報告架構:executive summary、營運計畫、風險管理。</p>
+          <p class="activity"><b>Activity —</b> Document Workshop:團隊分工撰寫 BP 各章節並統一格式排版。</p>
+        </div>
+        <div class="week-card">
+          <span class="wk-num">Week 15</span>
+          <h4>The Art of the Pitch: Structure &amp; Storytelling</h4>
+          <p class="topic">10 頁 Pitch Deck 結構:Hook、Problem、Solution、Market、Product、Business Model、Competition、Marketing、Financials、Team。</p>
+          <p class="activity"><b>Activity —</b> 分析 Techstars／Y Combinator 成功 Pitch 影片案例。</p>
+        </div>
+        <div class="week-card">
+          <span class="wk-num">Week 16</span>
+          <h4>Slide Design &amp; Q&amp;A Defense Strategy</h4>
+          <p class="topic">視覺簡報原則(少文字、多圖表);預判尖銳的投資人提問。</p>
+          <p class="activity"><b>Activity —</b> Pitch Speed Dating:向另一組團隊練習 3 分鐘 Pitch,接著 2 分鐘互相回饋。</p>
+        </div>
+        <div class="week-card milestone">
+          <span class="wk-num">Week 17</span>
+          <h4>Grand Finale: Final Demo Day / Pitch Competition (Milestone 2)</h4>
+          <p class="topic">展示最終產品、商業模式與財務預測。</p>
+          <p class="activity"><b>Activity —</b> NKUHT ITM Shark Tank:每隊 5 分鐘簡報＋4 分鐘 Q&amp;A(可邀請業界／育成中心評審)。</p>
+        </div>
+        <div class="week-card">
+          <span class="wk-num">Week 18</span>
+          <h4>Course Wrap-Up &amp; Post-Mortem Reflection</h4>
+          <p class="topic">個人自我評估、同儕互評,並為未來職涯應用整理心得。</p>
+          <p class="activity"><b>Activity —</b> 團隊繳交最終修訂版 Business Plan PDF,並完成 360 度同儕評量表。</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <p class="kicker">Assessment</p>
+      <h2>評分方式</h2>
+      <p>評量貫穿整學期,強調歷程與最終成果並重。</p>
+    </div>
+    <div class="grading">
+      <div class="grade-item">
+        <div class="pct">30%</div>
+        <div class="label">Final Demo Day Pitch(Week 17 簡報)</div>
+        <div class="bar"><span style="width:30%"></span></div>
+      </div>
+      <div class="grade-item">
+        <div class="pct">20%</div>
+        <div class="label">Midterm Progress Report(Week 9 簡報)</div>
+        <div class="bar"><span style="width:20%"></span></div>
+      </div>
+      <div class="grade-item">
+        <div class="pct">20%</div>
+        <div class="label">Written Business Plan(Week 18 PDF 繳交)</div>
+        <div class="bar"><span style="width:20%"></span></div>
+      </div>
+      <div class="grade-item">
+        <div class="pct">20%</div>
+        <div class="label">每週工作坊產出與學習單(個人／小組)</div>
+        <div class="bar"><span style="width:20%"></span></div>
+      </div>
+      <div class="grade-item">
+        <div class="pct">10%</div>
+        <div class="label">出席與同儕互評(360 度回饋)</div>
+        <div class="bar"><span style="width:10%"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    創業經營管理 Entrepreneurship · International Tourism Management, NKUHT · 全英語授課課程
+  </div>
+</footer>
+
+</body>
+</html>
