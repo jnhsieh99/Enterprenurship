@@ -667,8 +667,8 @@
 </div>
 
 <script>
-  const VALID_USERNAME = "nkuht";
-  const VALID_PASSWORD = "hsieh2026";
+  const VALID_USERNAME_HASH = "af2c9d4bb1dd3f15c35b87b6558884d890581b8289637eabcc0732ad10514cb3";
+  const VALID_PASSWORD_HASH = "09825bdcdeca7d22cb13d134d0e289363cc9412ad01cc18eda776dd12cacf87e";
 
   const loginView = document.getElementById("loginView");
   const siteView = document.getElementById("siteView");
@@ -684,11 +684,18 @@
     loginView.classList.remove("hidden");
   }
 
-  function login() {
+  async function sha256(str) {
+    const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
+  }
+
+  async function login() {
     const username = document.getElementById("username").value.trim();
     const password = document.getElementById("password").value;
 
-    if (username === VALID_USERNAME && password === VALID_PASSWORD) {
+    const [uHash, pHash] = await Promise.all([sha256(username), sha256(password)]);
+
+    if (uHash === VALID_USERNAME_HASH && pHash === VALID_PASSWORD_HASH) {
       localStorage.setItem("isLoggedIn", "true");
       showSite();
       errorMsg.textContent = "";
