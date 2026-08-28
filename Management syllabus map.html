@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>管理學｜管理功能與 AI 優化關聯圖譜</title>
+<style>
+  :root{
+    --sky:#0d2b45; --sky-2:#12395c; --paper:#f6f3ea; --line:#dcd6c4; --gold:#c9962c;
+    --ink:#1c1c1c; --mute:#5c5648;
+    --s1:#6b7fb0; --s2:#3a8f6f; --s3:#b3541e; --s4:#a13c5c;
+    --sans:"Helvetica Neue",Arial,"Noto Sans TC",sans-serif;
+    --serif:"Georgia","Noto Serif TC",serif;
+    --mono:"Courier New",monospace;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans); }
+  header{
+    background:linear-gradient(180deg,var(--sky) 0%, var(--sky-2) 100%);
+    color:#f2ece0; padding:56px 24px 48px; position:relative; overflow:hidden;
+  }
+  header::after{ content:""; position:absolute; right:-60px;top:-60px; width:280px;height:280px; border:1px solid rgba(242,236,224,.15); border-radius:50%; }
+  header::before{ content:""; position:absolute; right:20px;top:40px; width:180px;height:180px; border:1px solid rgba(242,236,224,.12); border-radius:50%; }
+  .eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:var(--gold); margin-bottom:14px; }
+  h1{ font-family:var(--serif); font-size:clamp(26px,4.5vw,40px); line-height:1.3; margin:0 0 12px; max-width:700px; }
+  header p{ max-width:600px; color:#c9c2ac; font-size:13.5px; line-height:1.85; margin:0; }
+  main{ max-width:1080px; margin:0 auto; padding:0 24px 80px; }
+
+  .section-title{ display:flex; align-items:baseline; gap:12px; margin:56px 0 22px; }
+  .section-title h2{ font-family:var(--serif); font-size:21px; margin:0; white-space:nowrap; }
+  .section-title .rule{ flex:1; height:1px; background:var(--line); }
+
+  .unit-badge{ display:inline-flex; align-items:center; justify-content:center; width:20px;height:20px; border-radius:50%; background:var(--gold); color:#1c1c1c; font-size:11px; font-weight:700; margin-right:7px; flex-shrink:0; }
+
+  .unit-table{ width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--line); font-size:13px; margin-top:-36px; position:relative; z-index:2; box-shadow:0 10px 24px rgba(20,20,10,.08); }
+  .unit-table th, .unit-table td{ padding:11px 14px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line); line-height:1.7; }
+  .unit-table thead th{ background:var(--sky); color:#f2ece0; font-weight:600; font-size:11.5px; letter-spacing:.03em; }
+  .unit-table tbody tr:nth-child(even) td{ background:#fbfaf5; }
+  .unit-table tbody tr:last-child td{ border-bottom:none; }
+  .unit-table td.no{ width:36px; text-align:center; }
+  .unit-table td.week{ width:110px; color:var(--mute); white-space:nowrap; }
+  .unit-table td.theme{ width:190px; font-weight:700; }
+  .unit-table td.theme.t1{ color:var(--s1);} .unit-table td.theme.t2{ color:var(--s2);}
+  .unit-table td.theme.t3{ color:var(--s3);} .unit-table td.theme.t4{ color:var(--s4);}
+  .unit-table td.theme.tx{ color:var(--gold);} .unit-table td.theme.pre{ color:#9a9484; }
+
+  @media (max-width:700px){ .unit-table{ font-size:12px; } .unit-table td.week{ white-space:normal; } }
+
+  .flag-box{ background:#fbf6e8; border:1px solid #e6d9ac; border-left:6px solid var(--gold); padding:20px 24px; margin:20px 0 30px; }
+  .flag-box .fb-title{ font-family:var(--serif); font-weight:700; color:#8a6a1a; font-size:14px; margin-bottom:8px; }
+  .flag-box p{ font-size:13px; line-height:1.9; color:#5c5648; margin:0; }
+  .flag-box b{ color:var(--sky); }
+
+  .flow{ position:relative; z-index:2; }
+  .stage{ background:#fff; border:1px solid var(--line); border-left:6px solid var(--c); box-shadow:0 10px 24px rgba(20,20,10,.08); padding:22px 24px 20px; margin-bottom:8px; }
+  .stage .stage-head{ display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+  .stage .stage-num{ font-family:var(--serif); font-size:13px; color:#fff; background:var(--c); width:26px;height:26px; border-radius:50%; display:flex;align-items:center;justify-content:center; flex-shrink:0; }
+  .stage .stage-title{ font-family:var(--serif); font-size:18px; font-weight:700; color:var(--c); }
+  .chip-row{ display:flex; align-items:center; flex-wrap:wrap; gap:10px; }
+  .chip{ background:#f2ede0; border:1px solid var(--line); border-radius:5px; padding:8px 14px; font-size:13px; font-weight:600; color:var(--ink); }
+  .chip.strong{ background:var(--c); color:#fff; border-color:var(--c); }
+  .arrow{ color:var(--c); font-size:18px; font-weight:700; flex-shrink:0; }
+  .connector{ display:flex; justify-content:flex-start; padding-left:26px; }
+  .connector .dot-line{ width:2px; height:26px; background:var(--line); position:relative; }
+  .connector .dot-line::after{ content:"▼"; position:absolute; bottom:-11px; left:-6px; font-size:11px; color:var(--gold); }
+  .sub-branches{ margin-top:14px; padding-top:14px; border-top:1px dashed var(--line); display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:10px 20px; }
+  .sub-branch .sb-name{ font-size:12.5px; font-weight:700; color:var(--mute); margin-bottom:3px; }
+  .sub-branch .sb-items{ font-size:12px; color:#4a4436; line-height:1.7; }
+
+  #s1{--c:var(--s1);} #s2{--c:var(--s2);} #s3{--c:var(--s3);} #s4{--c:var(--s4);}
+
+  .detail-block{ background:#fff; border:1px solid var(--line); padding:24px 26px 26px; margin-bottom:18px; }
+  .detail-block h3{ font-family:var(--serif); font-size:17px; margin:0 0 14px; padding-bottom:10px; border-bottom:2px solid var(--c); color:var(--c); }
+  .detail-block p{ font-size:13.3px; line-height:1.9; color:#3a352a; margin:0 0 10px; }
+  .detail-block ul{ margin:0 0 10px; padding-left:20px; }
+  .detail-block li{ font-size:13.3px; line-height:1.9; color:#3a352a; margin-bottom:6px; }
+  .detail-block b{ color:var(--c); }
+  .detail-block .flag{ background:#fbf6e8; border-left:3px solid var(--gold); padding:10px 14px; font-size:12.5px; color:var(--mute); line-height:1.8; margin:10px 0; }
+  #d1{--c:var(--s1);} #d2{--c:var(--s2);} #d3{--c:var(--s3);} #d4{--c:var(--s4);}
+
+  .callout{ margin-top:44px; background:#0d2b45; color:#f2ece0; padding:26px 28px; position:relative; }
+  .callout::before{ content:"⟡"; position:absolute; top:20px; right:24px; color:var(--gold); font-size:22px; }
+  .callout h3{ font-family:var(--serif); color:var(--gold); font-size:17px; margin:0 0 8px; }
+  .callout p{ font-size:13px; color:#d8d1bc; line-height:1.85; margin:0 0 10px; max-width:820px; }
+  .callout ol{ margin:12px 0 0; padding-left:20px; }
+  .callout li{ font-size:13px; line-height:1.9; color:#e8e2cf; margin-bottom:6px; }
+  .callout li b{ color:#fff; }
+
+  footer{ text-align:center; color:var(--mute); font-size:11.5px; padding:36px 24px 50px; border-top:1px solid var(--line); margin-top:40px; }
+
+  .grade-table{ width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--line); font-size:13.5px; }
+  .grade-table th, .grade-table td{ padding:14px 16px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line); line-height:1.8; }
+  .grade-table thead th{ background:var(--sky); color:#f2ece0; font-weight:600; font-size:12px; letter-spacing:.05em; }
+  .grade-table tbody th{ background:#f2ede0; font-weight:700; font-size:13.5px; color:var(--ink); width:150px; white-space:nowrap; }
+  .grade-table td.pct{ font-family:var(--serif); font-size:20px; font-weight:700; color:var(--s3); width:90px; }
+  .grade-table td.pct-max{ color:var(--gold); }
+  .grade-table tbody tr:last-child th, .grade-table tbody tr:last-child td{ border-bottom:none; }
+
+  .grade-notes{ margin-top:16px; display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .grade-note{ background:#fff; border:1px solid var(--line); border-left:4px solid var(--gold); padding:16px 18px 18px; }
+  .grade-note .gn-title{ font-family:var(--serif); font-weight:700; font-size:13.5px; color:var(--sky); margin-bottom:8px; line-height:1.5; }
+  .grade-note p{ margin:0; font-size:12.5px; line-height:1.75; color:#3a352a; }
+
+  @media (max-width:700px){
+    .grade-notes{ grid-template-columns:1fr; }
+    .grade-table, .grade-table thead, .grade-table tbody, .grade-table th, .grade-table td, .grade-table tr{ display:block; }
+    .grade-table thead{ display:none; }
+    .grade-table tbody tr{ border:1px solid var(--line); margin-bottom:14px; background:#fff; }
+    .grade-table tbody th, .grade-table tbody td{ width:auto; display:block; border-bottom:1px dashed var(--line); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">791070 管理學 · 115 學年第 1 學期</div>
+  <h1>管理功能與 AI 優化：規劃、組織、領導、控制的完整地圖</h1>
+  <p>整合 NotebookLM 心智圖「管理功能與 AI 優化」與課程教學大綱，對照 18 週課程進度，呈現管理學經典 POLC 四大功能（規劃 Planning、組織 Organizing、領導 Leading、控制 Controlling）如何對應每週課程內容。</p>
+</header>
+
+<main>
+
+  <table class="unit-table">
+    <thead>
+      <tr><th class="no">#</th><th class="week">週次</th><th>教學單元</th><th class="theme">對應主題</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="no">①</td><td class="week">第 1 週</td><td>課程介紹</td><td class="theme pre">先備基礎（心智圖未收錄）</td></tr>
+      <tr><td class="no">②</td><td class="week">第 2 週</td><td>管理理論的演進</td><td class="theme pre">先備基礎（心智圖未收錄）</td></tr>
+      <tr><td class="no">③</td><td class="week">第 3 週</td><td>管理與環境的關係</td><td class="theme pre">先備基礎（心智圖未收錄）</td></tr>
+      <tr><td class="no">④</td><td class="week">第 4 週</td><td>管理決策</td><td class="theme t1">規劃 Planning</td></tr>
+      <tr><td class="no">⑤</td><td class="week">第 5 週</td><td>規劃的基礎</td><td class="theme t1">規劃 Planning</td></tr>
+      <tr><td class="no">⑥</td><td class="week">第 6 週</td><td>策略管理</td><td class="theme t1">規劃 Planning</td></tr>
+      <tr><td class="no">⑦</td><td class="week">第 7 週</td><td>組織的基礎</td><td class="theme t2">組織 Organizing</td></tr>
+      <tr><td class="no">⑧</td><td class="week">第 8 週</td><td>組織理論及設計</td><td class="theme t2">組織 Organizing</td></tr>
+      <tr><td class="no">⑨</td><td class="week">第 9 週</td><td>期中考</td><td class="theme tx">交匯：①～⑧ 的階段檢核</td></tr>
+      <tr><td class="no">⑩</td><td class="week">第 10 週</td><td>團隊的建立與運用</td><td class="theme t3">領導 Leading</td></tr>
+      <tr><td class="no">⑪</td><td class="week">第 11 週</td><td>激勵</td><td class="theme t3">領導 Leading</td></tr>
+      <tr><td class="no">⑫</td><td class="week">第 12 週</td><td>領導</td><td class="theme t3">領導 Leading</td></tr>
+      <tr><td class="no">⑬</td><td class="week">第 13 週</td><td>控制</td><td class="theme t4">控制 Controlling</td></tr>
+      <tr><td class="no">⑭</td><td class="week">第 14～15 週</td><td>複習與案例整合 I、II</td><td class="theme tx">交匯：①～⑬ 綜合案例演練</td></tr>
+      <tr><td class="no">⑮</td><td class="week">第 16～18 週</td><td>期末報告 I、II、III</td><td class="theme tx">交匯：全部主題的總結展演</td></tr>
+    </tbody>
+  </table>
+
+  <div class="flag-box">
+    <div class="fb-title">⚠ 誠實對照：心智圖只涵蓋管理功能核心週次，前 3 週基礎課程未收錄</div>
+    <p>這份心智圖「管理功能與 AI 優化」聚焦在管理學經典的<b>規劃、組織、領導、控制（POLC）</b>四大功能，對應第 4～13 週（跳過期中考）；第 1～3 週「課程介紹」「管理理論的演進」「管理與環境的關係」屬於管理學的<b>歷史脈絡與環境基礎</b>，是四大功能展開前的暖身知識，但這份心智圖並未收錄其細項內容。另外，心智圖每個分支旁的「＞」符號顯示節點可展開，但本次截圖只呈現最上層四大分支，未展開的子分支內容暫時無法對照，下方拆解以四大管理功能的課本經典架構補充說明。</p>
+  </div>
+
+  <div class="section-title" style="margin-top:0;"><h2>管理功能關聯流程圖</h2><span class="rule"></span></div>
+
+  <div class="flow">
+    <div class="stage" id="s1">
+      <div class="stage-head"><div class="stage-num">1</div><div class="stage-title">規劃 Planning</div></div>
+      <div class="chip-row">
+        <span class="chip strong"><span class="unit-badge">④</span>第 4 週 管理決策</span>
+        <span class="arrow">→</span>
+        <span class="chip strong"><span class="unit-badge">⑤</span>第 5 週 規劃的基礎</span>
+        <span class="arrow">→</span>
+        <span class="chip strong"><span class="unit-badge">⑥</span>第 6 週 策略管理</span>
+      </div>
+      <div class="sub-branches"><div class="sub-branch"><div class="sb-name">心智圖分支（未展開子項）</div><div class="sb-items">規劃（Planning）· AI 優化角度可能涵蓋：數據輔助決策、AI 預測分析用於策略規劃</div></div></div>
+    </div>
+
+    <div class="connector"><div class="dot-line"></div></div>
+
+    <div class="stage" id="s2">
+      <div class="stage-head"><div class="stage-num">2</div><div class="stage-title">組織 Organizing</div></div>
+      <div class="chip-row">
+        <span class="chip strong"><span class="unit-badge">⑦</span>第 7 週 組織的基礎</span>
+        <span class="arrow">→</span>
+        <span class="chip strong"><span class="unit-badge">⑧</span>第 8 週 組織理論及設計</span>
+      </div>
+      <div class="sub-branches"><div class="sub-branch"><div class="sb-name">心智圖分支（未展開子項）</div><div class="sb-items">組織（Organizing）· AI 優化角度可能涵蓋：組織結構彈性化、AI 輔助人力資源配置</div></div></div>
+    </div>
+
+    <div class="connector"><div class="dot-line"></div></div>
+
+    <div class="stage" id="s3">
+      <div class="stage-head"><div class="stage-num">3</div><div class="stage-title">領導 Leading</div></div>
+      <div class="chip-row">
+        <span class="chip strong"><span class="unit-badge">⑩</span>第 10 週 團隊建立與運用</span>
+        <span class="arrow">→</span>
+        <span class="chip strong"><span class="unit-badge">⑪</span>第 11 週 激勵</span>
+        <span class="arrow">→</span>
+        <span class="chip strong"><span class="unit-badge">⑫</span>第 12 週 領導</span>
+      </div>
+      <div class="sub-branches"><div class="sub-branch"><div class="sb-name">心智圖分支（未展開子項）</div><div class="sb-items">領導（Leading）· AI 優化角度可能涵蓋：數位溝通工具、AI 輔助員工激勵方案設計</div></div></div>
+    </div>
+
+    <div class="connector"><div class="dot-line"></div></div>
+
+    <div class="stage" id="s4">
+      <div class="stage-head"><div class="stage-num">4</div><div class="stage-title">控制 Controlling</div></div>
+      <div class="chip-row"><span class="chip strong"><span class="unit-badge">⑬</span>第 13 週 控制</span></div>
+      <div class="sub-branches"><div class="sub-branch"><div class="sb-name">心智圖分支（未展開子項）</div><div class="sb-items">控制（Controlling）· AI 優化角度可能涵蓋：即時數據監控、AI 異常偵測輔助管理控制</div></div></div>
+    </div>
+  </div>
+
+  <div class="section-title"><h2>四大管理功能關聯性拆解</h2><span class="rule"></span></div>
+
+  <div class="detail-block" id="d1">
+    <h3>一、規劃 Planning（單元④⑤⑥）：管理循環的第一步</h3>
+    <p><b>管理決策、規劃的基礎、策略管理</b>——這三週建立管理學最基本的起手式：先學會如何做<b>決策</b>（單元④），再建立規劃的基本原理（單元⑤：目標設定、規劃類型、規劃程序），最後把規劃拉高到組織層級的<b>策略管理</b>（單元⑥：SWOT、策略層級、競爭策略）。三週依序遞進，從「個人決策」到「組織策略」，是規劃功能的完整脈絡。</p>
+    <p>這一區塊直接對應教學目標 1（清楚論述規劃、組織、領導、控制四大管理功能），也是<b>單元⑨（期中考）</b>檢核的重要範圍之一。</p>
+  </div>
+
+  <div class="detail-block" id="d2">
+    <h3>二、組織 Organizing（單元⑦⑧）：把規劃落實成架構</h3>
+    <p><b>組織的基礎、組織理論及設計</b>——規劃決定「要做什麼」，組織功能則回答「由誰做、怎麼分工」。單元⑦建立組織的基本概念（部門化、指揮鏈、控制幅度），單元⑧則進一步探討不同組織理論與設計模式（機械式 vs 有機式組織、矩陣型組織等）。</p>
+    <p>這一區塊直接對應教學目標 3（評析組織結構設計、變革與人才任用的實務案例，並提案改善建議），也是<b>單元⑨（期中考）</b>的最後一塊拼圖。</p>
+  </div>
+
+  <div class="detail-block" id="d3">
+    <h3>三、領導 Leading（單元⑩⑪⑫）：從團隊到個人的引導藝術</h3>
+    <p><b>團隊的建立與運用、激勵、領導</b>——期中考後的第一個主題，把視角從「組織架構」轉向「人」：單元⑩探討如何建立與運作有效團隊，單元⑪聚焦激勵理論如何驅動員工行為，單元⑫則整合成完整的領導理論與風格探討。三週由「群體」到「個體動機」再到「領導者角色」，構成完整的領導功能學習路徑。</p>
+    <p>這一區塊直接對應教學目標 4（評析領導、激勵、溝通與控制機制，並提案適切的管理方案），也是<b>期末報告</b>最容易發揮的主題之一。</p>
+  </div>
+
+  <div class="detail-block" id="d4">
+    <h3>四、控制 Controlling（單元⑬）：管理循環的收尾與回饋</h3>
+    <p><b>控制</b>——只安排一週，是四大功能中份量最精簡的一支，但概念上是整個管理循環（規劃→組織→領導→控制）的收尾：透過設定標準、衡量績效、比較差異、採取矯正行動，確保組織的實際運作沒有偏離規劃階段設定的目標，形成管理循環的回饋迴路。</p>
+    <div class="flag">誠實對照：心智圖把「控制」列為與規劃、組織、領導同等重要的第四大分支，但大綱實際只安排 1 週課程，遠少於規劃（3 週）與領導（3 週）。複習時建議不要因為週數少就輕忽控制功能的重要性，它是連結整個管理循環、呼應期末報告「提案適切管理方案」的關鍵一環。</div>
+  </div>
+
+  <div class="callout">
+    <h3>交匯點：單元⑨、⑭與⑮——期中考、複習整合、期末報告</h3>
+    <p><b>單元⑨（第 9 週期中考）</b>檢核單元①～⑧（管理基礎、規劃、組織），是紙筆測驗；<b>單元⑭（第 14～15 週複習與案例整合）</b>則在進入期末報告前，用兩週時間把規劃、組織、領導、控制四大功能透過案例重新串連；<b>單元⑮（第 16～18 週期末報告）</b>要求學生綜合運用全部四大功能，對真實企業的領導與控制機制進行評析並提案。</p>
+    <ol>
+      <li><b>考試與報告並存</b>——這門課同時保留期中「紙筆測驗」與期末「報告展演」兩種評量形式，前半學期重視理論記憶與計算，後半學期轉向案例評析與提案能力。</li>
+      <li><b>「複習與案例整合」是報告前的過渡橋樑</b>——大綱特別安排兩週（單元⑭）銜接期中考後的理論學習與期末報告的實務應用，避免學生在缺乏案例演練的情況下直接進入報告製作。</li>
+      <li><b>AI 優化是這門課的特色視角</b>——指定教科書《管理學：AI策略創造競爭優勢》與心智圖標題「管理功能與 AI 優化」都指向同一個重點：每個管理功能都應該思考如何運用 AI 工具強化決策品質與執行效率，這是本課程有別於傳統管理學教材的核心特色。</li>
+    </ol>
+  </div>
+
+  <div class="section-title"><h2>成績評定方式</h2><span class="rule"></span></div>
+
+  <table class="grade-table">
+    <thead><tr><th class="rowlabel">評量項目</th><th class="pct">佔比</th><th class="desc-col">說明</th></tr></thead>
+    <tbody>
+      <tr><th>平時成績</th><td class="pct pct-max">40%</td><td>佔比最高，反映每週課堂討論、本土案例演練與課堂參與情形</td></tr>
+      <tr><th>期中考</th><td class="pct">30%</td><td>第 9 週筆試，範圍為單元①～⑧（管理基礎、規劃、組織）</td></tr>
+      <tr><th>期末報告</th><td class="pct">30%</td><td>第 16～18 週分三次進行，綜合運用規劃、組織、領導、控制四大功能，評析真實企業並提案</td></tr>
+    </tbody>
+  </table>
+
+  <div class="grade-notes">
+    <div class="grade-note"><div class="gn-title">這門課兼採「期中考」與「期末報告」</div><p>前半學期用紙筆測驗檢核理論基礎，後半學期改用報告展演檢核評析與提案能力，是兩種評量邏輯並存的課程。</p></div>
+    <div class="grade-note"><div class="gn-title">平時成績佔比最高（40%）</div><p>呼應大綱「見木又見林」的系統化講授方式與本土案例演練，持續性課堂參與比重高於單次測驗。</p></div>
+    <div class="grade-note"><div class="gn-title">心智圖只涵蓋核心週次</div><p>第 1～3 週的管理發展史與環境基礎、第 14～18 週的複習與期末報告，皆未在心智圖中呈現，複習時仍須依大綱補齊全部範圍。</p></div>
+  </div>
+
+</main>
+
+<footer>整理依據：NotebookLM 心智圖「管理功能與 AI 優化」×《791070 管理學》115 學年第 1 學期教學大綱（授課教師：謝兆貞）</footer>
+
+</body>
+</html>

@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>會展進階管理｜主題關聯圖譜</title>
+<style>
+  :root{
+    --sky:#0d2b45;
+    --sky-2:#12395c;
+    --paper:#f6f3ea;
+    --line:#dcd6c4;
+    --gold:#c9962c;
+    --ink:#1c1c1c;
+    --mute:#5c5648;
+    --s1:#6b7fb0;
+    --s2:#3a8f6f;
+    --s3:#b3541e;
+    --s4:#a13c5c;
+    --sans:"Helvetica Neue",Arial,"Noto Sans TC",sans-serif;
+    --serif:"Georgia","Noto Serif TC",serif;
+    --mono:"Courier New",monospace;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+  }
+  header{
+    background:linear-gradient(180deg,var(--sky) 0%, var(--sky-2) 100%);
+    color:#f2ece0;
+    padding:56px 24px 48px;
+    position:relative;
+    overflow:hidden;
+  }
+  header::after{
+    content:"";
+    position:absolute;
+    right:-60px;top:-60px;
+    width:280px;height:280px;
+    border:1px solid rgba(242,236,224,.15);
+    border-radius:50%;
+  }
+  header::before{
+    content:"";
+    position:absolute;
+    right:20px;top:40px;
+    width:180px;height:180px;
+    border:1px solid rgba(242,236,224,.12);
+    border-radius:50%;
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:14px;
+  }
+  h1{
+    font-family:var(--serif);
+    font-size:clamp(26px,4.5vw,40px);
+    line-height:1.3;
+    margin:0 0 12px;
+    max-width:700px;
+  }
+  header p{
+    max-width:600px;
+    color:#c9c2ac;
+    font-size:13.5px;
+    line-height:1.85;
+    margin:0;
+  }
+  main{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 24px 80px;
+  }
+
+  .section-title{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    margin:56px 0 22px;
+  }
+  .section-title h2{
+    font-family:var(--serif);
+    font-size:21px;
+    margin:0;
+    white-space:nowrap;
+  }
+  .section-title .rule{ flex:1; height:1px; background:var(--line); }
+
+  .unit-badge{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:20px;height:20px;
+    border-radius:50%;
+    background:var(--gold);
+    color:#1c1c1c;
+    font-size:11px;
+    font-weight:700;
+    margin-right:7px;
+    flex-shrink:0;
+  }
+
+  /* ============ UNIT MAP TABLE ============ */
+  .unit-table{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+    border:1px solid var(--line);
+    font-size:13px;
+    margin-top:-36px;
+    position:relative;
+    z-index:2;
+    box-shadow:0 10px 24px rgba(20,20,10,.08);
+  }
+  .unit-table th, .unit-table td{
+    padding:11px 14px;
+    text-align:left;
+    vertical-align:top;
+    border-bottom:1px solid var(--line);
+    line-height:1.7;
+  }
+  .unit-table thead th{
+    background:var(--sky);
+    color:#f2ece0;
+    font-weight:600;
+    font-size:11.5px;
+    letter-spacing:.03em;
+  }
+  .unit-table tbody tr:nth-child(even) td{ background:#fbfaf5; }
+  .unit-table tbody tr:last-child td{ border-bottom:none; }
+  .unit-table td.no{ width:36px; text-align:center; }
+  .unit-table td.week{ width:130px; color:var(--mute); white-space:nowrap; }
+  .unit-table td.theme{ width:170px; font-weight:700; }
+  .unit-table td.theme.t1{ color:var(--s1); }
+  .unit-table td.theme.t2{ color:var(--s2); }
+  .unit-table td.theme.t3{ color:var(--s3); }
+  .unit-table td.theme.t4{ color:var(--s4); }
+  .unit-table td.theme.tx{ color:var(--gold); }
+  .unit-table tr.holiday td{ color:#b5ac98; font-style:italic; }
+
+  @media (max-width:700px){
+    .unit-table{ font-size:12px; }
+    .unit-table td.week{ white-space:normal; }
+  }
+
+  /* ============ FLOW DIAGRAM ============ */
+  .flow{
+    position:relative;
+    z-index:2;
+  }
+  .stage{
+    background:#fff;
+    border:1px solid var(--line);
+    border-left:6px solid var(--c);
+    box-shadow:0 10px 24px rgba(20,20,10,.08);
+    padding:22px 24px 20px;
+    margin-bottom:8px;
+  }
+  .stage .stage-head{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:14px;
+  }
+  .stage .stage-num{
+    font-family:var(--serif);
+    font-size:13px;
+    color:#fff;
+    background:var(--c);
+    width:26px;height:26px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .stage .stage-title{
+    font-family:var(--serif);
+    font-size:18px;
+    font-weight:700;
+    color:var(--c);
+  }
+  .chip-row{
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .chip{
+    background:#f2ede0;
+    border:1px solid var(--line);
+    border-radius:5px;
+    padding:8px 14px;
+    font-size:13px;
+    font-weight:600;
+    color:var(--ink);
+  }
+  .chip.strong{
+    background:var(--c);
+    color:#fff;
+    border-color:var(--c);
+  }
+  .chip.faded{
+    background:#fff;
+    border:1px dashed var(--line);
+    color:var(--mute);
+    font-style:italic;
+  }
+  .arrow{
+    color:var(--c);
+    font-size:18px;
+    font-weight:700;
+    flex-shrink:0;
+  }
+  .connector{
+    display:flex;
+    justify-content:flex-start;
+    padding-left:26px;
+  }
+  .connector .dot-line{
+    width:2px;
+    height:26px;
+    background:var(--line);
+    position:relative;
+  }
+  .connector .dot-line::after{
+    content:"▼";
+    position:absolute;
+    bottom:-11px;
+    left:-6px;
+    font-size:11px;
+    color:var(--gold);
+  }
+  .sub-branches{
+    margin-top:14px;
+    padding-top:14px;
+    border-top:1px dashed var(--line);
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:10px 20px;
+  }
+  .sub-branch .sb-name{
+    font-size:12.5px;
+    font-weight:700;
+    color:var(--mute);
+    margin-bottom:3px;
+  }
+  .sub-branch .sb-items{
+    font-size:12px;
+    color:#4a4436;
+    line-height:1.7;
+  }
+
+  #s1{--c:var(--s1);}
+  #s2{--c:var(--s2);}
+  #s3{--c:var(--s3);}
+  #s4{--c:var(--s4);}
+
+  /* ============ DETAIL SECTIONS ============ */
+  .detail-block{
+    background:#fff;
+    border:1px solid var(--line);
+    padding:24px 26px 26px;
+    margin-bottom:18px;
+  }
+  .detail-block h3{
+    font-family:var(--serif);
+    font-size:17px;
+    margin:0 0 14px;
+    padding-bottom:10px;
+    border-bottom:2px solid var(--c);
+    color:var(--c);
+  }
+  .detail-block p{
+    font-size:13.3px;
+    line-height:1.9;
+    color:#3a352a;
+    margin:0 0 10px;
+  }
+  .detail-block ul{
+    margin:0 0 10px;
+    padding-left:20px;
+  }
+  .detail-block li{
+    font-size:13.3px;
+    line-height:1.9;
+    color:#3a352a;
+    margin-bottom:6px;
+  }
+  .detail-block b{ color:var(--c); }
+  .detail-block .flag{
+    background:#fbf6e8;
+    border-left:3px solid var(--gold);
+    padding:10px 14px;
+    font-size:12.5px;
+    color:var(--mute);
+    line-height:1.8;
+    margin:10px 0;
+  }
+  #d1{--c:var(--s1);}
+  #d2{--c:var(--s2);}
+  #d3{--c:var(--s3);}
+  #d4{--c:var(--s4);}
+
+  .callout{
+    margin-top:44px;
+    background:#0d2b45;
+    color:#f2ece0;
+    padding:26px 28px;
+    position:relative;
+  }
+  .callout::before{
+    content:"⟡";
+    position:absolute;
+    top:20px; right:24px;
+    color:var(--gold);
+    font-size:22px;
+  }
+  .callout h3{
+    font-family:var(--serif);
+    color:var(--gold);
+    font-size:17px;
+    margin:0 0 8px;
+  }
+  .callout p{
+    font-size:13px;
+    color:#d8d1bc;
+    line-height:1.85;
+    margin:0 0 10px;
+    max-width:820px;
+  }
+  .callout ol{
+    margin:12px 0 0;
+    padding-left:20px;
+  }
+  .callout li{
+    font-size:13px;
+    line-height:1.9;
+    color:#e8e2cf;
+    margin-bottom:6px;
+  }
+  .callout li b{ color:#fff; }
+
+  footer{
+    text-align:center;
+    color:var(--mute);
+    font-size:11.5px;
+    padding:36px 24px 50px;
+    border-top:1px solid var(--line);
+    margin-top:40px;
+  }
+
+  /* ============ GRADING TABLE ============ */
+  .grade-table{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+    border:1px solid var(--line);
+    font-size:13.5px;
+  }
+  .grade-table th, .grade-table td{
+    padding:14px 16px;
+    text-align:left;
+    vertical-align:top;
+    border-bottom:1px solid var(--line);
+    line-height:1.8;
+  }
+  .grade-table thead th{
+    background:var(--sky);
+    color:#f2ece0;
+    font-weight:600;
+    font-size:12px;
+    letter-spacing:.05em;
+  }
+  .grade-table tbody th{
+    background:#f2ede0;
+    font-weight:700;
+    font-size:13.5px;
+    color:var(--ink);
+    width:150px;
+    white-space:nowrap;
+  }
+  .grade-table td.pct{
+    font-family:var(--serif);
+    font-size:20px;
+    font-weight:700;
+    color:var(--s3);
+    width:90px;
+  }
+  .grade-table td.pct-max{ color:var(--gold); }
+  .grade-table tbody tr:last-child th, .grade-table tbody tr:last-child td{ border-bottom:none; }
+
+  .grade-notes{
+    margin-top:16px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+  }
+  .grade-note{
+    background:#fff;
+    border:1px solid var(--line);
+    border-left:4px solid var(--gold);
+    padding:16px 18px 18px;
+  }
+  .grade-note .gn-title{
+    font-family:var(--serif);
+    font-weight:700;
+    font-size:13.5px;
+    color:var(--sky);
+    margin-bottom:8px;
+    line-height:1.5;
+  }
+  .grade-note p{
+    margin:0;
+    font-size:12.5px;
+    line-height:1.75;
+    color:#3a352a;
+  }
+
+  @media (max-width:700px){
+    .grade-notes{ grid-template-columns:1fr; }
+    .grade-table, .grade-table thead, .grade-table tbody, .grade-table th, .grade-table td, .grade-table tr{ display:block; }
+    .grade-table thead{ display:none; }
+    .grade-table tbody tr{
+      border:1px solid var(--line);
+      margin-bottom:14px;
+      background:#fff;
+    }
+    .grade-table tbody th, .grade-table tbody td{
+      width:auto;
+      display:block;
+      border-bottom:1px dashed var(--line);
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">494641 會展進階管理 · 115 學年第 1 學期</div>
+  <h1>從利害關係人到永續治理，進階會展管理的四條主線</h1>
+  <p>整合 NotebookLM 心智圖與課程教學大綱，將「國際會展活動管理實務」收斂為四大主題區塊，對照 18 週課程進度，呈現「基本概念 → 場地談判 → MICE 核心業務 → 特殊活動與永續」的完整知識地圖，並標出本學期實際安排的進階專案管理週次。</p>
+</header>
+
+<main>
+
+  <!-- ============ UNIT MAPPING TABLE ============ -->
+  <table class="unit-table">
+    <thead>
+      <tr>
+        <th class="no">#</th>
+        <th class="week">週次</th>
+        <th>教學單元</th>
+        <th class="theme">對應主題</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="no">①</td><td class="week">第 1 週</td><td>課程介紹、會展產業與高階管理概論</td><td class="theme t1">會展基本概念與產業範疇</td></tr>
+      <tr><td class="no">②</td><td class="week">第 2 週</td><td>國際大型展覽與會議的策略性管理架構</td><td class="theme t1">會展基本概念與產業範疇</td></tr>
+      <tr><td class="no">③</td><td class="week">第 3 週</td><td>利害關係人與範疇管理（大型會展專案）</td><td class="theme t1">會展基本概念與產業範疇</td></tr>
+      <tr class="holiday"><td class="no">—</td><td class="week">第 4 週</td><td>放假</td><td class="theme">—</td></tr>
+      <tr><td class="no">④</td><td class="week">第 5 週</td><td>時程規劃、關鍵路徑與資源配置</td><td class="theme t3">MICE 三大核心業務實務</td></tr>
+      <tr><td class="no">⑤</td><td class="week">第 6 週</td><td>會展財務編列基礎與預算架構</td><td class="theme t3">MICE 三大核心業務實務</td></tr>
+      <tr><td class="no">⑥</td><td class="week">第 7、9 週</td><td>期中報告（一）（二）</td><td class="theme tx">交匯：①～⑤ 的階段檢核</td></tr>
+      <tr class="holiday"><td class="no">—</td><td class="week">第 8 週</td><td>放假</td><td class="theme">—</td></tr>
+      <tr><td class="no">⑦</td><td class="week">第 10 週</td><td>會展營運風險評估框架</td><td class="theme t4">特殊活動策劃與永續經營</td></tr>
+      <tr><td class="no">⑧</td><td class="week">第 11 週</td><td>危機處理</td><td class="theme t4">特殊活動策劃與永續經營</td></tr>
+      <tr><td class="no">⑨</td><td class="week">第 12、13 週</td><td>大數據行銷策略應用（一）（二）</td><td class="theme t4">特殊活動策劃與永續經營</td></tr>
+      <tr><td class="no">⑩</td><td class="week">第 14、15 週</td><td>案例分析</td><td class="theme tx">交匯：綜合演練，銜接期末報告</td></tr>
+      <tr><td class="no">⑪</td><td class="week">第 16～18 週</td><td>期末報告（一）（二）（三）</td><td class="theme tx">交匯：①～⑩ 全部主題的總結展演</td></tr>
+    </tbody>
+  </table>
+
+  <div class="section-title" style="margin-top:44px;">
+    <h2>主題關聯流程圖</h2>
+    <span class="rule"></span>
+  </div>
+
+  <!-- ============ FLOW DIAGRAM ============ -->
+  <div class="flow">
+
+    <div class="stage" id="s1">
+      <div class="stage-head">
+        <div class="stage-num">1</div>
+        <div class="stage-title">會展活動基本概念與產業範疇</div>
+      </div>
+      <div class="chip-row">
+        <span class="chip strong"><span class="unit-badge">①</span>第 1 週 產業概論</span>
+        <span class="arrow">→</span>
+        <span class="chip strong"><span class="unit-badge">②</span>第 2 週 策略性管理架構</span>
+        <span class="arrow">→</span>
+        <span class="chip strong"><span class="unit-badge">③</span>第 3 週 利害關係人與範疇管理</span>
+      </div>
+      <div class="sub-branches">
+        <div class="sub-branch">
+          <div class="sb-name">心智圖子分支</div>
+          <div class="sb-items">MICE 定義與範疇・利益關係者 Stakeholders・產業特徵與經濟效益・核心推廣與人力認證</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="dot-line"></div></div>
+
+    <div class="stage" id="s2">
+      <div class="stage-head">
+        <div class="stage-num">2</div>
+        <div class="stage-title">會展活動場地與實務談判</div>
+      </div>
+      <div class="chip-row">
+        <span class="chip faded">本學期無獨立對應週次（先備知識）</span>
+      </div>
+      <div class="sub-branches">
+        <div class="sub-branch">
+          <div class="sb-name">心智圖子分支</div>
+          <div class="sb-items">場地類別與選擇・場地服務與管理・實務談判與協議</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="dot-line"></div></div>
+
+    <div class="stage" id="s3">
+      <div class="stage-head">
+        <div class="stage-num">3</div>
+        <div class="stage-title">MICE 三大核心業務實務</div>
+      </div>
+      <div class="chip-row">
+        <span class="chip strong"><span class="unit-badge">④</span>第 5 週 時程與資源配置</span>
+        <span class="arrow">→</span>
+        <span class="chip strong"><span class="unit-badge">⑤</span>第 6 週 財務編列與預算架構</span>
+      </div>
+      <div class="sub-branches">
+        <div class="sub-branch">
+          <div class="sb-name">心智圖子分支</div>
+          <div class="sb-items">國際會議實務（Meeting/Convention）・國際展覽實務（Exhibition）・獎勵旅遊實務（Incentive）</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="dot-line"></div></div>
+
+    <div class="stage" id="s4">
+      <div class="stage-head">
+        <div class="stage-num">4</div>
+        <div class="stage-title">特殊活動策劃與永續經營</div>
+      </div>
+      <div class="chip-row">
+        <span class="chip strong"><span class="unit-badge">⑦</span>第 10 週 風險評估框架</span>
+        <span class="arrow">→</span>
+        <span class="chip strong"><span class="unit-badge">⑧</span>第 11 週 危機處理</span>
+        <span class="arrow">→</span>
+        <span class="chip strong"><span class="unit-badge">⑨</span>第 12～13 週 大數據行銷應用</span>
+      </div>
+      <div class="sub-branches">
+        <div class="sub-branch">
+          <div class="sb-name">心智圖子分支</div>
+          <div class="sb-items">特殊活動企劃與行銷・永續經營與綠色會展・風險管理與法律合約</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ DETAIL CONTENT ============ -->
+  <div class="section-title">
+    <h2>四大主題關聯性拆解</h2>
+    <span class="rule"></span>
+  </div>
+
+  <div class="detail-block" id="d1">
+    <h3>一、會展活動基本概念與產業範疇（單元①②③）：建立高階管理的共同語言</h3>
+    <p><b>MICE 定義與範疇、利益關係者 Stakeholders、產業特徵與經濟效益、核心推廣與人力認證</b>——這些心智圖子分支對應<b>單元①</b>（第 1 週產業與高階管理概論）建立的產業共同語言，並在<b>單元②</b>（第 2 週策略性管理架構）延伸為專案治理的整體框架。</p>
+    <p><b>單元③</b>（第 3 週利害關係人與範疇管理）直接對應「利益關係者 Stakeholders」子分支，但這門「進階」課程把它從基礎定義推進到專案管理工具——用範疇管理（Scope Management）的角度重新理解利害關係人：不只是「誰跟這場會展有關」，而是「誰的需求會界定這個專案做什麼、不做什麼」。這一區塊也直接對應教學目標 1（清楚論述國際大型展覽與會議之策略性專案管理原則）。</p>
+  </div>
+
+  <div class="detail-block" id="d2">
+    <h3>二、會展活動場地與實務談判：本學期的隱性先備知識</h3>
+    <p><b>場地類別與選擇、場地服務與管理、實務談判與協議</b>——這是心智圖四大分支中，唯一在本學期教學大綱找不到對應獨立週次的主題。</p>
+    <div class="flag">誠實對照：這門課程名為「會展<b>進階</b>管理」，場地選擇與談判屬於基礎會展管理課程的範疇，本學期預設學生已具備這項先備知識，因此把課程時數留給更高階的專案管理工具（範疇、時程、財務、風險）。</div>
+    <p>不過場地知識並未真正缺席——它會隱性出現在<b>單元④⑤</b>的時程與財務規劃中：關鍵路徑法排程必須知道場地可租用的檔期限制，預算編列也必須把場地租金與合約條款算進成本結構，這正是「進階」與「基礎」知識銜接的地方。</p>
+  </div>
+
+  <div class="detail-block" id="d3">
+    <h3>三、MICE 三大核心業務實務（單元④⑤，並於⑥檢核）：把管理工具套進真實業務</h3>
+    <p><b>國際會議實務（Meeting/Convention）、國際展覽實務（Exhibition）、獎勵旅遊實務（Incentive）</b>——這三種業務類型看似分立，實則共用同一套專案管理工具，這正是<b>單元④</b>（第 5 週時程規劃、關鍵路徑與資源配置）與<b>單元⑤</b>（第 6 週會展財務編列基礎與預算架構）存在的原因：不論主辦的是國際會議、展覽或獎勵旅遊，都需要用關鍵路徑法排定籌備時程、用預算架構控管財務風險。</p>
+    <p>這套工具會在<b>單元⑥（期中報告）</b>被第一次檢驗——學生必須挑選一種 MICE 業務類型的真實或模擬案例，展示自己能否把單元①～⑤學到的利害關係人分析、範疇界定、時程規劃與財務編列，實際套用在具體個案上，直接對應教學目標 2（評析會展財務編列與風險項目，並提案危機處理因應策略）的前半段。</p>
+  </div>
+
+  <div class="detail-block" id="d4">
+    <h3>四、特殊活動策劃與永續經營（單元⑦⑧⑨）：把永續治理落實為風險與行銷能力</h3>
+    <ul>
+      <li><b>單元⑦（第 10 週，會展營運風險評估框架）</b>與<b>單元⑧（第 11 週，危機處理）</b>直接對應心智圖「風險管理與法律合約」子分支——先建立評估框架，再練習實戰應對，呼應教學目標 2 的後半段（提案危機處理因應策略）。</li>
+      <li><b>單元⑨（第 12～13 週，大數據行銷策略應用）</b>對應「特殊活動企劃與行銷」子分支，把傳統的活動行銷升級為數據驅動的顧客關係經營，直接對應教學目標 3（提案運用大數據之進階行銷策略，經營會展顧客關係）。</li>
+    </ul>
+    <div class="flag">誠實對照：心智圖此分支還有「永續經營與綠色會展」子分支，但本學期教學大綱沒有安排以「綠色會展」為名的獨立週次——這門進階課程選擇把「永續經營」重新詮釋為「風險可控＋行銷精準」的現代會展治理能力，而不是聚焦環保議題本身，這是解讀這張圖時值得注意的落差。</div>
+  </div>
+
+  <div class="callout">
+    <h3>交匯點：單元⑥⑩⑪——期中報告、案例分析、期末報告</h3>
+    <p><b>單元⑥（第 7、9 週期中報告）</b>檢核單元①～⑤（基本概念、利害關係人、時程、財務）；<b>單元⑩（第 14～15 週案例分析）</b>是期末報告前的綜合演練，讓學生在教師引導下對照已落幕展會的真實效益報告進行評析；<b>單元⑪（第 16～18 週期末報告）</b>則要求單元①～⑩全數到位，加考單元⑦⑧⑨（風險、危機、大數據行銷）。</p>
+    <ol>
+      <li><b>案例分析貫穿全學期</b>——教學大綱明訂「案例分析安排在每一個主題週次都會出現：先呈現案例背景 → 學生分組討論或個人論述 → 課堂上發表評析與提案 → 教師總結對照理論框架」，單元⑩只是這個循環在期末前的集中演練，不是唯一的案例分析場合。</li>
+      <li><b>從評析走向提案</b>——教學目標強調的不只是「論述」，更要「評析」與「提案」，這正是單元⑥⑪要求學生不只是分析個案，還要提出具體的財務編列、危機處理或行銷策略建議。</li>
+      <li><b>效益評估收尾</b>——呼應教學目標 4（評析會展後續效益，並提出改善建議），期末報告不只是規劃一場未來的會展，也要能回頭檢視真實展會的成效指標是否合理。</li>
+    </ol>
+  </div>
+
+  <div class="section-title">
+    <h2>成績評定方式</h2>
+    <span class="rule"></span>
+  </div>
+
+  <table class="grade-table">
+    <thead>
+      <tr>
+        <th class="rowlabel">評量項目</th>
+        <th class="pct">佔比</th>
+        <th class="desc-col">說明</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>平時成績</th>
+        <td class="pct pct-max">40%</td>
+        <td>佔比最高，反映案例分析貫穿全學期的討論與發表——大綱明訂每個主題週次都有「案例背景 → 分組討論 → 課堂發表 → 教師總結」的循環，平時成績即是這個循環的持續累積</td>
+      </tr>
+      <tr>
+        <th>期中報告</th>
+        <td class="pct">30%</td>
+        <td>第 7、9 週分兩次進行，檢核單元①～⑤（基本概念、利害關係人、時程、財務）的分析與提案能力</td>
+      </tr>
+      <tr>
+        <th>期末報告</th>
+        <td class="pct">30%</td>
+        <td>第 16～18 週分三次進行，整合全學期單元①～⑩，並加考風險、危機、大數據行銷等進階管理能力</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="grade-notes">
+    <div class="grade-note">
+      <div class="gn-title">同樣沒有「考試」這個項目</div>
+      <p>期中、期末都是分組報告，全課程以案例分析作為主要教學方法貫穿始終，而非紙筆測驗。</p>
+    </div>
+    <div class="grade-note">
+      <div class="gn-title">平時成績佔比最高（40%）</div>
+      <p>反映這門課「每週皆案例分析」的教學設計——評分重點在持續的分析與提案能力，不是單次考核。</p>
+    </div>
+    <div class="grade-note">
+      <div class="gn-title">期中期末報告加總佔 60%</div>
+      <p>各佔 30%，比重相同，期中檢核基礎專案管理工具的應用，期末則要求整合風險、危機與行銷等進階能力。</p>
+    </div>
+  </div>
+
+</main>
+
+<footer>整理依據：NotebookLM 心智圖 ×《494641 會展進階管理》115 學年第 1 學期教學大綱（授課教師：謝兆貞）</footer>
+
+</body>
+</html>

@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>媒體公關實務｜主題關聯圖譜</title>
+<style>
+  :root{
+    --sky:#0d2b45;
+    --sky-2:#12395c;
+    --paper:#f6f3ea;
+    --line:#dcd6c4;
+    --gold:#c9962c;
+    --ink:#1c1c1c;
+    --mute:#5c5648;
+    --s1:#6b7fb0;
+    --s2:#3a8f6f;
+    --s3:#b3541e;
+    --s4:#a13c5c;
+    --sans:"Helvetica Neue",Arial,"Noto Sans TC",sans-serif;
+    --serif:"Georgia","Noto Serif TC",serif;
+    --mono:"Courier New",monospace;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+  }
+  header{
+    background:linear-gradient(180deg,var(--sky) 0%, var(--sky-2) 100%);
+    color:#f2ece0;
+    padding:56px 24px 48px;
+    position:relative;
+    overflow:hidden;
+  }
+  header::after{
+    content:"";
+    position:absolute;
+    right:-60px;top:-60px;
+    width:280px;height:280px;
+    border:1px solid rgba(242,236,224,.15);
+    border-radius:50%;
+  }
+  header::before{
+    content:"";
+    position:absolute;
+    right:20px;top:40px;
+    width:180px;height:180px;
+    border:1px solid rgba(242,236,224,.12);
+    border-radius:50%;
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:14px;
+  }
+  h1{
+    font-family:var(--serif);
+    font-size:clamp(26px,4.5vw,40px);
+    line-height:1.3;
+    margin:0 0 12px;
+    max-width:700px;
+  }
+  header p{
+    max-width:600px;
+    color:#c9c2ac;
+    font-size:13.5px;
+    line-height:1.85;
+    margin:0;
+  }
+  main{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 24px 80px;
+  }
+
+  .section-title{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    margin:56px 0 22px;
+  }
+  .section-title h2{
+    font-family:var(--serif);
+    font-size:21px;
+    margin:0;
+    white-space:nowrap;
+  }
+  .section-title .rule{ flex:1; height:1px; background:var(--line); }
+
+  /* ============ FLOW DIAGRAM ============ */
+  .flow{
+    position:relative;
+    z-index:2;
+  }
+  .stage{
+    background:#fff;
+    border:1px solid var(--line);
+    border-left:6px solid var(--c);
+    box-shadow:0 10px 24px rgba(20,20,10,.08);
+    padding:22px 24px 20px;
+    margin-bottom:8px;
+  }
+  .stage .stage-head{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:14px;
+  }
+  .stage .stage-num{
+    font-family:var(--serif);
+    font-size:13px;
+    color:#fff;
+    background:var(--c);
+    width:26px;height:26px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .stage .stage-title{
+    font-family:var(--serif);
+    font-size:18px;
+    font-weight:700;
+    color:var(--c);
+  }
+  .chip-row{
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .chip{
+    background:#f2ede0;
+    border:1px solid var(--line);
+    border-radius:5px;
+    padding:8px 14px;
+    font-size:13px;
+    font-weight:600;
+    color:var(--ink);
+  }
+  .chip.strong{
+    background:var(--c);
+    color:#fff;
+    border-color:var(--c);
+  }
+  .arrow{
+    color:var(--c);
+    font-size:18px;
+    font-weight:700;
+    flex-shrink:0;
+  }
+  .connector{
+    display:flex;
+    justify-content:flex-start;
+    padding-left:26px;
+  }
+  .connector .dot-line{
+    width:2px;
+    height:26px;
+    background:var(--line);
+    position:relative;
+  }
+  .connector .dot-line::after{
+    content:"▼";
+    position:absolute;
+    bottom:-11px;
+    left:-6px;
+    font-size:11px;
+    color:var(--gold);
+  }
+  .sub-branches{
+    margin-top:14px;
+    padding-top:14px;
+    border-top:1px dashed var(--line);
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:10px 20px;
+  }
+  .sub-branch .sb-name{
+    font-size:12.5px;
+    font-weight:700;
+    color:var(--mute);
+    margin-bottom:3px;
+  }
+  .sub-branch .sb-items{
+    font-size:12px;
+    color:#4a4436;
+    line-height:1.7;
+  }
+
+  #s1{--c:var(--s1);}
+  #s2{--c:var(--s2);}
+  #s3{--c:var(--s3);}
+  #s4{--c:var(--s4);}
+
+  /* ============ DETAIL SECTIONS ============ */
+  .detail-block{
+    background:#fff;
+    border:1px solid var(--line);
+    padding:24px 26px 26px;
+    margin-bottom:18px;
+  }
+  .detail-block h3{
+    font-family:var(--serif);
+    font-size:17px;
+    margin:0 0 14px;
+    padding-bottom:10px;
+    border-bottom:2px solid var(--c);
+    color:var(--c);
+  }
+  .detail-block h4{
+    font-size:14px;
+    margin:16px 0 6px;
+    color:var(--ink);
+  }
+  .detail-block p{
+    font-size:13.3px;
+    line-height:1.9;
+    color:#3a352a;
+    margin:0 0 10px;
+  }
+  .detail-block ul{
+    margin:0 0 10px;
+    padding-left:20px;
+  }
+  .detail-block li{
+    font-size:13.3px;
+    line-height:1.9;
+    color:#3a352a;
+    margin-bottom:6px;
+  }
+  .detail-block b{ color:var(--c); }
+  #d1{--c:var(--s1);}
+  #d2{--c:var(--s2);}
+  #d3{--c:var(--s3);}
+  #d4{--c:var(--s4);}
+
+  .callout{
+    margin-top:44px;
+    background:#0d2b45;
+    color:#f2ece0;
+    padding:26px 28px;
+    position:relative;
+  }
+  .callout::before{
+    content:"⟡";
+    position:absolute;
+    top:20px; right:24px;
+    color:var(--gold);
+    font-size:22px;
+  }
+  .callout h3{
+    font-family:var(--serif);
+    color:var(--gold);
+    font-size:17px;
+    margin:0 0 8px;
+  }
+  .callout p{
+    font-size:13px;
+    color:#d8d1bc;
+    line-height:1.85;
+    margin:0 0 10px;
+    max-width:820px;
+  }
+  .callout ol{
+    margin:12px 0 0;
+    padding-left:20px;
+  }
+  .callout li{
+    font-size:13px;
+    line-height:1.9;
+    color:#e8e2cf;
+    margin-bottom:6px;
+  }
+  .callout li b{ color:#fff; }
+
+  footer{
+    text-align:center;
+    color:var(--mute);
+    font-size:11.5px;
+    padding:36px 24px 50px;
+    border-top:1px solid var(--line);
+    margin-top:40px;
+  }
+
+  /* ============ GRADING TABLE ============ */
+  .grade-table{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+    border:1px solid var(--line);
+    font-size:13.5px;
+  }
+  .grade-table th, .grade-table td{
+    padding:14px 16px;
+    text-align:left;
+    vertical-align:top;
+    border-bottom:1px solid var(--line);
+    line-height:1.8;
+  }
+  .grade-table thead th{
+    background:var(--sky);
+    color:#f2ece0;
+    font-weight:600;
+    font-size:12px;
+    letter-spacing:.05em;
+  }
+  .grade-table tbody th{
+    background:#f2ede0;
+    font-weight:700;
+    font-size:13.5px;
+    color:var(--ink);
+    width:150px;
+    white-space:nowrap;
+  }
+  .grade-table td.pct{
+    font-family:var(--serif);
+    font-size:20px;
+    font-weight:700;
+    color:var(--s3);
+    width:90px;
+  }
+  .grade-table td.pct-max{ color:var(--gold); }
+  .grade-table tbody tr:last-child th, .grade-table tbody tr:last-child td{ border-bottom:none; }
+
+  .grade-notes{
+    margin-top:16px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+  }
+  .grade-note{
+    background:#fff;
+    border:1px solid var(--line);
+    border-left:4px solid var(--gold);
+    padding:16px 18px 18px;
+  }
+  .grade-note .gn-title{
+    font-family:var(--serif);
+    font-weight:700;
+    font-size:13.5px;
+    color:var(--sky);
+    margin-bottom:8px;
+    line-height:1.5;
+  }
+  .grade-note p{
+    margin:0;
+    font-size:12.5px;
+    line-height:1.75;
+    color:#3a352a;
+  }
+
+  @media (max-width:700px){
+    .grade-notes{ grid-template-columns:1fr; }
+    .grade-table, .grade-table thead, .grade-table tbody, .grade-table th, .grade-table td, .grade-table tr{ display:block; }
+    .grade-table thead{ display:none; }
+    .grade-table tbody tr{
+      border:1px solid var(--line);
+      margin-bottom:14px;
+      background:#fff;
+    }
+    .grade-table tbody th, .grade-table tbody td{
+      width:auto;
+      display:block;
+      border-bottom:1px dashed var(--line);
+    }
+  }  .unit-badge{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:20px;height:20px;
+    border-radius:50%;
+    background:var(--gold);
+    color:#1c1c1c;
+    font-size:11px;
+    font-weight:700;
+    margin-right:7px;
+    flex-shrink:0;
+  }
+
+  /* ============ UNIT MAP TABLE ============ */
+  .unit-table{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+    border:1px solid var(--line);
+    font-size:13px;
+    margin-top:-36px;
+    position:relative;
+    z-index:2;
+    box-shadow:0 10px 24px rgba(20,20,10,.08);
+  }
+  .unit-table th, .unit-table td{
+    padding:11px 14px;
+    text-align:left;
+    vertical-align:top;
+    border-bottom:1px solid var(--line);
+    line-height:1.7;
+  }
+  .unit-table thead th{
+    background:var(--sky);
+    color:#f2ece0;
+    font-weight:600;
+    font-size:11.5px;
+    letter-spacing:.03em;
+  }
+  .unit-table tbody tr:nth-child(even) td{ background:#fbfaf5; }
+  .unit-table tbody tr:last-child td{ border-bottom:none; }
+  .unit-table td.no{ width:36px; text-align:center; }
+  .unit-table td.week{ width:110px; color:var(--mute); white-space:nowrap; }
+  .unit-table td.theme{ width:150px; font-weight:700; }
+  .unit-table td.theme.t1{ color:var(--s1); }
+  .unit-table td.theme.t2{ color:var(--s2); }
+  .unit-table td.theme.t3{ color:var(--s3); }
+  .unit-table td.theme.t4{ color:var(--s4); }
+  .unit-table td.theme.tx{ color:var(--gold); }
+
+  @media (max-width:700px){
+    .unit-table{ font-size:12px; }
+    .unit-table td.week{ white-space:normal; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">492413 媒體公關實務 · 115 學年第 1 學期</div>
+  <h1>從公關定義到企劃提案，四個主題如何環環相扣</h1>
+  <p>整合 NotebookLM 心智圖與課程教學大綱，將「公共關係—休閒事業觀點」收斂為四大主題區塊，對照 18 週課程進度，呈現「基礎語言 → 傳播操作 → 議題管理 → 數位與顧客關係」的完整關聯鏈。</p>
+</header>
+
+<main>
+
+  <!-- ============ 10-UNIT MAPPING TABLE ============ -->
+  <table class="unit-table">
+    <thead>
+      <tr>
+        <th class="no">#</th>
+        <th class="week">週次</th>
+        <th>教學單元</th>
+        <th class="theme">對應主題</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="no">①</td><td class="week">第 1 週</td><td>課程介紹與上課要點說明</td><td class="theme t1">核心意涵與類型</td></tr>
+      <tr><td class="no">②</td><td class="week">第 2 週</td><td>具備公關專業素養條件與業界公關工作實況</td><td class="theme t1">核心意涵與類型</td></tr>
+      <tr><td class="no">③</td><td class="week">第 4 週</td><td>議題升溫路徑與危機前兆判讀</td><td class="theme t3">議題管理實務</td></tr>
+      <tr><td class="no">④</td><td class="week">第 6 週</td><td>稿件操作與媒體關係經營</td><td class="theme t2">傳播理論與媒體</td></tr>
+      <tr><td class="no">⑤</td><td class="week">第 7～9 週</td><td>期中報告（一）～（三）</td><td class="theme tx">交匯：①②③④ 的階段檢核</td></tr>
+      <tr><td class="no">⑥</td><td class="week">第 10 週</td><td>公關事件的談判原則</td><td class="theme t3">議題管理實務</td></tr>
+      <tr><td class="no">⑦</td><td class="week">第 11 週</td><td>話題與活動創造傳播</td><td class="theme t3">議題管理實務</td></tr>
+      <tr><td class="no">⑧</td><td class="week">第 12 週</td><td>自媒體現況與操作解析（一）：平台特性與內容策略</td><td class="theme t4">網際網路與顧客</td></tr>
+      <tr><td class="no">⑨</td><td class="week">第 13 週</td><td>資源盤點與夥伴布局</td><td class="theme t4">網際網路與顧客</td></tr>
+      <tr><td class="no">⑩</td><td class="week">第 14、15、18 週</td><td>期末報告（一）～（三）</td><td class="theme tx">交匯：①～⑨ 全部主題的總結展演</td></tr>
+    </tbody>
+  </table>
+
+  <div class="section-title" style="margin-top:44px;">
+    <h2>主題關聯流程圖</h2>
+    <span class="rule"></span>
+  </div>
+
+  <!-- ============ FLOW DIAGRAM ============ -->
+  <div class="flow">
+
+    <div class="stage" id="s1">
+      <div class="stage-head">
+        <div class="stage-num">1</div>
+        <div class="stage-title">核心意涵與類型</div>
+      </div>
+      <div class="chip-row">
+        <span class="chip strong"><span class="unit-badge">①</span>第 1 週 課程介紹</span>
+        <span class="arrow">→</span>
+        <span class="chip strong"><span class="unit-badge">②</span>第 2 週 公關專業素養與業界實況</span>
+      </div>
+      <div class="sub-branches">
+        <div class="sub-branch">
+          <div class="sb-name">理論基礎</div>
+          <div class="sb-items">基本定義・公關四力・功能與價值・基本類型・公關 vs 廣告</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="dot-line"></div></div>
+
+    <div class="stage" id="s2">
+      <div class="stage-head">
+        <div class="stage-num">2</div>
+        <div class="stage-title">傳播理論與媒體</div>
+      </div>
+      <div class="chip-row">
+        <span class="chip strong"><span class="unit-badge">④</span>第 6 週 稿件操作與媒體關係經營</span>
+      </div>
+      <div class="sub-branches">
+        <div class="sub-branch">
+          <div class="sb-name">傳播理論工具</div>
+          <div class="sb-items">5W 傳播模式・傳播隱含要素・媒體互動模式・核心執行面向</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="dot-line"></div></div>
+
+    <div class="stage" id="s3">
+      <div class="stage-head">
+        <div class="stage-num">3</div>
+        <div class="stage-title">議題管理實務</div>
+      </div>
+      <div class="chip-row">
+        <span class="chip"><span class="unit-badge">③</span>第 4 週 議題升溫與危機前兆</span>
+        <span class="arrow">→</span>
+        <span class="chip strong"><span class="unit-badge">⑥</span>第 10 週 談判原則</span>
+        <span class="arrow">→</span>
+        <span class="chip"><span class="unit-badge">⑦</span>第 11 週 話題與活動創造傳播</span>
+      </div>
+      <div class="sub-branches">
+        <div class="sub-branch">
+          <div class="sb-name">議題管理方法論</div>
+          <div class="sb-items">進行模式步驟・傳播對象分類・議題特質分析</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="dot-line"></div></div>
+
+    <div class="stage" id="s4">
+      <div class="stage-head">
+        <div class="stage-num">4</div>
+        <div class="stage-title">網際網路與顧客</div>
+      </div>
+      <div class="chip-row">
+        <span class="chip strong"><span class="unit-badge">⑧</span>第 12 週 自媒體現況與操作解析</span>
+        <span class="arrow">→</span>
+        <span class="chip strong"><span class="unit-badge">⑨</span>第 13 週 資源盤點與夥伴布局</span>
+      </div>
+      <div class="sub-branches">
+        <div class="sub-branch">
+          <div class="sb-name">數位與關係經營</div>
+          <div class="sb-items">逆向行銷趨勢・顧客關係管理 CRM・虛擬社群互動</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ DETAIL CONTENT ============ -->
+  <div class="section-title">
+    <h2>四大主題關聯性拆解</h2>
+    <span class="rule"></span>
+  </div>
+
+  <div class="detail-block" id="d1">
+    <h3>一、核心意涵與類型（單元①②）：奠定公關的基礎語言</h3>
+    <p><b>基本定義、公關四力、功能與價值、基本類型、公關 vs 廣告</b>——這些是<b>單元①</b>（第 1 週課程介紹）與<b>單元②</b>（第 2 週具備公關專業素養條件與業界公關工作實況）的理論基礎。若沒有先釐清「公關不是廣告」與「公關的核心職能」，學生從<b>單元③</b>開始每週觀看業界案例影片時，容易把公關操作與廣告推廣混為一談，也無法判斷影片中從業者展現的究竟是哪一種專業能力。</p>
+    <p>這一區塊的知識會在<b>單元⑤（期中報告）</b>被第一次檢核：學生的企劃案若把公關操作講成廣告投放，正是單元①②的定義沒有內化的訊號；到了<b>單元⑩（期末報告）</b>，評審更會直接檢視提案是否清楚區分公關手法與廣告手法。</p>
+    <p>這一區塊也直接對應教學目標 1（清楚論述當前媒體生態與市場行銷所需的公關、廣告操作知識），是整學期評析與提案能力的起點。</p>
+  </div>
+
+  <div class="detail-block" id="d2">
+    <h3>二、傳播理論與媒體（單元④）：把定義轉化為操作語言</h3>
+    <p><b>5W 傳播模式、傳播隱含要素、媒體互動模式、核心執行面向</b>——這套理論在<b>單元④</b>（第 6 週稿件操作與媒體關係經營）正式落地：新聞稿撰寫要點對應 5W 模式中的「說什麼、透過何種管道」，媒體關係經營策略則對應「媒體互動模式」。</p>
+    <p>單元④緊接在單元①②之後、單元⑤（期中報告）之前，位置並非偶然：若學生沒有先在單元①②建立「公關 vs 廣告」的判準，就直接學單元④的新聞稿撰寫技巧，容易寫出偏廣告腔的稿件；而單元④學到的 5W 框架與媒體關係手法，正是單元⑤期中簡報時最先被檢驗的操作能力——沒有稿件與媒體關係基礎，企劃案就只停留在概念層次，無法落地執行。</p>
+  </div>
+
+  <div class="detail-block" id="d3">
+    <h3>三、議題管理實務（單元③⑥⑦）：從理論走向危機與活動現場</h3>
+    <p>這三個單元表面主題不同（危機、談判、活動），實則共用同一套「議題管理」方法論，且刻意被拆開安排在期中報告的前後兩側：</p>
+    <ul>
+      <li><b>單元③（第 4 週，議題升溫路徑與危機前兆判讀）</b>對應心智圖的「議題特質分析」——判讀議題目前處於哪個生命週期階段、有哪些危機前兆訊號，安排在單元④之前、單元⑤之前，讓學生在期中報告前先具備「看懂議題」的基本判斷力。</li>
+      <li><b>單元⑥（第 10 週，公關事件的談判原則）</b>對應「進行模式步驟」——當議題已經升溫，如何按部就班進行談判與協商框架，特意安排在<b>期中報告（單元⑤）之後</b>，讓學生帶著期中被提問挑戰的經驗，直接練習「如何在現場回應對抗與質疑」。</li>
+      <li><b>單元⑦（第 11 週，話題與活動創造傳播）</b>對應「傳播對象分類」——反過來運用議題操作手法，主動針對不同受眾設計話題與活動，創造正向傳播，是單元③危機視角的鏡像練習（從「防守議題」轉為「主動創造議題」）。</li>
+    </ul>
+    <p>單元③⑥⑦合起來形成「辨識議題特質（③）→ 依步驟談判處理（⑥）→ 鎖定對象主動操作（⑦）」的完整方法論鏈，同時也是<b>單元⑩（期末報告）</b>中「當場回應提問與挑戰」最直接的能力來源——期末評審的犀利提問，本質上就是單元⑥談判情境的翻版。這也呼應教學目標 2（能獨立評析真實公關議題，提出自己的觀點而非套用標準答案）。</p>
+  </div>
+
+  <div class="detail-block" id="d4">
+    <h3>四、網際網路與顧客（單元⑧⑨）：把公關操作搬進數位與商業關係</h3>
+    <p><b>逆向行銷趨勢、顧客關係管理 CRM、虛擬社群互動</b>，對應<b>單元⑧</b>（第 12 週自媒體現況與操作解析：平台特性與內容策略，虛擬社群互動、逆向行銷——讓消費者主動靠近品牌而非硬性推銷）與<b>單元⑨</b>（第 13 週資源盤點與夥伴布局，CRM 思維延伸到異業合作夥伴的關係經營，服務對象從消費者擴大到合作夥伴）。</p>
+    <p>單元⑧⑨被安排在單元⑩（期末報告）前的最後兩週，用意很明確：這是全課程最貼近教學目標 3（提案整合線上與線下媒體資源的公關操作策略）的部分，也是單元①～⑨所有知識中，離期末企劃案完成最近的兩塊拼圖——學生必須把單元③⑥⑦學到的議題操作手法，結合單元⑧的自媒體渠道與單元⑨的夥伴資源，才能在單元⑩寫出一份「線上＋線下」都站得住腳的完整提案。</p>
+  </div>
+
+  <div class="callout">
+    <h3>交匯點：單元⑤與⑩——期中／期末分組簡報</h3>
+    <p><b>單元⑤（第 7～9 週期中報告）</b>與<b>單元⑩（第 14、15、18 週期末報告）</b>，是十個教學單元知識的集中展演場，也是唯二橫跨全部四大主題的「整合型單元」。單元⑤側重檢核單元①②③④（核心意涵、傳播理論、議題辨識能力）；單元⑩則要求單元①～⑨全數到位，額外加考單元⑥⑦（談判與話題操作）與單元⑧⑨（自媒體與夥伴布局）。</p>
+    <ol>
+      <li><b>當場回應提問與挑戰</b>——教師與同儕在簡報現場即時提問，正是單元⑥談判原則與危機處理能力的實戰版本，也呼應教學目標 4 要求的「公關人員需要當場應對挑戰」的核心職能。</li>
+      <li><b>沒有標準答案</b>——呼應課程設計理念「公關不是標準答案，重點是練習表達自己的判斷與依據」，評分不是比對正解，而是看論述與依據是否站得住腳。</li>
+      <li><b>從觀察到提案</b>——單元⑥起，前面單元累積的案例評析（危機、談判、話題操作、自媒體）逐步整合成一套具體的公關操作策略提案，在單元⑩完整呈現。</li>
+    </ol>
+  </div>
+
+  <div class="section-title">
+    <h2>成績評定方式</h2>
+    <span class="rule"></span>
+  </div>
+
+  <table class="grade-table">
+    <thead>
+      <tr>
+        <th class="rowlabel">評量項目</th>
+        <th class="pct">佔比</th>
+        <th class="desc-col">說明</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>平時成績</th>
+        <td class="pct pct-max">40%</td>
+        <td>佔比最高，反映每週問答式討論、案例影片課堂討論與情境模擬演練的參與程度——這門課沒有紙筆測驗，平時的觀察評析與表達能力就是成績主體</td>
+      </tr>
+      <tr>
+        <th>期中報告</th>
+        <td class="pct">30%</td>
+        <td>第 7～9 週分三週進行分組簡報，上台闡述企劃案並回應教師與同儕提問</td>
+      </tr>
+      <tr>
+        <th>期末報告</th>
+        <td class="pct">30%</td>
+        <td>第 14、15、18 週分三週進行，整合全學期案例觀察與議題管理方法論，提出完整公關操作策略提案</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="grade-notes">
+    <div class="grade-note">
+      <div class="gn-title">全課程沒有「考試」這個項目</div>
+      <p>期中、期末都是分組簡報而非紙筆測驗，直接呼應教學目標 4「簡報並辯證企劃案，於課堂上回應提問與挑戰」。</p>
+    </div>
+    <div class="grade-note">
+      <div class="gn-title">平時成績佔比最高（40%）</div>
+      <p>顯示這門課重視每週的問答式討論與案例評析過程，而非只看兩次報告的最終成果。</p>
+    </div>
+    <div class="grade-note">
+      <div class="gn-title">期中期末報告加總佔 60%</div>
+      <p>各佔 30%，比重相同，代表教師同樣重視「議題觀察能力」的階段性檢核（期中）與「完整策略提案能力」的總結性展現（期末）。</p>
+    </div>
+  </div>
+
+</main>
+
+<footer>整理依據：NotebookLM 心智圖 ×《492413 媒體公關實務》115 學年第 1 學期教學大綱（授課教師：謝兆貞）</footer>
+
+</body>
+</html>
