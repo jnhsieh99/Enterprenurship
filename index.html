@@ -47,7 +47,6 @@
       <span class="pill">INSTRUCTOR: HSIEH, CHAO-CHEN</span>
     </div>
   </div></header>
-  <!-- rest of file unchanged -->
 </div>
 <script>const VALID_USERNAME = "nkuht"; const VALID_PASSWORD = "hsieh2026"; const loginView = document.getElementById("loginView"); const siteView = document.getElementById("siteView"); const errorMsg = document.getElementById("errorMsg"); function showSite(){loginView.classList.add("hidden"); siteView.classList.remove("hidden");} function showLogin(){siteView.classList.add("hidden"); loginView.classList.remove("hidden");} function login(){const username = document.getElementById("username").value.trim(); const password = document.getElementById("password").value; if (username === VALID_USERNAME && password === VALID_PASSWORD) { localStorage.setItem("isLoggedIn", "true"); showSite(); errorMsg.textContent = ""; } else { errorMsg.textContent = "帳號或密碼錯誤"; }} function logout(){localStorage.removeItem("isLoggedIn"); showLogin(); document.getElementById("username").value = ""; document.getElementById("password").value = "";} window.onload = function(){const isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; if (isLoggedIn) { showSite(); } else { showLogin(); }};</script>
 </body>
