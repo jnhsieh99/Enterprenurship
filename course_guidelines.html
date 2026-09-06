@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>課堂須知 Course Guidelines｜餐旅暨會展行銷管理系</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#132A3A;
+    --navy-deep:#0D1F2C;
+    --gold:#A9812F;
+    --gold-light:#C9A55C;
+    --cream:#F6F2E9;
+    --paper:#FBF9F4;
+    --ink:#232320;
+    --ink-soft:#5B5850;
+    --line:#DCD3BE;
+    --red:#8C2F2F;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Noto Sans TC','Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- language toggle ---------- */
+  html.lang-en [data-zh]{display:none;}
+  html:not(.lang-en) [data-en]{display:none;}
+
+  .lang-switch{
+    position:fixed;
+    top:22px;
+    right:22px;
+    z-index:50;
+    display:flex;
+    background:var(--navy-deep);
+    border-radius:999px;
+    padding:4px;
+    box-shadow:0 6px 18px rgba(13,31,44,.28);
+  }
+  .lang-switch button{
+    border:none;
+    background:transparent;
+    color:#CBD6DC;
+    font-family:'Inter',sans-serif;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.02em;
+    padding:8px 16px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:background .25s ease, color .25s ease;
+  }
+  .lang-switch button.active{
+    background:var(--gold-light);
+    color:var(--navy-deep);
+  }
+
+  /* ---------- hero / masthead ---------- */
+  .masthead{
+    position:relative;
+    background:
+      radial-gradient(ellipse 120% 100% at 15% -10%, #1C3A50 0%, var(--navy) 45%, var(--navy-deep) 100%);
+    color:var(--paper);
+    padding:78px 8vw 64px;
+    overflow:hidden;
+  }
+  .masthead::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:0;
+    height:6px;
+    background:linear-gradient(90deg, transparent, var(--gold-light) 15%, var(--gold-light) 85%, transparent);
+  }
+  .badge-row{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:34px;
+  }
+  .badge-mark{
+    width:44px;height:44px;
+    border:1.5px solid var(--gold-light);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Playfair Display',serif;
+    font-weight:700;
+    font-size:17px;
+    color:var(--gold-light);
+    flex-shrink:0;
+  }
+  .badge-text{
+    font-family:'Inter',sans-serif;
+    font-size:13px;
+    letter-spacing:.06em;
+    color:#9FB4C2;
+    line-height:1.5;
+  }
+  .badge-text b{color:#DCE7EC;font-weight:600;}
+
+  .masthead h1{
+    font-family:'Noto Serif TC','Playfair Display',serif;
+    font-weight:900;
+    font-size:clamp(34px,5vw,58px);
+    line-height:1.18;
+    margin:0 0 18px;
+    max-width:15ch;
+  }
+  html.lang-en .masthead h1{font-family:'Playfair Display',serif;font-style:italic;font-weight:700;}
+  .masthead p.lede{
+    font-size:16.5px;
+    line-height:1.85;
+    color:#C6D2D9;
+    max-width:56ch;
+    margin:0;
+  }
+  .masthead p.lede b{color:var(--gold-light);font-weight:600;}
+
+  /* ---------- section shells ---------- */
+  main{max-width:920px;margin:0 auto;padding:0 8vw;}
+  section.rule-block{padding:70px 0;border-bottom:1px solid var(--line);}
+  section.rule-block:last-of-type{border-bottom:none;}
+
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:18px;
+    margin-bottom:8px;
+  }
+  .section-num{
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    font-size:15px;
+    color:var(--gold);
+    letter-spacing:.04em;
+    white-space:nowrap;
+  }
+  .section-head h2{
+    font-family:'Noto Serif TC','Playfair Display',serif;
+    font-weight:700;
+    font-size:clamp(24px,3.2vw,32px);
+    margin:0;
+    color:var(--navy-deep);
+  }
+  html.lang-en .section-head h2{font-family:'Playfair Display',serif;}
+  .section-sub{
+    font-size:14.5px;
+    color:var(--ink-soft);
+    line-height:1.7;
+    margin:10px 0 34px;
+    max-width:62ch;
+  }
+
+  /* icon strip for classroom conduct */
+  .icon-strip{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+    margin-bottom:36px;
+  }
+  .icon-card{
+    border:1px solid var(--line);
+    background:var(--paper);
+    border-radius:2px;
+    padding:22px 14px 16px;
+    text-align:center;
+  }
+  .icon-card svg{width:46px;height:46px;}
+  .icon-card span{
+    display:block;
+    margin-top:10px;
+    font-size:12.5px;
+    letter-spacing:.03em;
+    color:var(--ink-soft);
+    font-weight:500;
+  }
+
+  /* numbered rule rows */
+  .rule-list{list-style:none;margin:0;padding:0;}
+  .rule-list li{
+    display:grid;
+    grid-template-columns:38px 1fr;
+    gap:16px;
+    padding:16px 0;
+    border-top:1px solid var(--line);
+    align-items:start;
+  }
+  .rule-list li:first-child{border-top:none;}
+  .rule-list .n{
+    font-family:'Playfair Display',serif;
+    font-weight:600;
+    font-style:italic;
+    color:var(--gold);
+    font-size:18px;
+    line-height:1.6;
+  }
+  .rule-list .t{
+    font-size:15.5px;
+    line-height:1.75;
+    color:var(--ink);
+  }
+  .rule-list li.emph{background:linear-gradient(90deg, rgba(169,129,47,.06), transparent 60%);}
+  .rule-list li.emph .t{color:var(--navy-deep);}
+  .tag{
+    display:inline-block;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.04em;
+    color:var(--red);
+    border:1px solid rgba(140,47,47,.35);
+    padding:1px 7px;
+    border-radius:2px;
+    margin-right:8px;
+    transform:translateY(-1px);
+  }
+
+  /* spec table for written report */
+  .spec-table{width:100%;border-collapse:collapse;}
+  .spec-table tr{border-top:1px solid var(--line);}
+  .spec-table tr:first-child{border-top:none;}
+  .spec-table td{padding:15px 0;font-size:15px;line-height:1.75;vertical-align:top;}
+  .spec-table td.key{
+    width:150px;
+    font-weight:700;
+    color:var(--navy-deep);
+    font-family:'Noto Serif TC','Playfair Display',serif;
+    font-size:14.5px;
+    letter-spacing:.02em;
+    padding-right:20px;
+    white-space:nowrap;
+  }
+  html.lang-en .spec-table td.key{font-family:'Inter',sans-serif;font-weight:600;}
+
+  .footnote-box{
+    margin-top:36px;
+    border-left:3px solid var(--gold);
+    background:var(--paper);
+    padding:16px 20px;
+    font-size:13.5px;
+    line-height:1.8;
+    color:var(--ink-soft);
+  }
+  .footnote-box b{color:var(--navy-deep);}
+
+  footer{
+    padding:48px 8vw 70px;
+    text-align:center;
+    color:var(--ink-soft);
+    font-size:12.5px;
+    letter-spacing:.03em;
+  }
+  footer .div{
+    width:34px;height:1px;background:var(--gold);
+    margin:0 auto 18px;
+  }
+
+  @media (max-width:640px){
+    .masthead{padding:96px 6vw 50px;}
+    main{padding:0 6vw;}
+    .icon-strip{grid-template-columns:1fr 1fr 1fr;gap:10px;}
+    .icon-card{padding:14px 8px 12px;}
+    .icon-card svg{width:34px;height:34px;}
+    .icon-card span{font-size:10.5px;}
+    .rule-list li{grid-template-columns:26px 1fr;}
+    .spec-table td.key{width:110px;font-size:12.5px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<div class="lang-switch">
+  <button id="btn-zh" class="active" onclick="setLang('zh')">中文</button>
+  <button id="btn-en" onclick="setLang('en')">EN</button>
+</div>
+
+<div class="masthead">
+  <div class="badge-row">
+    <div class="badge-mark">NK</div>
+    <div class="badge-text">
+      <span data-zh><b>國立高雄餐旅大學</b>｜餐旅暨會展行銷管理系</span>
+      <span data-en><b>National Kaohsiung University of Hospitality and Tourism</b> · Dept. of Hospitality &amp; MICE Marketing Management</span>
+    </div>
+  </div>
+  <h1>
+    <span data-zh>課堂須知</span>
+    <span data-en>Course&nbsp;Guidelines</span>
+  </h1>
+  <p class="lede" data-zh>
+    適用於系上大一至大四各課程，包含全英語授課（EMI）班級。內容涵蓋<b>課堂規範</b>、<b>口頭報告</b>與<b>書面報告</b>三大部分，請於學期初詳閱，並於課程進行中持續遵循。
+  </p>
+  <p class="lede" data-en>
+    Applies to all department courses from freshman through senior year, including English-Medium Instruction (EMI) classes. Covers three areas — <b>classroom conduct</b>, <b>oral presentations</b>, and <b>written reports</b>. Please read carefully at the start of the semester and follow throughout the course.
+  </p>
+</div>
+
+<main>
+
+  <!-- SECTION 1: 上課須知 -->
+  <section class="rule-block" id="conduct">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2><span data-zh>課堂規範</span><span data-en>Classroom Conduct</span></h2>
+    </div>
+    <p class="section-sub" data-zh>維持專業且尊重的學習環境，是每位餐旅暨會展行銷管理系學生的基本素養。</p>
+    <p class="section-sub" data-en>Maintaining a professional, respectful learning environment is a baseline expectation for every student in the department.</p>
+
+    <div class="icon-strip">
+      <div class="icon-card">
+        <svg viewBox="0 0 48 48" fill="none"><rect x="15" y="6" width="18" height="36" rx="3" stroke="#8C2F2F" stroke-width="2.4"/><line x1="20" y1="12" x2="28" y2="12" stroke="#8C2F2F" stroke-width="2.4" stroke-linecap="round"/><circle cx="24" cy="35" r="1.6" fill="#8C2F2F"/><line x1="7" y1="41" x2="41" y2="7" stroke="#8C2F2F" stroke-width="2.6" stroke-linecap="round"/><circle cx="24" cy="24" r="20" stroke="#8C2F2F" stroke-width="2.4"/></svg>
+        <span data-zh>上課請將手機靜音</span><span data-en>Silence phones in class</span>
+      </div>
+      <div class="icon-card">
+        <svg viewBox="0 0 48 48" fill="none"><path d="M14 20h4v14a3 3 0 003 3h6a3 3 0 003-3V20h4" stroke="#8C2F2F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><line x1="16" y1="9" x2="16" y2="20" stroke="#8C2F2F" stroke-width="2.2" stroke-linecap="round"/><line x1="19" y1="9" x2="19" y2="20" stroke="#8C2F2F" stroke-width="2.2" stroke-linecap="round"/><line x1="22" y1="9" x2="22" y2="20" stroke="#8C2F2F" stroke-width="2.2" stroke-linecap="round"/><path d="M31 9c0 6-3 8-3 12v16" stroke="#8C2F2F" stroke-width="2.2" stroke-linecap="round"/><line x1="7" y1="41" x2="41" y2="7" stroke="#8C2F2F" stroke-width="2.6" stroke-linecap="round"/><circle cx="24" cy="24" r="20" stroke="#8C2F2F" stroke-width="2.4"/></svg>
+        <span data-zh>教室內禁止飲食</span><span data-en>No eating or drinking</span>
+      </div>
+      <div class="icon-card">
+        <svg viewBox="0 0 48 48" fill="none"><rect x="9" y="10" width="30" height="19" rx="2" stroke="#8C2F2F" stroke-width="2.2"/><path d="M5 34h38l-3 5H8l-3-5z" stroke="#8C2F2F" stroke-width="2.2" stroke-linejoin="round"/><line x1="7" y1="41" x2="41" y2="7" stroke="#8C2F2F" stroke-width="2.6" stroke-linecap="round"/><circle cx="24" cy="24" r="20" stroke="#8C2F2F" stroke-width="2.4"/></svg>
+        <span data-zh>電腦僅限課程用途</span><span data-en>Laptops for coursework only</span>
+      </div>
+    </div>
+
+    <ul class="rule-list">
+      <li>
+        <span class="n">1</span>
+        <span class="t" data-zh>課前先預習指定章節與案例。</span>
+        <span class="t" data-en>Preview the assigned chapters and case studies before each class.</span>
+      </li>
+      <li class="emph">
+        <span class="n">2</span>
+        <span class="t" data-zh><span class="tag">必讀</span>每節課準時出席是基本義務；缺課累計達全學期三分之一，依學校規定辦理。</span>
+        <span class="t" data-en><span class="tag">KEY</span>Punctual attendance every session is required. Absences totaling one-third of the semester will be handled per university regulations.</span>
+      </li>
+      <li>
+        <span class="n">3</span>
+        <span class="t" data-zh>無法出席者須依規定完成請假手續，未依規定辦理者以曠課處理。</span>
+        <span class="t" data-en>Students unable to attend must submit a leave request through the proper process; unexcused absences are recorded as truancy.</span>
+      </li>
+      <li>
+        <span class="n">4</span>
+        <span class="t" data-zh>出席、課堂參與與平時作業，均列入平時成績計算。</span>
+        <span class="t" data-en>Attendance, in-class participation, and assignments all factor into the course participation grade.</span>
+      </li>
+      <li class="emph">
+        <span class="n">5</span>
+        <span class="t" data-zh>手機或電腦不得從事與課程無關之活動；教學使用、案例搜尋、AI 工具與問卷活動除外。</span>
+        <span class="t" data-en>Phones and laptops may not be used for non-course activities; exceptions apply for instructional use, case research, AI tools, and survey activities.</span>
+      </li>
+      <li>
+        <span class="n">6</span>
+        <span class="t" data-zh>教室內不得進食，飲料以飲水為原則。</span>
+        <span class="t" data-en>No eating in the classroom; water is the only beverage permitted.</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- SECTION 2: 口頭報告 -->
+  <section class="rule-block" id="oral">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2><span data-zh>口頭報告</span><span data-en>Oral Presentation</span></h2>
+    </div>
+    <p class="section-sub" data-zh>口頭報告是訓練專業表達與臨場應對能力的重要環節，全英班級請以全程英語進行報告與問答。</p>
+    <p class="section-sub" data-en>Oral presentations build professional delivery and on-the-spot response skills. EMI sections must present and field questions entirely in English.</p>
+
+    <table class="spec-table">
+      <tr>
+        <td class="key" data-zh>時間</td><td class="key" data-en>Duration</td>
+        <td><span data-zh>每組 20 至 25 分鐘。</span><span data-en>20–25 minutes per group.</span></td>
+      </tr>
+      <tr>
+        <td class="key" data-zh>簡報檔</td><td class="key" data-en>Slide deck</td>
+        <td><span data-zh>需製作具專業程度的簡報檔案。</span><span data-en>A professional-quality slide deck is required.</span></td>
+      </tr>
+      <tr>
+        <td class="key" data-zh>上台人員</td><td class="key" data-en>Presenters</td>
+        <td><span data-zh>每位組員皆須上台報告，不可缺席分工。</span><span data-en>Every group member must take a speaking turn — no one presents by proxy.</span></td>
+      </tr>
+      <tr>
+        <td class="key" data-zh>報告方式</td><td class="key" data-en>Delivery style</td>
+        <td><span data-zh>避免逐字閱讀講稿，以口語化、有互動的方式呈現。</span><span data-en>Avoid reading verbatim from a script; present conversationally and stay engaged with the audience.</span></td>
+      </tr>
+      <tr>
+        <td class="key" data-zh>服裝</td><td class="key" data-en>Attire</td>
+        <td><span data-zh><span class="tag">必讀</span>須著正式或專業服裝上台。</span><span data-en><span class="tag">KEY</span>Formal or professional attire is required.</span></td>
+      </tr>
+      <tr>
+        <td class="key" data-zh>媒材工具</td><td class="key" data-en>Media &amp; tools</td>
+        <td><span data-zh>可搭配影片、海報、AI 影音媒體或互動工具豐富呈現方式。</span><span data-en>Videos, posters, AI-generated media, or interactive tools are welcome to enrich the presentation.</span></td>
+      </tr>
+      <tr>
+        <td class="key" data-zh>提問義務</td><td class="key" data-en>Q&amp;A duty</td>
+        <td><span data-zh>台下同學須於報告後提出與內容相關之問題；每位同學於學期結束前至少提問一次。</span><span data-en>Classmates must ask a content-related question after each presentation; every student must ask at least one question by semester's end.</span></td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- SECTION 3: 書面報告 -->
+  <section class="rule-block" id="written">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2><span data-zh>書面報告</span><span data-en>Written Report</span></h2>
+    </div>
+    <p class="section-sub" data-zh>格式規範適用於所有書面報告，包含個案分析、期末報告等各類書面作業。</p>
+    <p class="section-sub" data-en>These formatting standards apply to all written assignments, including case analyses and final reports.</p>
+
+    <table class="spec-table">
+      <tr>
+        <td class="key" data-zh>頁數</td><td class="key" data-en>Length</td>
+        <td><span data-zh>不限頁數。</span><span data-en>No page limit.</span></td>
+      </tr>
+      <tr>
+        <td class="key" data-zh>封面資訊</td><td class="key" data-en>Cover page</td>
+        <td><span data-zh>組別、成員姓名與學號、個案名稱、報告日期。</span><span data-en>Group number, member names &amp; student IDs, case name, and submission date.</span></td>
+      </tr>
+      <tr>
+        <td class="key" data-zh>版面邊界</td><td class="key" data-en>Margins</td>
+        <td><span data-zh>上下左右各 2.5 公分。</span><span data-en>2.5 cm on all four sides.</span></td>
+      </tr>
+      <tr>
+        <td class="key" data-zh>字型規格</td><td class="key" data-en>Typeface</td>
+        <td><span data-zh><span class="tag">必讀</span>中文：明體／楷書／黑體；英文與數字：Times New Roman／Arial；本文字級 12pt；行距建議 1.2。</span><span data-en><span class="tag">KEY</span>Chinese: Ming, Kai, or Hei typeface. English &amp; numerals: Times New Roman or Arial. Body text 12pt, line spacing 1.2 recommended.</span></td>
+      </tr>
+      <tr>
+        <td class="key" data-zh>資料引用</td><td class="key" data-en>Citations</td>
+        <td><span data-zh>引用資料須標示來源，圖表亦同。</span><span data-en>All cited material, including figures and tables, must be properly sourced.</span></td>
+      </tr>
+      <tr>
+        <td class="key" data-zh>AI 使用</td><td class="key" data-en>Use of AI</td>
+        <td><span data-zh>使用生成式 AI 時，須自行查核內容正確性並說明使用方式。</span><span data-en>When using generative AI, verify the accuracy of the output yourself and disclose how it was used.</span></td>
+      </tr>
+      <tr>
+        <td class="key" data-zh>品質要求</td><td class="key" data-en>Quality bar</td>
+        <td><span data-zh>不得有明顯錯別字、資料錯誤或未經查證之敘述。</span><span data-en>No obvious typos, factual errors, or unverified claims.</span></td>
+      </tr>
+    </table>
+
+    <div class="footnote-box">
+      <span data-zh><b>提醒：</b>以上規範自即日起適用於本系大一至大四各年級課程；全英教學（EMI）班級之口頭與書面報告，一律以英文完成，格式規範不變。如有課程個別調整，將於各課程大綱中另行說明。</span>
+      <span data-en><b>Note:</b> These guidelines apply to all department courses from freshman through senior year, effective immediately. For EMI sections, both oral and written reports must be completed entirely in English; formatting standards remain the same. Any course-specific adjustments will be noted in the individual course syllabus.</span>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="div"></div>
+  <span data-zh>國立高雄餐旅大學．餐旅暨會展行銷管理系</span>
+  <span data-en>National Kaohsiung University of Hospitality and Tourism · Dept. of Hospitality &amp; MICE Marketing Management</span>
+</footer>
+
+<script>
+  function setLang(lang){
+    const html = document.documentElement;
+    if(lang === 'en'){
+      html.classList.add('lang-en');
+      document.getElementById('btn-en').classList.add('active');
+      document.getElementById('btn-zh').classList.remove('active');
+      html.setAttribute('lang','en');
+    } else {
+      html.classList.remove('lang-en');
+      document.getElementById('btn-zh').classList.add('active');
+      document.getElementById('btn-en').classList.remove('active');
+      html.setAttribute('lang','zh-Hant');
+    }
+  }
+</script>
+
+</body>
+</html>
