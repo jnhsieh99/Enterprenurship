@@ -9,142 +9,56 @@
 @font-face { font-family:'Fraunces'; font-style:normal; font-weight:600; font-display:swap; src:url(data:font/woff2;base64,d09GMgABAAAAAEawAA8AAAAAjegAAEZNAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG55YHIEoBmA/U[...]
 @font-face { font-family:'Fraunces'; font-style:normal; font-weight:700; font-display:swap; src:url(data:font/woff2;base64,d09GMgABAAAAAEckAA8AAAAAjcAAAEbCAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG55eHIEoBmA/U[...]
 @font-face { font-family:'Work Sans'; font-style:normal; font-weight:400; font-display:swap; src:url(data:font/woff2;base64,d09GMgABAAAAAE28ABAAAAAAvJAAAE1aAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGmobgZoAHI1w[...]
-@font-face { font-family:'Work Sans'; font-style:normal; font-weight:500; font-display:swap; src:url(data:font/woff2;base64,d09GMgABAAAAAFFoABAAAAAAvOwAAFEFAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGmobgZoSHI1w[...]
-@font-face { font-family:'Work Sans'; font-style:normal; font-weight:600; font-display:swap; src:url(data:font/woff2;base64,d09GMgABAAAAAFH4ABAAAAAAvlwAAFGUAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGmobgZs+HI4S[...]
 @font-face { font family:'IBM Plex Mono'; font-style:normal; font-weight:500; font-display:swap; src:url(data:font/woff2;base64,d09GMgABAAAAADooABEAAAAAoqQAADnGAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGkwbhnYc[...]
 </style>
 <style>
-  :root{
-    --paper:#F7F1E4;
-    --paper-card:#FFFFFF;
-    --ink:#2B2620;
-    --ink-soft:#6B6255;
-    --rust:#B5533C;
-    --gold:#C79A3E;
-    --green:#4C7A5E;
-    --blue:#3B6EA8;
-    --line: rgba(43,38,32,0.10);
-  }
+  :root{ --paper:#F7F1E4; --paper-card:#FFFFFF; --ink:#2B2620; --ink-soft:#6B6255; --rust:#B5533C; --gold:#C79A3E; --green:#4C7A5E; --blue:#3B6EA8; --line: rgba(43,38,32,0.10); }
   *{box-sizing:border-box;}
   html,body{margin:0;background:var(--paper);color:var(--ink);font-family:'Work Sans',sans-serif;}
   .wrap{max-width:900px; margin:0 auto; padding:0 24px;}
   .hero{padding:72px 0 48px;}
-  .eyebrow{
-    font-family:'IBM Plex Mono',monospace; letter-spacing:.12em; text-transform:uppercase;
-    font-size:.78rem; color:var(--rust); margin-bottom:.9rem;
-  }
+  .eyebrow{font-family:'IBM Plex Mono',monospace; letter-spacing:.12em; text-transform:uppercase; font-size:.78rem; color:var(--rust); margin-bottom:.9rem;}
   h1{font-family:'Fraunces',serif; font-weight:700; font-size:clamp(2.4rem,6vw,3.6rem); line-height:1.05; margin:0 0 .3rem;}
   .subtitle{font-family:'Fraunces',serif; font-style:italic; font-size:1.2rem; color:var(--ink-soft); margin:0 0 1.4rem;}
   p.lead{font-size:1.05rem; line-height:1.65; color:var(--ink-soft); max-width:62ch; margin:0 0 1.6rem;}
   .pills{display:flex; flex-wrap:wrap; gap:.6rem; margin-bottom:.6rem;}
-  .pill{
-    font-family:'IBM Plex Mono',monospace; font-size:.78rem; letter-spacing:.03em;
-    border:1px solid var(--line); border-radius:999px; padding:.4rem .9rem; background:var(--paper-card);
-  }
-  section{padding:44px 0; border-top:1px solid var(--line);}
-  h2{font-family:'Fraunces',serif; font-weight:700; font-size:clamp(1.6rem,3.4vw,2.1rem); margin:.2rem 0 .8rem;}
-  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:1.6rem;}
-  .card{background:var(--paper-card); border:1px solid var(--line); border-radius:10px; padding:1.4rem; border-top:3px solid var(--rust);}
-  .card.gold{border-top-color:var(--gold);}
-  .card h3{font-family:'Fraunces',serif; font-size:1.3rem; margin:0 0 .5rem;}
-  .card p{margin:0; color:var(--ink-soft); line-height:1.55; font-size:.96rem;}
-
-  .phase-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:1.6rem;}
-  .phase-card{background:var(--paper-card); border:1px solid var(--line); border-radius:10px; padding:1.4rem; border-top:3px solid var(--rust);}
-  .phase-card.gold{border-top-color:var(--gold);}
-  .phase-card.green{border-top-color:var(--green);}
-  .phase-card.blue{border-top-color:var(--blue);}
-  .phase-num{font-family:'Fraunces',serif; font-weight:700; font-size:2rem; margin:0 0 .3rem;}
-  .phase-card.rustnum .phase-num{color:var(--rust);}
-  .phase-card.gold .phase-num{color:var(--gold);}
-  .phase-card.green .phase-num{color:var(--green);}
-  .phase-card.blue .phase-num{color:var(--blue);}
-  .phase-card h4{font-family:'Fraunces',serif; font-size:1.15rem; margin:0 0 .5rem;}
-  .phase-card p{margin:0; color:var(--ink-soft); font-size:.94rem; line-height:1.55;}
-
-  .phase-header{display:flex; align-items:baseline; justify-content:space-between; gap:1rem; flex-wrap:wrap; margin-top:2rem;}
-  .phase-header .tag{
-    font-family:'IBM Plex Mono',monospace; font-size:.75rem; letter-spacing:.05em; text-transform:uppercase;
-    color:var(--rust); border-bottom:2px solid var(--rust); padding-bottom:2px;
-  }
-  .phase-header h3{font-family:'Fraunces',serif; font-size:1.4rem; margin:.2rem 0 0;}
-  .phase-header .weekrange{font-family:'IBM Plex Mono',monospace; font-size:.85rem; color:var(--ink-soft);}
-  .phase-focus{color:var(--ink-soft); margin:.6rem 0 1.2rem; font-size:.98rem;}
-
-  .week-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:1rem;}
-  .week-card{background:var(--paper-card); border:1px solid var(--line); border-radius:10px; padding:1.2rem;}
-  .week-top{display:flex; align-items:center; gap:.5rem; margin-bottom:.5rem; flex-wrap:wrap;}
-  .week-label{
-    font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.04em; color:var(--ink-soft);
-  }
-  .week-label-link{
-    font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.04em; color:var(--rust);
-    text-decoration:none; font-weight:700;
-  }
-  .week-label-link:hover{ text-decoration:underline; }
-  .clo-badge{
-    font-family:'IBM Plex Mono',monospace; font-size:.68rem; background:var(--paper); border:1px solid var(--line);
-    border-radius:999px; padding:.15rem .55rem; color:var(--ink-soft);
-  }
-  .milestone-badge{
-    font-family:'IBM Plex Mono',monospace; font-size:.65rem; letter-spacing:.04em; text-transform:uppercase;
-    background:var(--rust); color:#fff; border-radius:6px; padding:.2rem .5rem;
-  }
-  .week-card h4{font-family:'Fraunces',serif; font-size:1.08rem; margin:0 0 .4rem;}
-  .week-card .desc{color:var(--ink-soft); font-size:.9rem; line-height:1.5; margin:0 0 .6rem;}
-  .week-card .activity{
-    font-size:.88rem; line-height:1.5; color:var(--ink); border-top:1px dashed var(--line); padding-top:.6rem;
-  }
-  .week-card .activity b{color:var(--ink);}
-
-  .grading-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:1.6rem;}
-  .grade-card{background:var(--paper-card); border:1px solid var(--line); border-radius:10px; padding:1.3rem;}
-  .grade-pct{font-family:'Fraunces',serif; font-weight:700; font-size:2rem; color:var(--rust); margin:0 0 .4rem;}
-  .grade-card p{margin:0 0 .7rem; font-size:.92rem; color:var(--ink-soft); line-height:1.4;}
-  .bar-track{height:8px; border-radius:6px; background:var(--paper); overflow:hidden;}
-  .bar-fill{height:100%; background:linear-gradient(90deg,var(--rust),var(--gold));}
-
-  footer{
-    text-align:center; padding:40px 24px 60px; font-family:'IBM Plex Mono',monospace; font-size:.82rem;
-    color:var(--ink-soft); border-top:1px solid var(--line);
-  }
-
-  @media (max-width:700px){
-    .grid2, .phase-grid, .week-grid, .grading-grid{grid-template-columns:1fr;}
-  }
+  .pill{font-family:'IBM Plex Mono',monospace; font-size:.78rem; letter-spacing:.03em; border:1px solid var(--line); border-radius:999px; padding:.4rem .9rem; background:var(--paper-card);} 
+  section{padding:44px 0; border-top:1px solid var(--line);} h2{font-family:'Fraunces',serif; font-weight:700; font-size:clamp(1.6rem,3.4vw,2.1rem); margin:.2rem 0 .8rem;}
+  .grid2,.phase-grid,.week-grid,.grading-grid{display:grid; gap:16px; margin-top:1.6rem;}
+  .grid2,.phase-grid,.grading-grid{grid-template-columns:1fr 1fr;}
+  .week-grid{grid-template-columns:1fr 1fr; gap:14px; margin-bottom:1rem;}
+  .card,.phase-card,.week-card,.grade-card{background:var(--paper-card); border:1px solid var(--line); border-radius:10px; padding:1.2rem;}
+  .card{border-top:3px solid var(--rust);} .card.gold,.phase-card.gold{border-top-color:var(--gold);} .phase-card{border-top:3px solid var(--rust);} .phase-card.green{border-top-color:var(--green);} .phase-card.blue{border-top-color:var(--blue);} 
+  .phase-grid .phase-card{padding:1.4rem;}
+  .phase-num,.grade-pct{font-family:'Fraunces',serif; font-weight:700; font-size:2rem; margin:0 0 .3rem; color:var(--rust);} .phase-card.gold .phase-num{color:var(--gold);} .phase-card.green .phase-num{color:var(--green);} .phase-card.blue .phase-num{color:var(--blue);} 
+  .card h3,.phase-card h4,.week-card h4{font-family:'Fraunces',serif; margin:0 0 .5rem;} .card h3{font-size:1.3rem;} .phase-card h4{font-size:1.15rem;} .week-card h4{font-size:1.08rem;}
+  .card p,.phase-card p,.week-card .desc,.week-card .activity,.grade-card p{margin:0; color:var(--ink-soft); line-height:1.55; font-size:.96rem;}
+  .phase-header{display:flex; align-items:baseline; justify-content:space-between; gap:1rem; flex-wrap:wrap; margin-top:2rem;} .phase-header .tag,.week-label-link{font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.04em; color:var(--rust); text-decoration:none; font-weight:700;} .phase-header h3{font-family:'Fraunces',serif; font-size:1.4rem; margin:.2rem 0 0;} .phase-header .weekrange{font-family:'IBM Plex Mono',monospace; font-size:.85rem; color:var(--ink-soft);} .phase-focus{color:var(--ink-soft); margin:.6rem 0 1.2rem; font-size:.98rem;}
+  .week-top{display:flex; align-items:center; gap:.5rem; margin-bottom:.5rem; flex-wrap:wrap;} .clo-badge,.milestone-badge{font-family:'IBM Plex Mono',monospace; border-radius:999px; padding:.15rem .55rem; font-size:.68rem;} .clo-badge{background:var(--paper); border:1px solid var(--line); color:var(--ink-soft);} .milestone-badge{background:var(--rust); color:#fff; border-radius:6px; padding:.2rem .5rem; font-size:.65rem; text-transform:uppercase;}
+  .week-card .desc{font-size:.9rem; margin:0 0 .6rem;} .week-card .activity{font-size:.88rem; border-top:1px dashed var(--line); padding-top:.6rem;}
+  .grade-pct{font-size:2rem; color:var(--rust); margin:0 0 .4rem;} .grade-card p{font-size:.92rem; margin:0 0 .7rem;} .bar-track{height:8px; border-radius:6px; background:var(--paper); overflow:hidden;} .bar-fill{height:100%; background:linear-gradient(90deg,var(--rust),var(--gold));}
+  footer{text-align:center; padding:40px 24px 60px; font-family:'IBM Plex Mono',monospace; font-size:.82rem; color:var(--ink-soft); border-top:1px solid var(--line);} 
+  @media (max-width:700px){ .grid2,.phase-grid,.week-grid,.grading-grid{grid-template-columns:1fr;} }
 </style>
 </head>
 <body>
-
 <div class="wrap">
-
   <div class="hero">
     <div class="eyebrow">NKUHT · International Tourism Management (ITM)</div>
     <h1>Entrepreneurship</h1>
     <p class="subtitle">An 18-Week Studio Course</p>
-    <p class="lead">A fully English-taught, hands-on studio course in NKUHT's International Tourism Management
-    program. 18 weeks, 3 credits: students start from campus life and the hospitality/tourism industry, use Design
-    Thinking to uncover real pain points, build out a Business Model Canvas, and finish with a pitch-ready Business
-    Plan defended in front of judges at Demo Day.</p>
-    <div class="pills">
-      <span class="pill">18 WEEKS</span>
-      <span class="pill">3 CREDITS</span>
-      <span class="pill">ENGLISH-TAUGHT</span>
-    </div>
+    <p class="lead">A fully English-taught, hands-on studio course in NKUHT's International Tourism Management program. 18 weeks, 3 credits: students start from campus life and the hospitality/tourism industry, use Design Thinking to uncover real pain points, build out a Business Model Canvas, and finish with a pitch-ready Business Plan defended in front of judges at Demo Day.</p>
+    <div class="pills"><span class="pill">18 WEEKS</span><span class="pill">3 CREDITS</span><span class="pill">ENGLISH-TAUGHT</span></div>
     <div class="pills">
       <span class="pill">DESIGN THINKING &rarr; BMC &rarr; BP &rarr; PITCH</span>
       <span class="pill">INSTRUCTOR: HSIEH, CHAO-CHEN</span>
       <a class="pill" href="Other.html">OTHER COURSES</a>
-      <a class="pill" href="week6-bmc-airbnb.html">BMC Airbnb</a>
     </div>
   </div>
-
   <section>
     <div class="eyebrow">Course Objectives</div>
     <h2>Course Learning Objectives</h2>
-    <p class="lead">3 in-class hours per week, plus a recommended 6 hours of pre/post-class work (customer
-    interviews, survey design and execution, BMC/BP development, pitch rehearsal) to achieve the four objectives
-    below.</p>
+    <p class="lead">3 in-class hours per week, plus a recommended 6 hours of pre/post-class work (customer interviews, survey design and execution, BMC/BP development, pitch rehearsal) to achieve the four objectives below.</p>
     <div class="grid2">
       <div class="card"><h3>CLO 1</h3><p>Accurately identify and define real customer pain points in a campus or hospitality/tourism context using Design Thinking methods.</p></div>
       <div class="card gold"><h3>CLO 2</h3><p>Independently design and validate a complete Business Model Canvas covering customer, channel, cost, and revenue structures.</p></div>
@@ -152,13 +66,10 @@
       <div class="card gold"><h3>CLO 4</h3><p>Clearly present and defend a financially viable business plan to a panel, responding to questions under pressure.</p></div>
     </div>
   </section>
-
   <section>
     <div class="eyebrow">Course Journey</div>
     <h2>Four Phases: From "Pain Point" to Demo Day</h2>
-    <p class="lead">The course runs in four connected phases: first building an entrepreneurial mindset and empathy,
-    then converging on a business model, then prototyping and running the numbers, and finally pulling it all
-    together into a business plan and a live pitch.</p>
+    <p class="lead">The course runs in four connected phases: first building an entrepreneurial mindset and empathy, then converging on a business model, then prototyping and running the numbers, and finally pulling it all together into a business plan and a live pitch.</p>
     <div class="phase-grid">
       <div class="phase-card rustnum"><div class="phase-num">01</div><h4>Mindset &amp; Ideation</h4><p>Week 1&ndash;5 &middot; Build an entrepreneurial mindset and use Design Thinking to uncover real pain points.</p></div>
       <div class="phase-card gold"><div class="phase-num">02</div><h4>Business Models &amp; Validation</h4><p>Week 6&ndash;9 &middot; Turn the idea into a business model with the Business Model Canvas and validate demand.</p></div>
@@ -166,162 +77,47 @@
       <div class="phase-card blue"><div class="phase-num">04</div><h4>Business Plan &amp; Pitching</h4><p>Week 14&ndash;18 &middot; Write a formal business plan, polish the pitch, and take on the final Demo Day challenge.</p></div>
     </div>
   </section>
-
   <section>
     <div class="eyebrow">Syllabus</div>
     <h2>Full 18-Week Syllabus</h2>
-    <p class="lead">3 hours per week, pairing theory with hands-on activities. Week 9 is the midterm milestone;
-    Weeks 17&ndash;18 are the final assessment.</p>
-
-    <!-- PHASE 1 -->
+    <p class="lead">3 hours per week, pairing theory with hands-on activities. Week 9 is the midterm milestone; Weeks 17&ndash;18 are the final assessment.</p>
     <div class="phase-header"><div><span class="tag">Phase 1</span><h3>Mindset &amp; Ideation</h3></div><span class="weekrange">Week 1&ndash;5</span></div>
     <p class="phase-focus">Focus: building an entrepreneurial mindset, learning Design Thinking methods, and finding real pain points on campus and in the hospitality/tourism market.</p>
     <div class="week-grid">
-      <div class="week-card" id="week-1">
-        <div class="week-top"><a class="week-label-link" href="week1_entrepreneurship_slides_offline.html">WEEK 1</a></div>
-        <h4>Course Introduction &amp; The Entrepreneurial Mindset</h4>
-        <p class="desc">Course roadmap and grading, defining entrepreneurship in the hospitality/tourism industry.</p>
-        <p class="activity"><b>Activity —</b> The Paperclip Challenge: teams trade a paperclip for something more valuable on campus to experience "value creation."</p>
-      </div>
-      <div class="week-card" id="week-2">
-        <div class="week-top"><a class="week-label-link" href="week2_entrepreneurship_slides_offline.html">WEEK 2</a><span class="clo-badge">CLO 1</span></div>
-        <h4>Design Thinking I: Empathize &amp; Define</h4>
-        <p class="desc">Finding pain points in campus activities or local tourism.</p>
-        <p class="activity"><b>Activity —</b> Campus Observation Safari: interview classmates to find inefficiencies in campus activities and processes.</p>
-      </div>
-      <div class="week-card" id="week-3">
-        <div class="week-top"><a class="week-label-link" href="week3_entrepreneurship_slides_offline.html">WEEK 3</a><span class="clo-badge">CLO 1</span></div>
-        <h4>Design Thinking II: Ideation &amp; Brainstorming</h4>
-        <p class="desc">Divergent vs. convergent thinking; turning complaints into business opportunities.</p>
-        <p class="activity"><b>Activity —</b> Crazy Eights: sketch 8 distinct product/service ideas in 8 minutes.</p>
-      </div>
-      <div class="week-card" id="week-4">
-        <div class="week-top"><a class="week-label-link" href="week4_entrepreneurship_slides_offline.html">WEEK 4</a><span class="clo-badge">CLO 1</span></div>
-        <h4>Value Proposition &amp; Customer Segments</h4>
-        <p class="desc">Who is your customer? Filling out the Value Proposition Canvas.</p>
-        <p class="activity"><b>Activity —</b> Draft 2 contrasting customer personas (e.g., an exchange student vs. a commuter student).</p>
-      </div>
-      <div class="week-card" id="week-5">
-        <div class="week-top"><a class="week-label-link" href="week5_entrepreneurship_slides_offline.html">WEEK 5</a><span class="clo-badge">CLO 1</span></div>
-        <h4>Team Formation &amp; Core Idea Selection</h4>
-        <p class="desc">Team dynamics, roles (CEO/CFO/CMO/CTO), finalizing the project direction.</p>
-        <p class="activity"><b>Activity —</b> Idea Marketplace: students pitch their ideas to recruit teammates and sign a Co-founder Agreement.</p>
-      </div>
+      <div class="week-card" id="week-1"><div class="week-top"><a class="week-label-link" href="week1_entrepreneurship_slides_offline.html">WEEK 1</a></div><h4>Course Introduction &amp; The Entrepreneurial Mindset</h4><p class="desc">Course roadmap and grading, defining entrepreneurship in the hospitality/tourism industry.</p><p class="activity"><b>Activity —</b> The Paperclip Challenge: teams trade a paperclip for something more valuable on campus to experience "value creation."</p></div>
+      <div class="week-card" id="week-2"><div class="week-top"><a class="week-label-link" href="week2_entrepreneurship_slides_offline.html">WEEK 2</a><span class="clo-badge">CLO 1</span></div><h4>Design Thinking I: Empathize &amp; Define</h4><p class="desc">Finding pain points in campus activities or local tourism.</p><p class="activity"><b>Activity —</b> Campus Observation Safari: interview classmates to find inefficiencies in campus activities and processes.</p></div>
+      <div class="week-card" id="week-3"><div class="week-top"><a class="week-label-link" href="week3_entrepreneurship_slides_offline.html">WEEK 3</a><span class="clo-badge">CLO 1</span></div><h4>Design Thinking II: Ideation &amp; Brainstorming</h4><p class="desc">Divergent vs. convergent thinking; turning complaints into business opportunities.</p><p class="activity"><b>Activity —</b> Crazy Eights: sketch 8 distinct product/service ideas in 8 minutes.</p></div>
+      <div class="week-card" id="week-4"><div class="week-top"><a class="week-label-link" href="week4_entrepreneurship_slides_offline.html">WEEK 4</a><span class="clo-badge">CLO 1</span></div><h4>Value Proposition &amp; Customer Segments</h4><p class="desc">Who is your customer? Filling out the Value Proposition Canvas.</p><p class="activity"><b>Activity —</b> Draft 2 contrasting customer personas (e.g., an exchange student vs. a commuter student).</p></div>
+      <div class="week-card" id="week-5"><div class="week-top"><a class="week-label-link" href="week5_entrepreneurship_slides_offline.html">WEEK 5</a><span class="clo-badge">CLO 1</span></div><h4>Team Formation &amp; Core Idea Selection</h4><p class="desc">Team dynamics, roles (CEO/CFO/CMO/CTO), finalizing the project direction.</p><p class="activity"><b>Activity —</b> Idea Marketplace: students pitch their ideas to recruit teammates and sign a Co-founder Agreement.</p></div>
     </div>
-
-    <!-- PHASE 2 -->
     <div class="phase-header"><div><span class="tag" style="color:var(--gold); border-color:var(--gold);">Phase 2</span><h3>Business Models &amp; Market Validation</h3></div><span class="weekrange">Week 6&ndash;9</span></div>
     <p class="phase-focus">Focus: turning the idea into a business model and validating it in the market with real data.</p>
     <div class="week-grid">
-      <div class="week-card" id="week-6">
-        <div class="week-top"><a class="week-label-link" href="week6_entrepreneurship_slides_offline.html">WEEK 6</a><span class="clo-badge">CLO 2</span></div>
-        <h4>Business Model Canvas (BMC) Part 1</h4>
-        <p class="desc">Infrastructure &amp; offering: Key Partners, Key Activities, Key Resources, Value Propositions.</p>
-        <p class="activity"><b>Activity —</b> Case study of a well-known tourism startup's early business model (e.g., KKday/Klook).</p>
-      </div>
-      <div class="week-card" id="week-7">
-        <div class="week-top"><a class="week-label-link" href="week7_entrepreneurship_slides_offline.html">WEEK 7</a><span class="clo-badge">CLO 2</span></div>
-        <h4>Business Model Canvas (BMC) Part 2</h4>
-        <p class="desc">Customers &amp; finances: Customer Relationships, Channels, Cost Structure, Revenue Streams.</p>
-        <p class="activity"><b>Activity —</b> Complete the team's first full one-page BMC.</p>
-      </div>
-      <div class="week-card" id="week-8">
-        <div class="week-top"><a class="week-label-link" href="week8_entrepreneurship_slides_offline.html">WEEK 8</a><span class="clo-badge">CLO 3</span></div>
-        <h4>Market Research &amp; Competitor Analysis</h4>
-        <p class="desc">Primary vs. secondary research; designing a Google Form survey and analyzing local competitors.</p>
-        <p class="activity"><b>Activity —</b> Teams design an online survey to validate demand for their product on campus (target: at least 30 responses).</p>
-      </div>
-      <div class="week-card" id="week-9">
-        <div class="week-top"><a class="week-label-link" href="week9_entrepreneurship_slides_offline.html">WEEK 9</a><span class="clo-badge">CLO 1&ndash;3</span><span class="milestone-badge">Milestone</span></div>
-        <h4>Midterm Progress Report (Milestone 1)</h4>
-        <p class="desc">Presenting a validated problem, a validated solution, and a draft BMC.</p>
-        <p class="activity"><b>Activity —</b> Peer-Review Panel: 5-minute team presentations with feedback from both instructor and classmates.</p>
-      </div>
+      <div class="week-card" id="week-6"><div class="week-top"><a class="week-label-link" href="week6_entrepreneurship_slides_offline.html">WEEK 6</a><span class="clo-badge">CLO 2</span><a class="week-label-link" href="week6-bmc-airbnb.html">bmc-airbnb</a></div><h4>Business Model Canvas (BMC) Part 1</h4><p class="desc">Infrastructure &amp; offering: Key Partners, Key Activities, Key Resources, Value Propositions.</p><p class="activity"><b>Activity —</b> Case study of a well-known tourism startup's early business model (e.g., KKday/Klook).</p></div>
+      <div class="week-card" id="week-7"><div class="week-top"><a class="week-label-link" href="week7_entrepreneurship_slides_offline.html">WEEK 7</a><span class="clo-badge">CLO 2</span></div><h4>Business Model Canvas (BMC) Part 2</h4><p class="desc">Customers &amp; finances: Customer Relationships, Channels, Cost Structure, Revenue Streams.</p><p class="activity"><b>Activity —</b> Complete the team's first full one-page BMC.</p></div>
+      <div class="week-card" id="week-8"><div class="week-top"><a class="week-label-link" href="week8_entrepreneurship_slides_offline.html">WEEK 8</a><span class="clo-badge">CLO 3</span></div><h4>Market Research &amp; Competitor Analysis</h4><p class="desc">Primary vs. secondary research; designing a Google Form survey and analyzing local competitors.</p><p class="activity"><b>Activity —</b> Teams design an online survey to validate demand for their product on campus (target: at least 30 responses).</p></div>
+      <div class="week-card" id="week-9"><div class="week-top"><a class="week-label-link" href="week9_entrepreneurship_slides_offline.html">WEEK 9</a><span class="clo-badge">CLO 1&ndash;3</span><span class="milestone-badge">Milestone</span></div><h4>Midterm Progress Report (Milestone 1)</h4><p class="desc">Presenting a validated problem, a validated solution, and a draft BMC.</p><p class="activity"><b>Activity —</b> Peer-Review Panel: 5-minute team presentations with feedback from both instructor and classmates.</p></div>
     </div>
-
-    <!-- PHASE 3 -->
     <div class="phase-header"><div><span class="tag" style="color:var(--green); border-color:var(--green);">Phase 3</span><h3>Prototyping &amp; Financial Fundamentals</h3></div><span class="weekrange">Week 10&ndash;13</span></div>
     <p class="phase-focus">Focus: building a prototype and estimating startup costs and revenue to assess financial feasibility.</p>
     <div class="week-grid">
-      <div class="week-card" id="week-10">
-        <div class="week-top"><a class="week-label-link" href="week10_entrepreneurship_slides_offline.html">WEEK 10</a></div>
-        <h4>Minimum Viable Product (MVP) &amp; Prototyping</h4>
-        <p class="desc">Building to learn; low-fidelity vs. high-fidelity prototypes.</p>
-        <p class="activity"><b>Activity —</b> UI/UX or physical mockup studio: build a landing page, a digital wireframe (Figma/Canva), or a physical prototype mockup.</p>
-      </div>
-      <div class="week-card" id="week-11">
-        <div class="week-top"><a class="week-label-link" href="week11_entrepreneurship_slides_offline.html">WEEK 11</a></div>
-        <h4>Marketing Strategy &amp; Go-To-Market (GTM) Plan</h4>
-        <p class="desc">Applying the marketing 4Ps to a startup launch; digital marketing basics.</p>
-        <p class="activity"><b>Activity —</b> Outline a 4-week launch campaign using Instagram/LINE marketing strategies.</p>
-      </div>
-      <div class="week-card" id="week-12">
-        <div class="week-top"><a class="week-label-link" href="week12_entrepreneurship_slides_offline.html">WEEK 12</a></div>
-        <h4>Startup Finance I: Cost Structure &amp; Pricing</h4>
-        <p class="desc">Fixed vs. variable costs; cost-plus pricing vs. value-based pricing.</p>
-        <p class="activity"><b>Activity —</b> Calculate the Cost of Goods Sold (COGS) and set a unit price.</p>
-      </div>
-      <div class="week-card" id="week-13">
-        <div class="week-top"><a class="week-label-link" href="week13_entrepreneurship_slides_offline.html">WEEK 13</a></div>
-        <h4>Startup Finance II: Revenue Projections &amp; Break-Even Analysis</h4>
-        <p class="desc">Sales forecasting and calculating the Break-Even Point (BEP).</p>
-        <p class="activity"><b>Activity —</b> Fill out a simplified spreadsheet to calculate monthly burn rate and runway.</p>
-      </div>
+      <div class="week-card" id="week-10"><div class="week-top"><a class="week-label-link" href="week10_entrepreneurship_slides_offline.html">WEEK 10</a></div><h4>Minimum Viable Product (MVP) &amp; Prototyping</h4><p class="desc">Building to learn; low-fidelity vs. high-fidelity prototypes.</p><p class="activity"><b>Activity —</b> UI/UX or physical mockup studio: build a landing page, a digital wireframe (Figma/Canva), or a physical prototype mockup.</p></div>
+      <div class="week-card" id="week-11"><div class="week-top"><a class="week-label-link" href="week11_entrepreneurship_slides_offline.html">WEEK 11</a></div><h4>Marketing Strategy &amp; Go-To-Market (GTM) Plan</h4><p class="desc">Applying the marketing 4Ps to a startup launch; digital marketing basics.</p><p class="activity"><b>Activity —</b> Outline a 4-week launch campaign using Instagram/LINE marketing strategies.</p></div>
+      <div class="week-card" id="week-12"><div class="week-top"><a class="week-label-link" href="week12_entrepreneurship_slides_offline.html">WEEK 12</a></div><h4>Startup Finance I: Cost Structure &amp; Pricing</h4><p class="desc">Fixed vs. variable costs; cost-plus pricing vs. value-based pricing.</p><p class="activity"><b>Activity —</b> Calculate the Cost of Goods Sold (COGS) and set a unit price.</p></div>
+      <div class="week-card" id="week-13"><div class="week-top"><a class="week-label-link" href="week13_entrepreneurship_slides_offline.html">WEEK 13</a></div><h4>Startup Finance II: Revenue Projections &amp; Break-Even Analysis</h4><p class="desc">Sales forecasting and calculating the Break-Even Point (BEP).</p><p class="activity"><b>Activity —</b> Fill out a simplified spreadsheet to calculate monthly burn rate and runway.</p></div>
     </div>
-
-    <!-- PHASE 4 -->
     <div class="phase-header"><div><span class="tag" style="color:var(--blue); border-color:var(--blue);">Phase 4</span><h3>Crafting the Business Plan &amp; Pitching</h3></div><span class="weekrange">Week 14&ndash;18</span></div>
     <p class="phase-focus">Focus: pulling everything together into a business plan, sharpening pitch skills, and taking on Demo Day.</p>
     <div class="week-grid">
-      <div class="week-card" id="week-14">
-        <div class="week-top"><a class="week-label-link" href="week14_entrepreneurship_slides_offline.html">WEEK 14</a></div>
-        <h4>Writing the Professional Business Plan (BP)</h4>
-        <p class="desc">Structuring the written report: executive summary, operational plan, risk management.</p>
-        <p class="activity"><b>Activity —</b> Document workshop: teams draft and format each section of the BP.</p>
-      </div>
-      <div class="week-card" id="week-15">
-        <div class="week-top"><a class="week-label-link" href="week15_entrepreneurship_slides_offline.html">WEEK 15</a></div>
-        <h4>The Art of the Pitch: Structure &amp; Storytelling</h4>
-        <p class="desc">The 10-slide pitch structure: Hook, Problem, Solution, Market, Product, Business Model, Competition, Marketing, Financials, Team.</p>
-        <p class="activity"><b>Activity —</b> Analyze successful pitch videos from Techstars/Y Combinator.</p>
-      </div>
-      <div class="week-card" id="week-16">
-        <div class="week-top"><a class="week-label-link" href="week16_entrepreneurship_slides_offline.html">WEEK 16</a></div>
-        <h4>Slide Design &amp; Q&amp;A Defense Strategy</h4>
-        <p class="desc">Visual presentation principles (less text, more data graphics); anticipating tough investor questions.</p>
-        <p class="activity"><b>Activity —</b> Pitch Speed Dating: 3-minute practice pitch to another team, followed by 2 minutes of feedback.</p>
-      </div>
-      <div class="week-card" id="week-17">
-        <div class="week-top"><a class="week-label-link" href="week17_entrepreneurship_slides_offline.html">WEEK 17</a><span class="clo-badge">CLO 4</span><span class="milestone-badge">Milestone</span></div>
-        <h4>Grand Finale: Final Demo Day / Pitch Competition (Milestone 2)</h4>
-        <p class="desc">Showcasing the final product, business model, and financial projections.</p>
-        <p class="activity"><b>Activity —</b> NKUHT ITM Shark Tank: 5-minute presentation + 4-minute Q&amp;A per team (industry/incubator judges optional).</p>
-      </div>
-      <div class="week-card" id="week-18">
-        <div class="week-top"><a class="week-label-link" href="week18_entrepreneurship_slides_offline.html">WEEK 18</a><span class="clo-badge">CLO 1&ndash;4</span></div>
-        <h4>Course Wrap-Up &amp; Post-Mortem Reflection</h4>
-        <p class="desc">Individual self-assessment and peer evaluation, and reflecting on takeaways for future career applications.</p>
-        <p class="activity"><b>Activity —</b> Teams submit a final revised Business Plan PDF and complete a 360-degree peer evaluation.</p>
-      </div>
+      <div class="week-card" id="week-14"><div class="week-top"><a class="week-label-link" href="week14_entrepreneurship_slides_offline.html">WEEK 14</a></div><h4>Writing the Professional Business Plan (BP)</h4><p class="desc">Structuring the written report: executive summary, operational plan, risk management.</p><p class="activity"><b>Activity —</b> Document workshop: teams draft and format each section of the BP.</p></div>
+      <div class="week-card" id="week-15"><div class="week-top"><a class="week-label-link" href="week15_entrepreneurship_slides_offline.html">WEEK 15</a></div><h4>The Art of the Pitch: Structure &amp; Storytelling</h4><p class="desc">The 10-slide pitch structure: Hook, Problem, Solution, Market, Product, Business Model, Competition, Marketing, Financials, Team.</p><p class="activity"><b>Activity —</b> Analyze successful pitch videos from Techstars/Y Combinator.</p></div>
+      <div class="week-card" id="week-16"><div class="week-top"><a class="week-label-link" href="week16_entrepreneurship_slides_offline.html">WEEK 16</a></div><h4>Slide Design &amp; Q&amp;A Defense Strategy</h4><p class="desc">Visual presentation principles (less text, more data graphics); anticipating tough investor questions.</p><p class="activity"><b>Activity —</b> Pitch Speed Dating: 3-minute practice pitch to another team, followed by 2 minutes of feedback.</p></div>
+      <div class="week-card" id="week-17"><div class="week-top"><a class="week-label-link" href="week17_entrepreneurship_slides_offline.html">WEEK 17</a><span class="clo-badge">CLO 4</span><span class="milestone-badge">Milestone</span></div><h4>Grand Finale: Final Demo Day / Pitch Competition (Milestone 2)</h4><p class="desc">Showcasing the final product, business model, and financial projections.</p><p class="activity"><b>Activity —</b> NKUHT ITM Shark Tank: 5-minute presentation + 4-minute Q&amp;A per team (industry/incubator judges optional).</p></div>
+      <div class="week-card" id="week-18"><div class="week-top"><a class="week-label-link" href="week18_entrepreneurship_slides_offline.html">WEEK 18</a><span class="clo-badge">CLO 1&ndash;4</span></div><h4>Course Wrap-Up &amp; Post-Mortem Reflection</h4><p class="desc">Individual self-assessment and peer evaluation, and reflecting on takeaways for future career applications.</p><p class="activity"><b>Activity —</b> Teams submit a final revised Business Plan PDF and complete a 360-degree peer evaluation.</p></div>
     </div>
   </section>
-
-  <section>
-    <div class="eyebrow">Assessment</div>
-    <h2>Grading</h2>
-    <p class="lead">Assessment runs across the whole semester, weighting both the process and the final deliverables.</p>
-    <div class="grading-grid">
-      <div class="grade-card"><div class="grade-pct">30%</div><p>Final Demo Day Pitch (Week 17 presentation)</p><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div>
-      <div class="grade-card"><div class="grade-pct">20%</div><p>Midterm Progress Report (Week 9 presentation)</p><div class="bar-track"><div class="bar-fill" style="width:67%"></div></div></div>
-      <div class="grade-card"><div class="grade-pct">20%</div><p>Written Business Plan (Week 18 PDF submission)</p><div class="bar-track"><div class="bar-fill" style="width:67%"></div></div></div>
-      <div class="grade-card"><div class="grade-pct">20%</div><p>Weekly workshop deliverables &amp; worksheets (individual/group)</p><div class="bar-track"><div class="bar-fill" style="width:67%"></div></div></div>
-      <div class="grade-card"><div class="grade-pct">10%</div><p>Attendance &amp; peer evaluation (360-degree feedback)</p><div class="bar-track"><div class="bar-fill" style="width:33%"></div></div></div>
-    </div>
-  </section>
-
+  <section><div class="eyebrow">Assessment</div><h2>Grading</h2><p class="lead">Assessment runs across the whole semester, weighting both the process and the final deliverables.</p><div class="grading-grid"><div class="grade-card"><div class="grade-pct">30%</div><p>Final Demo Day Pitch (Week 17 presentation)</p><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div><div class="grade-card"><div class="grade-pct">20%</div><p>Midterm Progress Report (Week 9 presentation)</p><div class="bar-track"><div class="bar-fill" style="width:67%"></div></div></div><div class="grade-card"><div class="grade-pct">20%</div><p>Written Business Plan (Week 18 PDF submission)</p><div class="bar-track"><div class="bar-fill" style="width:67%"></div></div></div><div class="grade-card"><div class="grade-pct">20%</div><p>Weekly workshop deliverables &amp; worksheets (individual/group)</p><div class="bar-track"><div class="bar-fill" style="width:67%"></div></div></div><div class="grade-card"><div class="grade-pct">10%</div><p>Attendance &amp; peer evaluation (360-degree feedback)</p><div class="bar-track"><div class="bar-fill" style="width:33%"></div></div></div></div></section>
 </div>
-
 <footer>Entrepreneurship &middot; International Tourism Management, NKUHT &middot; &copy; 2026 Hsieh, Chao-Chen</footer>
-
 </body>
 </html>
