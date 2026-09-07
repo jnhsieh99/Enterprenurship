@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 6 — Business Model Canvas Through Airbnb</title>
+<style>
+  :root{
+    --ink:#142A2E;
+    --ink-soft:#3E5459;
+    --teal:#1F5C66;
+    --teal-dark:#123840;
+    --gold:#C98A2E;
+    --gold-soft:#F4E3C4;
+    --bg:#F3F5F3;
+    --card:#FFFFFF;
+    --line:#DCE3E0;
+    --line-soft:#EAEEEC;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    line-height:1.55;
+  }
+  h1,h2,h3,.display{
+    font-family:"Fraunces","Iowan Old Style",Georgia,serif;
+    font-weight:600;
+    color:var(--teal-dark);
+    letter-spacing:-0.01em;
+  }
+  a{color:var(--teal);}
+  .wrap{max-width:900px;margin:0 auto;padding:0 24px;}
+  .wrap-wide{max-width:1040px;margin:0 auto;padding:0 24px;}
+
+  /* Header band */
+  .band{
+    background:linear-gradient(135deg,var(--teal-dark),var(--teal) 70%);
+    color:#EAF3F1;
+    padding:38px 0 46px;
+  }
+  .band .kicker{
+    font-size:14px;
+    letter-spacing:0.02em;
+    color:#BFE0DA;
+    margin:0 0 10px;
+  }
+  .band h1{
+    color:#fff;
+    font-size:clamp(28px,4vw,42px);
+    margin:0 0 10px;
+    max-width:720px;
+  }
+  .band p.sub{
+    color:#D7EAE6;
+    font-size:17px;
+    max-width:620px;
+    margin:0 0 20px;
+  }
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;}
+  .meta-chip{
+    background:rgba(255,255,255,0.12);
+    border:1px solid rgba(255,255,255,0.22);
+    border-radius:999px;
+    padding:6px 14px;
+    font-size:13.5px;
+    color:#E9F4F1;
+  }
+
+  section{padding:44px 0;}
+  section.tight{padding:28px 0;}
+  .section-label{
+    font-size:13px;
+    font-weight:600;
+    color:var(--gold);
+    margin:0 0 6px;
+  }
+  h2{font-size:26px;margin:0 0 14px;}
+  p{color:var(--ink-soft);font-size:16px;}
+
+  /* Objectives */
+  .obj-list{list-style:none;margin:0;padding:0;display:grid;gap:10px;}
+  .obj-list li{
+    display:flex;gap:12px;align-items:flex-start;
+    background:var(--card);border:1px solid var(--line);
+    border-radius:var(--radius);padding:14px 16px;
+  }
+  .obj-num{
+    font-family:"Fraunces",serif;font-weight:600;color:var(--gold);
+    font-size:18px;min-width:22px;
+  }
+
+  /* Timeline */
+  .timeline{display:grid;gap:0;border-top:1px solid var(--line);}
+  .tl-row{
+    display:grid;grid-template-columns:110px 1fr;gap:18px;
+    padding:14px 0;border-bottom:1px solid var(--line);
+  }
+  .tl-time{color:var(--teal);font-weight:600;font-size:14.5px;white-space:nowrap;}
+  .tl-desc{color:var(--ink-soft);font-size:15px;}
+
+  /* Canvas hero */
+  .canvas-intro{text-align:left;margin-bottom:22px;}
+  .canvas-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    grid-template-rows:auto auto;
+    gap:6px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:12px;
+    overflow:hidden;
+  }
+  .cell{
+    background:var(--card);
+    padding:0;
+  }
+  .cell.vp{background:var(--gold-soft);}
+  .cell summary{
+    list-style:none;cursor:pointer;
+    padding:16px 14px;
+    font-family:"Fraunces",serif;font-weight:600;font-size:15px;color:var(--teal-dark);
+    display:flex;justify-content:space-between;align-items:center;gap:6px;
+  }
+  .cell summary::-webkit-details-marker{display:none;}
+  .cell summary .plus{color:var(--gold);font-size:20px;font-weight:400;transition:transform .2s ease;}
+  .cell[open] summary .plus{transform:rotate(45deg);}
+  .cell .body{padding:0 14px 16px;}
+  .cell .tag{
+    display:inline-block;font-size:11.5px;color:var(--teal);
+    background:#E5F0EE;border-radius:999px;padding:2px 9px;margin-bottom:8px;
+  }
+  .cell p{font-size:14px;margin:6px 0;color:var(--ink-soft);}
+  .cell .q{font-style:italic;color:var(--teal-dark);}
+  .cell .ans{color:var(--ink);}
+  .row-kp{grid-column:1;grid-row:1;}
+  .row-ka{grid-column:2;grid-row:1 / span 1;}
+  .row-kr{grid-column:2;grid-row:2;}
+  .row-vp{grid-column:3;grid-row:1 / span 2;}
+  .row-cr{grid-column:4;grid-row:1;}
+  .row-ch{grid-column:4;grid-row:2;}
+  .row-cs{grid-column:5;grid-row:1 / span 2;}
+  .row-cost{grid-column:1 / span 3;grid-row:3;}
+  .row-rev{grid-column:4 / span 2;grid-row:3;}
+  @media(max-width:760px){
+    .canvas-grid{grid-template-columns:1fr 1fr;}
+    .row-kp,.row-ka,.row-kr,.row-vp,.row-cr,.row-ch,.row-cs,.row-cost,.row-rev{
+      grid-column:auto;grid-row:auto;
+    }
+  }
+
+  /* Callouts */
+  .callout-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:700px){.callout-grid{grid-template-columns:1fr;}}
+  .callout{
+    border-radius:var(--radius);padding:18px 20px;font-size:14.5px;
+  }
+  .callout.aha{background:#EAF3F1;border-left:4px solid var(--teal);color:var(--teal-dark);}
+  .callout.warn{background:#FBF0E2;border-left:4px solid var(--gold);color:#6B4A16;}
+  .callout strong{display:block;margin-bottom:6px;font-size:13.5px;}
+
+  /* Activity */
+  .steps{list-style:none;margin:0;padding:0;counter-reset:step;}
+  .steps li{
+    counter-increment:step;
+    display:grid;grid-template-columns:32px 1fr;gap:12px;
+    padding:10px 0;border-bottom:1px solid var(--line-soft);
+    color:var(--ink-soft);font-size:15px;
+  }
+  .steps li::before{
+    content:counter(step);
+    font-family:"Fraunces",serif;font-weight:600;color:#fff;
+    background:var(--teal);width:26px;height:26px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:13px;
+  }
+
+  .timer-box{
+    background:var(--teal-dark);color:#fff;border-radius:var(--radius);
+    padding:22px 24px;display:flex;flex-wrap:wrap;align-items:center;gap:18px;
+    margin-top:22px;
+  }
+  .timer-display{font-family:"Fraunces",serif;font-size:38px;font-weight:600;min-width:110px;}
+  .timer-btns{display:flex;gap:8px;flex-wrap:wrap;}
+  .timer-btns button{
+    background:rgba(255,255,255,0.14);color:#fff;border:1px solid rgba(255,255,255,0.3);
+    border-radius:7px;padding:8px 14px;font-size:13.5px;cursor:pointer;
+    font-family:inherit;
+  }
+  .timer-btns button:hover{background:rgba(255,255,255,0.24);}
+  .timer-tip{font-size:12.5px;color:#BFE0DA;width:100%;}
+
+  .prompt-bank{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;}
+  .prompt-pill{
+    background:var(--card);border:1px solid var(--line);border-radius:999px;
+    padding:8px 16px;font-size:13.5px;color:var(--ink-soft);
+  }
+
+  /* Quiz */
+  .quiz-card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 20px;margin-bottom:14px;
+  }
+  .quiz-q{font-family:"Fraunces",serif;font-weight:600;font-size:16px;margin:0 0 10px;color:var(--teal-dark);}
+  .quiz-opts{display:grid;gap:8px;}
+  .quiz-opts button{
+    text-align:left;background:#FAFBFA;border:1px solid var(--line);border-radius:7px;
+    padding:10px 14px;font-size:14.5px;color:var(--ink);cursor:pointer;font-family:inherit;
+  }
+  .quiz-opts button:hover{border-color:var(--teal);}
+  .quiz-opts button.correct{background:#E4F3E9;border-color:#5CA97B;color:#215B3C;font-weight:600;}
+  .quiz-opts button.incorrect{background:#FBE7E4;border-color:#D97C6E;color:#7A2E22;}
+
+  /* Extension cards */
+  .ext-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  @media(max-width:700px){.ext-grid{grid-template-columns:1fr;}}
+  .ext-card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 22px;
+  }
+  .ext-card .week-tag{
+    display:inline-block;background:var(--teal);color:#fff;font-size:12px;
+    border-radius:999px;padding:3px 11px;margin-bottom:10px;
+  }
+  .ext-card h3{font-size:17px;margin:0 0 8px;}
+  .ext-card p{font-size:14.5px;margin:6px 0;}
+
+  ul.plain{padding-left:18px;color:var(--ink-soft);font-size:15px;}
+  ul.plain li{margin-bottom:6px;}
+
+  footer{
+    background:var(--teal-dark);color:#D7EAE6;padding:34px 0 40px;font-size:14px;
+  }
+  footer a{color:#EAF3F1;}
+  .foot-row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:center;}
+
+  details.zh{
+    margin-top:26px;border:1px dashed var(--line);border-radius:var(--radius);
+    padding:4px 18px;background:#FAFAF8;
+  }
+  details.zh summary{cursor:pointer;font-size:14px;color:var(--ink-soft);padding:12px 0;}
+  details.zh .zh-body{font-size:14px;color:var(--ink-soft);padding-bottom:16px;}
+  details.zh .zh-body p{margin:0 0 12px;}
+
+  hr.split{border:none;border-top:1px solid var(--line);margin:0;}
+</style>
+</head>
+<body>
+
+<div class="band">
+  <div class="wrap">
+    <p class="kicker">Entrepreneurship · Week 6 of 18 · NKUHT International Tourism Management</p>
+    <h1>What Is a Business Model?</h1>
+    <p class="sub">Reverse-engineering the Business Model Canvas through the company every student already knows: Airbnb.</p>
+    <div class="meta-row">
+      <span class="meta-chip">2-hour session, English-taught</span>
+      <span class="meta-chip">Opens Phase 2: Business Models &amp; Validation</span>
+      <span class="meta-chip">Bring: Week 4 personas &amp; value propositions</span>
+    </div>
+  </div>
+</div>
+
+<section class="tight">
+  <div class="wrap">
+    <p class="section-label">Session overview</p>
+    <p>This session answers one question before students touch their own canvas: <em>what is a business model, and what does a complete one actually look like?</em> Instead of introducing the nine blocks in the abstract, the class reverse-engineers Airbnb block by block, then uses that model as a template before starting the team's own left-half draft. Teach it as a warm-up before the standard "left-half only" activity, or as an extended session if you want students to see the whole canvas before narrowing in on infrastructure.</p>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap">
+    <h2>Learning objectives</h2>
+    <ul class="obj-list">
+      <li><span class="obj-num">1</span><span>Define a business model in your own words — not just recite the textbook line.</span></li>
+      <li><span class="obj-num">2</span><span>Name all nine Business Model Canvas blocks and explain what each one is asking.</span></li>
+      <li><span class="obj-num">3</span><span>Trace how Airbnb's founding story became a two-sided platform business model.</span></li>
+      <li><span class="obj-num">4</span><span>Identify a hospitality or tourism example for each of the nine blocks, beyond Airbnb.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap">
+    <h2>Today's plan</h2>
+    <div class="timeline">
+      <div class="tl-row"><div class="tl-time">0:00–0:10</div><div class="tl-desc">Hook: could you pay rent with an air mattress? The Airbnb origin story.</div></div>
+      <div class="tl-row"><div class="tl-time">0:10–0:25</div><div class="tl-desc">Mini-lecture: what a business model is, and where the Canvas came from.</div></div>
+      <div class="tl-row"><div class="tl-time">0:25–1:05</div><div class="tl-desc">Case study walkthrough: Airbnb across all nine blocks.</div></div>
+      <div class="tl-row"><div class="tl-time">1:05–1:10</div><div class="tl-desc">Break / transition.</div></div>
+      <div class="tl-row"><div class="tl-time">1:10–1:40</div><div class="tl-desc">Guided activity: teams sketch a full rough canvas for their own idea.</div></div>
+      <div class="tl-row"><div class="tl-time">1:40–1:55</div><div class="tl-desc">Gallery walk and peer feedback.</div></div>
+      <div class="tl-row"><div class="tl-time">1:55–2:00</div><div class="tl-desc">Debrief and quick learning check.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="canvas">
+  <div class="wrap-wide">
+    <p class="section-label">The case study</p>
+    <h2>Airbnb, block by block</h2>
+    <div class="canvas-intro">
+      <p>In 2008, co-founder Brian Chesky moved to San Francisco and struggled to make rent. When a design conference sold out every hotel in the city, he messaged his roommate Joe Gebbia with an idea: turn their apartment into a "Designer's Bed and Breakfast" for the event, offering out-of-town designers a place to crash for four days — Wi-Fi, a small desk, a sleeping mat, and breakfast each morning. Half-joking, they built a simple website overnight. Three strangers paid to stay with them that weekend. It didn't feel like a business yet. Six months later, Airbnb was born.</p>
+      <p>Tap each block below. For each, give the class the general idea first, ask the guiding question, then reveal Airbnb's answer. Work right to left — customer, then value, then infrastructure, then finance.</p>
+    </div>
+
+    <div class="canvas-grid">
+      <details class="cell row-kp">
+        <summary>Key Partners <span class="plus">+</span></summary>
+        <div class="body">
+          <span class="tag">Who you can't build alone</span>
+          <p>Companies partner to gain scale, reduce risk, or acquire a resource they lack in-house.</p>
+          <p class="q">Who did Airbnb need early on that it couldn't build itself?</p>
+          <p class="ans">Payment processors for secure transactions, and later, local photographers — added after testing showed professional photos roughly doubled booking rates.</p>
+        </div>
+      </details>
+
+      <details class="cell row-ka">
+        <summary>Key Activities <span class="plus">+</span></summary>
+        <div class="body">
+          <span class="tag">What you must repeatedly do</span>
+          <p>Production, problem-solving, or platform-building are the three common types.</p>
+          <p class="q">What does the company have to keep doing every day?</p>
+          <p class="ans">Growing and supporting the host community, and continuously building features based on what hosts and guests need — platform-type activity.</p>
+        </div>
+      </details>
+
+      <details class="cell row-kr">
+        <summary>Key Resources <span class="plus">+</span></summary>
+        <div class="body">
+          <span class="tag">What you must own or control</span>
+          <p>Physical, intellectual, human, or financial resources.</p>
+          <p class="q">Airbnb owns no real estate — so what does it own?</p>
+          <p class="ans">Brand trust, the host and guest community itself, and investor backing.</p>
+        </div>
+      </details>
+
+      <details class="cell row-vp vp" open>
+        <summary>Value Propositions <span class="plus">+</span></summary>
+        <div class="body">
+          <span class="tag">The pain relieved, or gain created</span>
+          <p>Not the product itself — the reason the customer won't leave.</p>
+          <p class="q">What does each side actually get?</p>
+          <p class="ans">Travelers: a home away from home, and a local way to experience a city. Hosts: extra income from space they already own.</p>
+        </div>
+      </details>
+
+      <details class="cell row-cr">
+        <summary>Customer Relationships <span class="plus">+</span></summary>
+        <div class="body">
+          <span class="tag">How close, or how self-service</span>
+          <p>Ranges from low-touch self-service to high-touch personal assistance.</p>
+          <p class="q">How does Airbnb build trust between strangers?</p>
+          <p class="ans">Host communities sharing tips, and constant iteration from feedback — like adding neighborhood info because guests cared about local context.</p>
+        </div>
+      </details>
+
+      <details class="cell row-ch">
+        <summary>Channels <span class="plus">+</span></summary>
+        <div class="body">
+          <span class="tag">Awareness, purchase, delivery</span>
+          <p>Covers the whole journey, not just where you sell.</p>
+          <p class="q">How do people find and decide to trust Airbnb?</p>
+          <p class="ans">Direct app and website bookings, plus word-of-mouth — good stays get shared, bringing in new users for free.</p>
+        </div>
+      </details>
+
+      <details class="cell row-cs">
+        <summary>Customer Segments <span class="plus">+</span></summary>
+        <div class="body">
+          <span class="tag">Who you serve, who you don't</span>
+          <p>Mass, niche, segmented, or diversified markets.</p>
+          <p class="q">Airbnb has two very different user groups — who?</p>
+          <p class="ans">A two-sided platform: travelers looking for a stay, and hosts with space to rent — each with its own value, channel, and revenue treatment.</p>
+        </div>
+      </details>
+
+      <details class="cell row-cost">
+        <summary>Cost Structure <span class="plus">+</span></summary>
+        <div class="body">
+          <span class="tag">Fixed vs. variable, cost- vs. value-driven</span>
+          <p>Where the money goes, and whether the model competes on price or on value.</p>
+          <p class="q">Where does most of Airbnb's money actually go?</p>
+          <p class="ans">Mostly marketing and technology, plus partner costs like the photography program — a value-driven model, spending to improve trust and experience.</p>
+        </div>
+      </details>
+
+      <details class="cell row-rev">
+        <summary>Revenue Streams <span class="plus">+</span></summary>
+        <div class="body">
+          <span class="tag">Why, and how, the customer pays</span>
+          <p>Usage fees, subscriptions, rental fees, or licensing.</p>
+          <p class="q">Airbnb owns no property — so how does it make money?</p>
+          <p class="ans">A service fee charged to both sides of every transaction, host and guest — what makes the two-sided model self-sustaining.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap">
+    <div class="callout-grid">
+      <div class="callout aha">
+        <strong>The "aha" moment to highlight</strong>
+        Key Partners here isn't just supply-chain logic — the photographer partnership came from testing a hypothesis, then building an activity around the answer. A good bridge into Week 8's market research theme.
+      </div>
+      <div class="callout warn">
+        <strong>Common mistake to flag</strong>
+        Students often list "guests" or "hosts" as Key Partners. Customers are never a Key Partner, even in a two-sided model — real partners are the third parties who help deliver the value, not the customers themselves.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="section-label">Hour 2 · Activity</p>
+    <h2>Sketch your own full canvas</h2>
+    <p>Working right to left, sketch a rough answer for all nine blocks — one sentence per block is enough for a first draft.</p>
+    <ol class="steps">
+      <li>Start from your Value Proposition (Week 4) and your two customer personas.</li>
+      <li>Fill in all nine blocks — avoid vague answers like "everyone" or plain "marketing."</li>
+      <li>Use the Airbnb example as a model for how specific your answers should be.</li>
+      <li>Circle any block your team is unsure about — it gets attention in Week 7.</li>
+    </ol>
+
+    <div class="timer-box">
+      <div class="timer-display" id="timerDisplay">40:00</div>
+      <div class="timer-btns">
+        <button onclick="startTimer(40)">Start 40:00</button>
+        <button onclick="startTimer(10)">Start 10:00</button>
+        <button onclick="pauseTimer()">Pause</button>
+        <button onclick="resetTimer()">Reset</button>
+      </div>
+      <div class="timer-tip">Tip: give a warning before time is up.</div>
+    </div>
+
+    <p style="margin-top:26px;"><strong style="color:var(--teal-dark);">Stuck? Hospitality &amp; tourism prompts:</strong></p>
+    <div class="prompt-bank">
+      <span class="prompt-pill">Campus food-delivery between dorms and night markets</span>
+      <span class="prompt-pill">Local tour-guide matching for exchange students</span>
+      <span class="prompt-pill">Shared-equipment rental for weekend trips</span>
+    </div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap">
+    <h2>Debrief · Ask the whole class</h2>
+    <ul class="plain">
+      <li>Which block was hardest to fill in for your own idea, and why?</li>
+      <li>Did anyone's canvas reveal that their "customer" was actually two different segments, like Airbnb?</li>
+      <li>What's one Key Partner your idea needs that you hadn't thought of before this session?</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="section-label">Before we go</p>
+    <h2>Quick learning check</h2>
+
+    <div class="quiz-card">
+      <p class="quiz-q">1. Which block should generally be defined first?</p>
+      <div class="quiz-opts">
+        <button onclick="check(this)">Cost Structure</button>
+        <button onclick="check(this)" data-correct="true">Value Propositions</button>
+        <button onclick="check(this)">Key Resources</button>
+      </div>
+    </div>
+
+    <div class="quiz-card">
+      <p class="quiz-q">2. Why does Airbnb charge a fee to both hosts and guests?</p>
+      <div class="quiz-opts">
+        <button onclick="check(this)">It's required by law</button>
+        <button onclick="check(this)" data-correct="true">It's a two-sided platform monetizing both segments</button>
+        <button onclick="check(this)">It reduces Key Activities</button>
+      </div>
+    </div>
+
+    <div class="quiz-card">
+      <p class="quiz-q">3. What's the most common mistake when filling in Key Partners?</p>
+      <div class="quiz-opts">
+        <button onclick="check(this)">Listing too few partners</button>
+        <button onclick="check(this)" data-correct="true">Listing customers as partners</button>
+        <button onclick="check(this)">Using real case studies as reference</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap">
+    <h2>Materials needed</h2>
+    <ul class="plain">
+      <li>Whiteboard or slide with a blank nine-block canvas template</li>
+      <li>Sticky notes for gallery-walk feedback</li>
+      <li>Printed or projected Week 4 personas and value propositions</li>
+      <li>Optional: a printed Airbnb canvas as a takeaway reference sheet</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap-wide">
+    <p class="section-label">Same story, later in the semester</p>
+    <h2>Extending the Airbnb thread</h2>
+    <div class="ext-grid">
+      <div class="ext-card">
+        <span class="week-tag">Week 1 seed</span>
+        <h3>From an air mattress to a global company</h3>
+        <p>Used as a mindset hook before students know any Canvas vocabulary. Chesky's specific pitch to Gebbia — Wi-Fi, a desk, a sleeping mat, breakfast, for one type of guest — previews what a value proposition looks like, and the scrappy weekend fix previews the idea of an MVP, both without naming the terms yet.</p>
+      </div>
+      <div class="ext-card">
+        <span class="week-tag">Week 12 harvest</span>
+        <h3>The $40 box of cereal that funded Airbnb</h3>
+        <p>The same founders return to teach fixed vs. variable costs and value-based pricing: novelty election cereal that cost a few dollars to make, priced at $40, raised about $30,000 — and convinced Y Combinator's Paul Graham to fund them.</p>
+      </div>
+    </div>
+
+    <details class="zh">
+      <summary>教師備忘：中文摘要 (for the instructor's reference)</summary>
+      <div class="zh-body">
+        <p>這份教案把「商業模式是什麼？用 Airbnb 看懂商業模式九宮格」這篇文章，轉換成 Week 6 全英語授課的教學活動：先講故事鉤子，再用互動式九宮格逐格拆解 Airbnb（每格先給一般分類、再給 Airbnb 的具體答案），最後讓各組畫出自己的完整初稿。</p>
+        <p>同一個 Airbnb 故事也延伸到 Week 1（价值主張與 MVP 的伏筆，刻意不點名術語）與 Week 12（用賣政治梗玉米片撐過資金困境、進 Y Combinator 的故事教固定/變動成本與價值導向定價，並選讀 Paul Graham《駭客與畫家》的「金錢≠財富」概念）。完整教案內容請見隨附的 Markdown 檔案。</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <span>Week 6 · Business Model Canvas Through Airbnb</span>
+      <span>See you next week — Week 7: the right half of the BMC.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  let timerInterval = null;
+  let remaining = 40*60;
+  const display = document.getElementById('timerDisplay');
+
+  function render(){
+    const m = Math.floor(remaining/60).toString().padStart(2,'0');
+    const s = (remaining%60).toString().padStart(2,'0');
+    display.textContent = m+":"+s;
+  }
+  function startTimer(minutes){
+    clearInterval(timerInterval);
+    remaining = minutes*60;
+    render();
+    timerInterval = setInterval(()=>{
+      if(remaining>0){remaining--;render();}
+      else{clearInterval(timerInterval);}
+    },1000);
+  }
+  function pauseTimer(){clearInterval(timerInterval);}
+  function resetTimer(){clearInterval(timerInterval);remaining=40*60;render();}
+  render();
+
+  function check(btn){
+    const group = btn.parentElement.querySelectorAll('button');
+    group.forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.correct==="true"){ b.classList.add('correct'); }
+      else if(b===btn){ b.classList.add('incorrect'); }
+    });
+  }
+</script>
+
+</body>
+</html>
