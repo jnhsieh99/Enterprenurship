@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>行銷學｜第 1-2 週 行銷的本質與內涵</title>
+<style>
+  :root{
+    --sky:#0d2b45; --sky-2:#12395c; --paper:#f6f3ea; --line:#dcd6c4; --gold:#c9962c;
+    --ink:#1c1c1c; --mute:#5c5648; --teal:#2f7a5c; --coral:#b3541e; --purple:#6b4f8f;
+    --card:#ffffff;
+    --sans:"Helvetica Neue",Arial,"Noto Sans TC",sans-serif;
+    --serif:"Georgia","Noto Serif TC",serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.7;}
+  header{
+    background:linear-gradient(180deg,var(--sky) 0%, var(--sky-2) 100%);
+    color:#f2ece0;padding:52px 24px 44px;position:relative;overflow:hidden;
+  }
+  header::after{content:"";position:absolute;right:-60px;top:-60px;width:280px;height:280px;
+    border:1px solid rgba(242,236,224,.15);border-radius:50%;}
+  .eyebrow{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+  h1{font-family:var(--serif);font-size:clamp(26px,4.2vw,38px);line-height:1.35;margin:0 0 14px;max-width:760px;color:#fff;}
+  header p{max-width:640px;color:#c9c2ac;font-size:14.5px;line-height:1.85;margin:0 0 20px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:2;}
+  .meta-chip{background:rgba(242,236,224,.1);border:1px solid rgba(242,236,224,.25);
+    border-radius:999px;padding:6px 14px;font-size:12.5px;}
+
+  main{max-width:1000px;margin:0 auto;padding:0 24px 80px;}
+  .section-title{display:flex;align-items:baseline;gap:12px;margin:52px 0 20px;}
+  .section-title h2{font-family:var(--serif);font-size:22px;margin:0;white-space:nowrap;color:var(--sky);}
+  .section-title .rule{flex:1;height:1px;background:var(--line);}
+  h3{font-family:var(--serif);font-size:17px;color:var(--sky);margin:0 0 8px;}
+  p{color:var(--mute);font-size:15px;}
+
+  .obj-list{list-style:none;margin:0;padding:0;display:grid;gap:9px;}
+  .obj-list li{display:flex;gap:12px;background:var(--card);border:1px solid var(--line);
+    border-radius:6px;padding:12px 16px;font-size:14.5px;color:var(--ink);}
+  .obj-num{font-family:var(--serif);color:var(--gold);font-weight:bold;min-width:18px;}
+
+  table{width:100%;border-collapse:collapse;font-size:14px;}
+  table.timeline td{padding:10px 4px;border-bottom:1px solid var(--line);vertical-align:top;}
+  table.timeline td:first-child{color:var(--sky);font-weight:bold;white-space:nowrap;width:110px;}
+  table.compare{background:var(--card);border:1px solid var(--line);}
+  table.compare th{background:var(--sky);color:#f2ece0;font-size:13px;padding:10px 12px;text-align:left;font-weight:normal;}
+  table.compare td{padding:10px 12px;border-bottom:1px solid var(--line);font-size:13.5px;color:var(--ink);}
+  table.compare tr:last-child td{border-bottom:none;}
+
+  .callout{background:#fbf3e6;border-left:4px solid var(--gold);padding:14px 18px;border-radius:0 6px 6px 0;
+    font-size:14px;color:var(--ink);margin:16px 0;}
+  .callout b{color:var(--sky);}
+
+  /* 12 rules */
+  .rules-source{background:#eef3f1;border:1px solid var(--line);border-radius:6px;padding:14px 18px;
+    font-size:13.5px;color:var(--mute);margin-bottom:18px;}
+  .rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  @media(max-width:700px){.rules-grid{grid-template-columns:1fr;}}
+  .rule-card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 16px;
+    display:flex;gap:12px;}
+  .rule-num{font-family:var(--serif);font-size:20px;font-weight:bold;color:var(--gold);min-width:28px;}
+  .rule-card h4{margin:0 0 4px;font-size:14px;color:var(--sky);font-family:var(--serif);}
+  .rule-card p{margin:0;font-size:13px;}
+
+  .case-card{background:var(--card);border:1px solid var(--line);border-left-width:6px;border-left-color:var(--teal);
+    border-radius:0 6px 6px 0;padding:20px 22px;margin:18px 0;box-shadow:0 8px 18px rgba(20,20,10,.05);}
+  .case-card p{margin:8px 0;font-size:14.5px;}
+
+  ul.plain{padding-left:18px;color:var(--mute);font-size:14.5px;}
+  ul.plain li{margin-bottom:6px;}
+
+  .quiz-card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:16px 18px;margin-bottom:12px;}
+  .quiz-q{font-family:var(--serif);font-size:15px;color:var(--sky);margin:0 0 10px;}
+  .quiz-opts{display:grid;gap:7px;}
+  .quiz-opts button{text-align:left;background:#faf8f2;border:1px solid var(--line);border-radius:5px;
+    padding:9px 13px;font-size:13.5px;color:var(--ink);cursor:pointer;font-family:inherit;}
+  .quiz-opts button:hover{border-color:var(--gold);}
+  .quiz-opts button.correct{background:#e6f0e3;border-color:#5a8a4f;color:#2f5626;font-weight:bold;}
+  .quiz-opts button.incorrect{background:#f6e4de;border-color:#b3541e;color:#7a3416;}
+
+  .connect-block{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:6px 22px;margin-bottom:10px;}
+  .connect-block b{color:var(--sky);}
+
+  footer{background:var(--sky);color:#c9c2ac;padding:30px 24px;font-size:12.5px;text-align:center;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">791020 行銷學・115 學年第 1 學期・授課教師 謝兆貞</div>
+  <h1>餐旅、MICE 從業人員為什麼要懂行銷</h1>
+  <p>單元①②，第 1-2 週。從行銷觀念 vs. 銷售觀念的對照，到〈行銷任務管理的 12 項守則〉案例導讀，建立整學期的分析語言基礎。</p>
+  <div class="meta-row">
+    <span class="meta-chip">對應教學目標 1：論述行銷核心概念與規劃流程</span>
+    <span class="meta-chip">主題：行銷環境與本質分析</span>
+    <span class="meta-chip">平時成績佔比 40%</span>
+  </div>
+</header>
+
+<main>
+
+  <div class="section-title"><h2>教案總覽</h2><div class="rule"></div></div>
+  <p>這門課的學生多半來自餐旅、觀光、會展相關科系，未來的職涯場景是飯店、餐廳、旅行社、交通業者、遊樂園、會展公司——但很多學生對「行銷」的第一印象仍停留在「打廣告、做促銷」，分不清行銷部門跟業務／銷售部門的差別。這一單元的任務，就是在學期一開始把這個誤解導正過來：<b style="color:var(--sky);">行銷不是銷售的另一個名字，而是一套從了解顧客到創造價值的完整任務管理系統。</b></p>
+
+  <div class="section-title"><h2>學習目標</h2><div class="rule"></div></div>
+  <ul class="obj-list">
+    <li><span class="obj-num">1</span><span>用自己的話區分「行銷觀念」與「銷售觀念」的差異。</span></li>
+    <li><span class="obj-num">2</span><span>說出行銷為什麼在餐旅、會展產業中扮演「靈魂人物」的角色。</span></li>
+    <li><span class="obj-num">3</span><span>理解行銷是一套需要任務管理的系統性工作，並能舉出餐旅/MICE 情境中的具體例子。</span></li>
+    <li><span class="obj-num">4</span><span>為後續單元（行銷規劃、宏觀環境、STP）建立共同的分析語言基礎。</span></li>
+  </ul>
+
+  <div class="section-title"><h2>課堂時間軸</h2><div class="rule"></div></div>
+  <table class="timeline">
+    <tr><td>0:00–0:10</td><td>破題提問：「你心目中的『行銷』是什麼？請舉一個你最近印象深刻的例子。」</td></tr>
+    <tr><td>0:10–0:30</td><td>講授：行銷觀念 vs. 銷售觀念——從「賣出已經做好的東西」到「先了解顧客再決定要做什麼」</td></tr>
+    <tr><td>0:30–0:50</td><td>講授：行銷為什麼是餐旅／MICE 產業的靈魂人物</td></tr>
+    <tr><td>0:50–1:00</td><td>休息</td></tr>
+    <tr><td>1:00–1:30</td><td>案例導讀：〈行銷任務管理的 12 項守則〉，逐條對應餐旅/MICE 情境</td></tr>
+    <tr><td>1:30–1:50</td><td>分組活動：用自己熟悉的餐旅/會展場景，重新詮釋 12 項守則中的 3 條</td></tr>
+    <tr><td>1:50–2:00</td><td>討論收尾＋隨堂檢核</td></tr>
+  </table>
+
+  <div class="section-title"><h2>核心內容：行銷觀念 vs. 銷售觀念</h2><div class="rule"></div></div>
+  <table class="compare">
+    <tr><th>面向</th><th>銷售觀念</th><th>行銷觀念</th></tr>
+    <tr><td>出發點</td><td>已經做好產品/服務，想辦法賣出去</td><td>先了解顧客需要什麼，再決定要提供什麼</td></tr>
+    <tr><td>焦點</td><td>賣方需求（出清庫存、衝業績）</td><td>買方需求（顧客真正在意的價值）</td></tr>
+    <tr><td>時間軸</td><td>短期、交易導向</td><td>長期、關係導向</td></tr>
+    <tr><td>餐旅業例子</td><td>飯店房間賣不掉，降價衝促銷</td><td>先研究商務客與家庭客需求，分別設計房型與服務</td></tr>
+    <tr><td>MICE 業例子</td><td>展位租不出去，最後一刻大降價出清</td><td>先了解目標產業參展需求，提前設計符合買家期待的展區</td></tr>
+  </table>
+  <div class="callout"><b>引導提問：</b>如果一間旅館一年到頭都在打折促銷，這代表它的行銷做得很成功，還是行銷沒有真正發揮作用？</div>
+
+  <div class="section-title"><h2>案例導讀：行銷任務管理的 12 項守則</h2><div class="rule"></div></div>
+  <div class="rules-source">這是一篇談「行銷任務管理」的報刊專欄，開頭點出行銷人員在公司是靈魂人物，特別是在飯店、餐飲業、旅行社、交通事業、遊樂園等餐旅產業，格外需要優秀的行銷人才。（參閱：2017.01.19，經濟日報，A16 版，張俊鴻撰；以下為改寫整理，非原文照錄，並各自搭配餐旅/MICE 情境例子）</div>
+  <div class="rules-grid">
+    <div class="rule-card"><span class="rule-num">1</span><div><h4>要有編號才管得了</h4><p>飯店每檔促銷活動若沒有專屬代號，事後難以回溯是哪一檔帶來訂房成長。</p></div></div>
+    <div class="rule-card"><span class="rule-num">2</span><div><h4>要有清單才檢視得了</h4><p>會展公司籌辦展覽的前置作業需要清單管理，不能只靠記憶。</p></div></div>
+    <div class="rule-card"><span class="rule-num">3</span><div><h4>要有統計才有績效可言</h4><p>餐廳辦活動後要有進客數、客單價統計，才知道值不值得再辦。</p></div></div>
+    <div class="rule-card"><span class="rule-num">4</span><div><h4>要有分類才分析得了</h4><p>旅行社把活動分成品牌形象類與短期促購類，才能分開評估效果。</p></div></div>
+    <div class="rule-card"><span class="rule-num">5</span><div><h4>要有關聯性才能整合行銷</h4><p>遊樂園的社群貼文、優惠券、實體活動應互相導流，而非各做各的。</p></div></div>
+    <div class="rule-card"><span class="rule-num">6</span><div><h4>要有流程才控制得了</h4><p>旅館發布優惠從構思到上線需要固定流程，不能因人而異。</p></div></div>
+    <div class="rule-card"><span class="rule-num">7</span><div><h4>要有圖解才理解得了重點</h4><p>向高層或跨部門簡報行銷計畫，一張流程圖比一長串文字更好懂。</p></div></div>
+    <div class="rule-card"><span class="rule-num">8</span><div><h4>要指定承辦人才有人負責</h4><p>會展招商若沒指定專責窗口，容易發生「以為別人在做」的狀況。</p></div></div>
+    <div class="rule-card"><span class="rule-num">9</span><div><h4>要有期限才如期完成</h4><p>節慶行銷活動若沒訂出上線日期，很容易拖到節慶都過了。</p></div></div>
+    <div class="rule-card"><span class="rule-num">10</span><div><h4>要有分工才有專業</h4><p>飯店行銷團隊的內容撰寫、社群經營、異業合作應是不同人專責。</p></div></div>
+    <div class="rule-card"><span class="rule-num">11</span><div><h4>要有成果檢討才能改善</h4><p>展會結束後盤點哪些攤位效果好、哪些素材沒發揮作用。</p></div></div>
+    <div class="rule-card"><span class="rule-num">12</span><div><h4>要有指導才有領導</h4><p>行銷主管除了自己執行，也要能帶領團隊建立方法論。</p></div></div>
+  </div>
+  <div class="callout"><b>引導提問：</b>這 12 條守則裡，哪一條你覺得在你打工/實習經驗中最常被忽略？為什麼？</div>
+
+  <div class="section-title"><h2>分組活動：用自己的產業情境重新詮釋</h2><div class="rule"></div></div>
+  <div class="case-card">
+    <p><b>指示：</b>每組選擇一個熟悉的餐旅/會展場景（連鎖咖啡店、青年旅館、婚宴會館、國際展覽、校園園遊會攤位），從 12 項守則中挑 3 條，具體說明「如果沒有做到這一條，會發生什麼問題」，並上台分享 2 分鐘。</p>
+    <p><b>教師收尾提示：</b>重點不是把 12 條全部背起來，而是體會「行銷不是憑感覺做事，而是一套需要被管理的系統性工作」——這個心態會貫穿整學期，尤其是單元③行銷規劃、單元⑦策略評估、單元⑧行銷組合決策，都建立在「行銷可以被拆解、追蹤、檢討」這個前提上。</p>
+  </div>
+
+  <div class="section-title"><h2>討論題</h2><div class="rule"></div></div>
+  <ul class="plain">
+    <li>為什麼文章特別點名飯店、餐飲業、旅行社、交通事業、遊樂園需要優秀的行銷人員？</li>
+    <li>12 項守則裡，有哪幾條其實也適用於你自己管理學業或報告進度？</li>
+    <li>如果你是一間小型民宿的唯一行銷負責人，資源有限，你會優先做到哪 3 條？</li>
+  </ul>
+
+  <div class="section-title"><h2>隨堂檢核</h2><div class="rule"></div></div>
+  <div class="quiz-card">
+    <p class="quiz-q">1. 「行銷觀念」與「銷售觀念」最主要的差異是？</p>
+    <div class="quiz-opts">
+      <button onclick="check(this)">行銷觀念只做廣告，銷售觀念只做業務拜訪</button>
+      <button onclick="check(this)" data-correct="true">行銷觀念先了解顧客需求，銷售觀念先想辦法賣出既有產品</button>
+      <button onclick="check(this)">兩者完全相同，只是名稱不同</button>
+    </div>
+  </div>
+  <div class="quiz-card">
+    <p class="quiz-q">2. 一個行銷方案如果沒有專屬編號，會造成什麼問題？</p>
+    <div class="quiz-opts">
+      <button onclick="check(this)">沒有違法疑慮</button>
+      <button onclick="check(this)" data-correct="true">事後難以追蹤是哪個方案帶來成效</button>
+      <button onclick="check(this)">不會有任何影響</button>
+    </div>
+  </div>
+  <div class="quiz-card">
+    <p class="quiz-q">3. 一間旅館長期只能靠不斷降價促銷維持訂房率，這通常代表？</p>
+    <div class="quiz-opts">
+      <button onclick="check(this)">行銷做得非常成功</button>
+      <button onclick="check(this)" data-correct="true">可能是行銷規劃不足、只能靠銷售手段補救的訊號</button>
+      <button onclick="check(this)">與行銷完全無關，只是市場景氣問題</button>
+    </div>
+  </div>
+
+  <div class="section-title"><h2>與第 1-18 週課程的關聯性</h2><div class="rule"></div></div>
+  <div class="connect-block"><p><b>單元③（第 4 週，行銷規劃）</b>：這一週建立的系統性任務管理心態，直接銜接下一週的具體規劃步驟與邏輯。</p></div>
+  <div class="connect-block"><p><b>單元④（第 6-7 週，宏觀環境）</b>：了解行銷任務管理後，學生才能理解環境分析也是行銷任務的一環。</p></div>
+  <div class="connect-block"><p><b>單元⑤（第 8 週，STP）</b>：12 項守則裡的「分類」「關聯性」，會在 STP 具體落實為市場區隔與定位邏輯。</p></div>
+  <div class="connect-block"><p><b>單元⑦（第 10-12 週，行銷策略與評估）</b>：大綱明訂用真實餐旅業者做 SWOT 與五力分析演練，這週「靈魂人物」的定位是理解策略重要性的起點。</p></div>
+  <div class="connect-block"><p><b>單元⑧（第 13-15 週，行銷組合）</b>：12 項守則中的「分工」「流程」「成果檢討」，會在 4P/7P 決策執行層再次出現。</p></div>
+  <div class="connect-block"><p><b>平時成績（40%）</b>：這一週的分組活動是全學期案例演練模式的起手式，後續每週都會延續類似形式。</p></div>
+
+  <div class="section-title"><h2>需要準備的教材</h2><div class="rule"></div></div>
+  <ul class="plain">
+    <li>黑板或投影片：行銷觀念 vs. 銷售觀念對照表</li>
+    <li>〈行銷任務管理的 12 項守則〉重點整理投影片（含餐旅/MICE 情境例子）</li>
+    <li>選用：一則近期的飯店/餐飲/會展行銷案例，作為破題提問的暖身素材</li>
+  </ul>
+
+</main>
+
+<footer>
+  資料來源：經濟日報 2017.01.19 A16 版（張俊鴻撰），以及 791020 行銷學課程主題關聯圖（授課教師 謝兆貞）
+</footer>
+
+<script>
+function check(btn){
+  const group = btn.parentElement.querySelectorAll('button');
+  group.forEach(b=>{
+    b.disabled = true;
+    if(b.dataset.correct==="true"){ b.classList.add('correct'); }
+    else if(b===btn){ b.classList.add('incorrect'); }
+  });
+}
+</script>
+
+</body>
+</html>
