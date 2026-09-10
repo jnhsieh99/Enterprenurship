@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>媒體公關實務｜第 1-2 週 公關、廣告、行銷的差異</title>
+<style>
+  :root{
+    --sky:#0d2b45;
+    --sky-2:#12395c;
+    --paper:#f6f3ea;
+    --line:#dcd6c4;
+    --gold:#c9962c;
+    --ink:#1c1c1c;
+    --mute:#5c5648;
+    --coral:#b3541e;
+    --teal:#2f7a5c;
+    --purple:#6b4f8f;
+    --card:#ffffff;
+    --sans:"Helvetica Neue",Arial,"Noto Sans TC",sans-serif;
+    --serif:"Georgia","Noto Serif TC",serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.7;}
+  header{
+    background:linear-gradient(180deg,var(--sky) 0%, var(--sky-2) 100%);
+    color:#f2ece0;padding:52px 24px 44px;position:relative;overflow:hidden;
+  }
+  header::after{content:"";position:absolute;right:-60px;top:-60px;width:280px;height:280px;
+    border:1px solid rgba(242,236,224,.15);border-radius:50%;}
+  .eyebrow{font-family:var(--sans);font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;}
+  h1{font-family:var(--serif);font-size:clamp(26px,4.2vw,38px);line-height:1.35;margin:0 0 14px;max-width:760px;}
+  header p{max-width:640px;color:#c9c2ac;font-size:14.5px;line-height:1.85;margin:0 0 20px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:2;}
+  .meta-chip{background:rgba(242,236,224,.1);border:1px solid rgba(242,236,224,.25);
+    border-radius:999px;padding:6px 14px;font-size:12.5px;}
+
+  main{max-width:1000px;margin:0 auto;padding:0 24px 80px;}
+  .section-title{display:flex;align-items:baseline;gap:12px;margin:52px 0 20px;}
+  .section-title h2{font-family:var(--serif);font-size:22px;margin:0;white-space:nowrap;color:var(--sky);}
+  .section-title .rule{flex:1;height:1px;background:var(--line);}
+  h3{font-family:var(--serif);font-size:17px;color:var(--sky);margin:0 0 8px;}
+  p{color:var(--mute);font-size:15px;}
+
+  /* mindmap */
+  .mindmap-wrap{background:var(--card);border:1px solid var(--line);border-radius:6px;
+    padding:20px 12px;box-shadow:0 10px 24px rgba(20,20,10,.06);}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;font-size:12.5px;color:var(--mute);}
+  .legend span{display:inline-flex;align-items:center;gap:6px;}
+  .dot{width:10px;height:10px;border-radius:50%;display:inline-block;}
+
+  /* objectives */
+  .obj-list{list-style:none;margin:0;padding:0;display:grid;gap:9px;}
+  .obj-list li{display:flex;gap:12px;background:var(--card);border:1px solid var(--line);
+    border-radius:6px;padding:12px 16px;font-size:14.5px;color:var(--ink);}
+  .obj-num{font-family:var(--serif);color:var(--gold);font-weight:bold;min-width:18px;}
+
+  /* timeline */
+  table{width:100%;border-collapse:collapse;font-size:14px;}
+  table.timeline td{padding:10px 4px;border-bottom:1px solid var(--line);vertical-align:top;}
+  table.timeline td:first-child{color:var(--sky);font-weight:bold;white-space:nowrap;width:110px;}
+  table.compare{background:var(--card);border:1px solid var(--line);}
+  table.compare th{background:var(--sky);color:#f2ece0;font-size:13px;padding:10px 12px;text-align:left;font-weight:normal;}
+  table.compare td{padding:10px 12px;border-bottom:1px solid var(--line);font-size:13.5px;color:var(--ink);}
+  table.compare tr:last-child td{border-bottom:none;}
+
+  .callout{background:#fbf3e6;border-left:4px solid var(--gold);padding:14px 18px;border-radius:0 6px 6px 0;
+    font-size:14px;color:var(--ink);margin:16px 0;}
+  .callout b{color:var(--sky);}
+
+  /* case cards */
+  .case-card{background:var(--card);border:1px solid var(--line);border-left-width:6px;
+    border-radius:0 6px 6px 0;padding:20px 22px;margin-bottom:18px;box-shadow:0 8px 18px rgba(20,20,10,.05);
+    display:grid;grid-template-columns:64px 1fr;gap:18px;align-items:start;}
+  @media(max-width:560px){.case-card{grid-template-columns:1fr;}}
+  .case-icon{width:64px;height:64px;flex-shrink:0;}
+  .case-body{min-width:0;}
+  .case-card.c1{border-left-color:var(--teal);}
+  .case-card.c2{border-left-color:var(--coral);}
+  .case-card.c3{border-left-color:var(--purple);}
+  .case-tag{display:inline-block;font-size:11.5px;color:#fff;border-radius:999px;padding:3px 11px;margin-bottom:10px;}
+  .c1 .case-tag{background:var(--teal);}
+  .c2 .case-tag{background:var(--coral);}
+  .c3 .case-tag{background:var(--purple);}
+  .case-card h3{margin-bottom:4px;}
+  .case-card .sub{font-size:13px;color:var(--mute);margin-bottom:10px;}
+  .case-card p{margin:8px 0;font-size:14.5px;}
+  .w5-details{margin-top:12px;background:#faf5ec;border:1px solid var(--line);border-radius:6px;padding:4px 14px;}
+  .w5-details summary{cursor:pointer;font-size:13px;color:var(--coral);padding:10px 0;font-weight:bold;}
+  .w5-body{padding-bottom:12px;}
+  .w5-body p{font-size:13px;margin:6px 0;color:var(--mute);}
+  .w5-body b{color:var(--sky);}
+
+  /* MICE mini cards */
+  .mice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  @media(max-width:760px){.mice-grid{grid-template-columns:1fr;}}
+  .mice-card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:16px 18px;}
+  .mice-icon{width:40px;height:40px;margin-bottom:8px;}
+  .mice-card .tag{font-size:11px;color:var(--sky);background:#e8e2d0;border-radius:999px;padding:2px 9px;}
+  .mice-card h4{font-family:var(--serif);font-size:14.5px;margin:8px 0 6px;color:var(--sky);}
+  .mice-card p{font-size:13px;margin:0;}
+
+  ul.plain{padding-left:18px;color:var(--mute);font-size:14.5px;}
+  ul.plain li{margin-bottom:6px;}
+
+  /* slido-style poll */
+  .slido-card{background:var(--sky);color:#f2ece0;border-radius:10px;padding:28px 30px 24px;
+    box-shadow:0 14px 30px rgba(13,43,69,.25);}
+  .slido-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;}
+  .slido-badge{background:var(--gold);color:#3a2b06;font-size:11.5px;font-weight:bold;
+    border-radius:999px;padding:4px 12px;letter-spacing:.04em;}
+  .slido-dots{display:flex;gap:6px;}
+  .slido-dots span{width:8px;height:8px;border-radius:50%;background:rgba(242,236,224,.3);}
+  .slido-dots span.active{background:var(--gold);}
+  .slido-q{font-family:var(--serif);font-size:19px;line-height:1.5;margin:0 0 20px;color:#f6f2e6;}
+  .slido-opts{display:grid;gap:10px;margin-bottom:22px;}
+  .slido-opt{position:relative;background:rgba(242,236,224,.08);border:1px solid rgba(242,236,224,.22);
+    border-radius:8px;padding:12px 16px;cursor:pointer;overflow:hidden;font-size:14.5px;color:#f2ece0;}
+  .slido-opt:hover{border-color:var(--gold);}
+  .slido-opt .fill{position:absolute;left:0;top:0;bottom:0;width:0%;background:rgba(201,150,44,.35);
+    transition:width .8s cubic-bezier(.2,.8,.2,1);z-index:0;}
+  .slido-opt.correct .fill{background:rgba(90,138,79,.45);}
+  .slido-opt .opt-row{position:relative;z-index:1;display:flex;justify-content:space-between;gap:10px;}
+  .slido-opt .pct{font-weight:bold;min-width:38px;text-align:right;opacity:0;transition:opacity .4s;}
+  .slido-opt.voted .pct{opacity:1;}
+  .slido-opt.disabled{cursor:default;}
+  .slido-opt.correct{border-color:#7cb36a;}
+  .slido-nav{display:flex;align-items:center;justify-content:space-between;}
+  .slido-btn{background:var(--gold);color:#3a2b06;border:none;border-radius:6px;padding:9px 18px;
+    font-size:13.5px;font-weight:bold;cursor:pointer;font-family:inherit;}
+  .slido-btn:disabled{opacity:.4;cursor:default;}
+  .slido-btn.ghost{background:transparent;color:#c9c2ac;border:1px solid rgba(242,236,224,.3);}
+  .slido-count{font-size:12.5px;color:#c9c2ac;}
+
+  .connect-block{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:6px 22px;margin-bottom:10px;}
+  .connect-block b{color:var(--sky);}
+
+  footer{background:var(--sky);color:#c9c2ac;padding:30px 24px;font-size:12.5px;text-align:center;}
+  footer a{color:#e8dcc0;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">492413 媒體公關實務・115 學年第 1 學期・授課教師 謝兆貞</div>
+  <h1>公關、廣告、行銷的差異——核心意涵與類型</h1>
+  <p>單元①②，第 1-2 週。從破題提問到三個真實品牌案例，再到與第 1-18 週課程的完整關聯地圖。</p>
+  <div class="meta-row">
+    <span class="meta-chip">對應教學目標 1：清楚論述公關、廣告操作知識</span>
+    <span class="meta-chip">下游檢核點：單元⑤期中報告</span>
+    <span class="meta-chip">2 小時課堂</span>
+  </div>
+</header>
+
+<main>
+
+  <div class="section-title"><h2>單元關聯心智地圖</h2><div class="rule"></div></div>
+  <p>王品案例貫穿危機處理線索（左），五桐號與甘樂文創案例貫穿主動經營聲量線索（右），最終在期中／期末報告匯流驗收。</p>
+  <div class="mindmap-wrap">
+    <svg width="100%" viewBox="0 0 680 560" role="img" style="display:block;">
+      <title>單元①②與第 1-18 週課程關聯心智地圖</title>
+      <desc>中央為第 1-2 週公關與廣告核心定義，向左延伸王品危機案例貫穿三個單元，向右延伸五桐號與甘樂文創案例貫穿三個單元，最後於期中期末報告匯流。</desc>
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="#8a8570" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+      <g stroke="#8a8570" stroke-width="1" fill="none">
+        <path d="M340,76 L340,110 L140,110 L140,140" marker-end="url(#arrow)"/>
+        <path d="M340,76 L340,110 L540,110 L540,140" marker-end="url(#arrow)"/>
+        <line x1="140" y1="224" x2="140" y2="234" marker-end="url(#arrow)"/>
+        <line x1="140" y1="318" x2="140" y2="328" marker-end="url(#arrow)"/>
+        <line x1="540" y1="224" x2="540" y2="234" marker-end="url(#arrow)"/>
+        <line x1="540" y1="318" x2="540" y2="328" marker-end="url(#arrow)"/>
+        <path d="M140,412 L140,430 L260,430 L260,442" marker-end="url(#arrow)"/>
+        <path d="M540,412 L540,430 L420,430 L420,442" marker-end="url(#arrow)"/>
+      </g>
+
+      <g>
+        <rect x="200" y="20" width="280" height="56" rx="10" fill="#fbf3e6" stroke="#c9962c" stroke-width="1"/>
+        <text x="340" y="40" text-anchor="middle" font-family="Georgia,'Noto Serif TC',serif" font-size="14" font-weight="bold" fill="#0d2b45">第 1-2 週：核心意涵與類型</text>
+        <text x="340" y="60" text-anchor="middle" font-size="12" fill="#7a6a3a">公關 vs 廣告 vs 行銷</text>
+      </g>
+
+      <g>
+        <rect x="40" y="150" width="200" height="74" rx="8" fill="#fbeee6" stroke="#b3541e" stroke-width="1"/>
+        <text x="140" y="170" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#7a3416">單元③ 第 4 週</text>
+        <text x="140" y="188" text-anchor="middle" font-size="12" fill="#8a5330">議題升溫：王品案例</text>
+        <text x="140" y="206" text-anchor="middle" font-size="11" fill="#9c6a48">來源：104學習・Storm.mg</text>
+      </g>
+      <g>
+        <rect x="40" y="244" width="200" height="74" rx="8" fill="#fbeee6" stroke="#b3541e" stroke-width="1"/>
+        <text x="140" y="264" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#7a3416">單元④ 第 6 週</text>
+        <text x="140" y="282" text-anchor="middle" font-size="12" fill="#8a5330">稿件操作：拆解致歉信</text>
+        <text x="140" y="300" text-anchor="middle" font-size="11" fill="#9c6a48">來源：中央社 CNA</text>
+      </g>
+      <g>
+        <rect x="40" y="338" width="200" height="74" rx="8" fill="#fbeee6" stroke="#b3541e" stroke-width="1"/>
+        <text x="140" y="358" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#7a3416">單元⑥ 第 10 週</text>
+        <text x="140" y="376" text-anchor="middle" font-size="12" fill="#8a5330">談判原則：協商方案</text>
+        <text x="140" y="394" text-anchor="middle" font-size="11" fill="#9c6a48">來源：潮健康 Cool Health</text>
+      </g>
+
+      <g>
+        <rect x="440" y="150" width="200" height="74" rx="8" fill="#e9f2ea" stroke="#2f7a5c" stroke-width="1"/>
+        <text x="540" y="170" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1f5a3f">單元⑦ 第 11 週</text>
+        <text x="540" y="188" text-anchor="middle" font-size="12" fill="#3a7050">話題活動：五桐號/甘樂</text>
+        <text x="540" y="206" text-anchor="middle" font-size="11" fill="#568068">來源：微笑台灣・roomie.tw</text>
+      </g>
+      <g>
+        <rect x="440" y="244" width="200" height="74" rx="8" fill="#e9f2ea" stroke="#2f7a5c" stroke-width="1"/>
+        <text x="540" y="264" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1f5a3f">單元⑧ 第 12 週</text>
+        <text x="540" y="282" text-anchor="middle" font-size="12" fill="#3a7050">自媒體操作：五桐號</text>
+        <text x="540" y="300" text-anchor="middle" font-size="11" fill="#568068">來源：女人我最大・FB</text>
+      </g>
+      <g>
+        <rect x="440" y="338" width="200" height="74" rx="8" fill="#e9f2ea" stroke="#2f7a5c" stroke-width="1"/>
+        <text x="540" y="358" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1f5a3f">單元⑨ 第 13 週</text>
+        <text x="540" y="376" text-anchor="middle" font-size="12" fill="#3a7050">資源夥伴：甘樂/MICE</text>
+        <text x="540" y="394" text-anchor="middle" font-size="11" fill="#568068">來源：微笑台灣</text>
+      </g>
+
+      <g>
+        <rect x="180" y="452" width="320" height="74" rx="10" fill="#f0ecf6" stroke="#6b4f8f" stroke-width="1"/>
+        <text x="340" y="472" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#453363">期中／期末報告</text>
+        <text x="340" y="490" text-anchor="middle" font-size="12" fill="#5c4878">案例整合＋MICE 模板驗收</text>
+        <text x="340" y="508" text-anchor="middle" font-size="11" fill="#7a638f">來源：104學習</text>
+      </g>
+    </svg>
+    <div class="legend">
+      <span><span class="dot" style="background:#c9962c"></span>核心定義單元</span>
+      <span><span class="dot" style="background:#b3541e"></span>王品危機案例線索</span>
+      <span><span class="dot" style="background:#2f7a5c"></span>五桐號／甘樂文創線索</span>
+      <span><span class="dot" style="background:#6b4f8f"></span>期中期末匯流</span>
+    </div>
+  </div>
+
+  <div class="section-title"><h2>教案總覽</h2><div class="rule"></div></div>
+  <p>這是整門課的地基單元。學生入學前，多半把「公關」「廣告」「行銷」當成同義詞交替使用；如果這一步沒有先釐清三者的界線，接下來每週看業界案例影片時，就無法判斷影片中從業者展現的究竟是公關手法還是廣告手法，期中報告也容易把公關企劃寫成廣告投放案。本教案分兩節課處理，也可以視班級進度壓縮成一次 2 小時完整教學。</p>
+
+  <div class="section-title"><h2>學習目標</h2><div class="rule"></div></div>
+  <ul class="obj-list">
+    <li><span class="obj-num">1</span><span>用自己的話說出公關、廣告、行銷三者的關係，而不是背誦教科書定義。</span></li>
+    <li><span class="obj-num">2</span><span>從媒體主控權、資訊可信度、成本、接觸對象與時間四個面向，具體區分公關與廣告的差異。</span></li>
+    <li><span class="obj-num">3</span><span>給定實際情境，判斷應該優先用公關手法還是廣告手法，並說明理由。</span></li>
+    <li><span class="obj-num">4</span><span>意識到行銷是公關與廣告共同的上位概念，而不是互相對立的兩件事。</span></li>
+  </ul>
+
+  <div class="section-title"><h2>課堂時間軸</h2><div class="rule"></div></div>
+  <table class="timeline">
+    <tr><td>0:00–0:10</td><td>破題提問：「一則新聞報導 vs. 一則付費廣告，你會比較相信哪一個？為什麼？」</td></tr>
+    <tr><td>0:10–0:30</td><td>講授：行銷、廣告、公關的關係圖——行銷是傘狀概念，廣告與公關是傘下兩個不同管道</td></tr>
+    <tr><td>0:30–0:55</td><td>講授＋討論：公關 vs. 廣告的具體差異（媒體主控權、可信度、成本、接觸對象與時間）</td></tr>
+    <tr><td>0:55–1:05</td><td>休息</td></tr>
+    <tr><td>1:05–1:40</td><td>分組演練：三個真實品牌案例，各組判斷該用公關還是廣告，並上台簡述理由</td></tr>
+    <tr><td>1:40–1:55</td><td>全班討論＋教師總結</td></tr>
+    <tr><td>1:55–2:00</td><td>隨堂檢核</td></tr>
+  </table>
+
+  <div class="section-title"><h2>核心內容：行銷、廣告、公關的關係</h2><div class="rule"></div></div>
+  <h3>先講關係，再講差異</h3>
+  <p><b>行銷（Marketing）是最上位的概念</b>，涵蓋一整套從產品、定價、通路到促銷的策略；<b>廣告與公關都是行銷底下的兩種不同溝通管道</b>，而不是互相競爭的部門。判準是「控制」與「信任度」的取捨：廣告是付費媒體，可以完全控制訊息，代價是可信度較低；公關經營的是贏得媒體，你無法完全控制最終呈現，但第三方觀點通常更值得信賴。</p>
+
+  <h3>公關 vs. 廣告：具體差異對照</h3>
+  <table class="compare">
+    <tr><th>區別面向</th><th>公共關係</th><th>廣告</th></tr>
+    <tr><td>溝通的媒體性質</td><td>新聞媒體——不可控制媒體，由編輯或記者決定</td><td>付費媒體——可控制媒體，由付費方決定</td></tr>
+    <tr><td>對資訊的主控權</td><td>低——會被轉述、篩選、改寫</td><td>高——完全照設計呈現</td></tr>
+    <tr><td>主要目標</td><td>增進瞭解，建立並維護長期良好關係</td><td>以促成銷售為主要目的</td></tr>
+    <tr><td>目標對象</td><td>較多元——媒體、大眾、利害關係人</td><td>較聚焦——以潛在消費者為主</td></tr>
+    <tr><td>接觸關係的持續時間</td><td>通常較長久</td><td>通常較短暫</td></tr>
+    <tr><td>成本</td><td>相對較低</td><td>相對較高</td></tr>
+  </table>
+  <div class="callout"><b>常見誤解提醒：</b>網紅業配本質上是付費、內容可控，比較接近廣告或行銷傳播的範疇，不是傳統定義下的公關；記者主動報導、企業無法完全掌控寫法的新聞曝光，才是典型的公關成果。</div>
+
+  <div class="section-title"><h2>分組情境演練：三個真實品牌案例</h2><div class="rule"></div></div>
+
+  <div class="case-card c1">
+    <svg class="case-icon" viewBox="0 0 64 64"><rect x="18" y="20" width="28" height="32" rx="4" fill="#2f7a5c" opacity=".15"/><path d="M20 22 L44 22 L41 50 Q41 54 37 54 L27 54 Q23 54 23 50 Z" fill="none" stroke="#2f7a5c" stroke-width="2"/><line x1="18" y1="22" x2="46" y2="22" stroke="#2f7a5c" stroke-width="2"/><rect x="24" y="14" width="16" height="8" rx="2" fill="none" stroke="#2f7a5c" stroke-width="2"/><circle cx="27" cy="42" r="2" fill="#2f7a5c"/><circle cx="33" cy="46" r="2" fill="#2f7a5c"/><circle cx="37" cy="40" r="2" fill="#2f7a5c"/><line x1="30" y1="26" x2="28" y2="52" stroke="#2f7a5c" stroke-width="1.5"/></svg>
+    <div class="case-body">
+    <span class="case-tag">以廣告為主・公關為輔</span>
+    <h3>案例一：手搖飲新品上市——五桐號（WooTea）</h3>
+    <div class="sub">情境：連鎖飲料店推出新口味，短時間衝高買氣，精準鎖定 18-25 歲消費者</div>
+    <p>多次與韓國插畫角色 Dinotaeng、Monchhichi、Care Bears 等 IP 聯名，新品上市前在 Instagram、Threads 投放高視覺吸引力的數位廣告，同時搭配便利商店通路聯名與大量網紅開箱短影音，在上市首週製造出門市大排長龍的短期爆發性業績。</p>
+    <p><b>教學重點：</b>付費、可控的 IP 聯名廣告負責精準觸及與短期轉換，KOL 開箱與社群打卡挑戰則負責免費的二次傳播——廣告與公關不是互斥的。</p>
+    </div>
+  </div>
+
+  <div class="case-card c2">
+    <svg class="case-icon" viewBox="0 0 64 64"><rect x="14" y="12" width="36" height="44" rx="3" fill="#b3541e" opacity=".12"/><rect x="14" y="12" width="36" height="44" rx="3" fill="none" stroke="#b3541e" stroke-width="2"/><line x1="20" y1="22" x2="44" y2="22" stroke="#b3541e" stroke-width="2"/><line x1="20" y1="30" x2="44" y2="30" stroke="#b3541e" stroke-width="2"/><line x1="20" y1="38" x2="36" y2="38" stroke="#b3541e" stroke-width="2"/><circle cx="32" cy="48" r="5" fill="none" stroke="#b3541e" stroke-width="2"/><path d="M30 48 L31.5 49.5 L34.5 46.5" stroke="#b3541e" stroke-width="1.6" fill="none"/></svg>
+    <div class="case-body">
+    <span class="case-tag">純公關操作</span>
+    <h3>案例二：餐飲食安危機——王品集團「初瓦、嚮辣」事件</h3>
+    <div class="sub">情境：餐飲業者被爆出衛生糾紛，社群負評擴散，需極短時間內回應</div>
+    <p>2024 年 4 月，王品集團旗下「初瓦」與「嚮辣」西門店傳出疑似食物中毒，通報就醫人數從個位數擴大到 56 人、最終累計超過百人。王品第一時間發出致歉信，明確表示「沒有任何理由推諉責任」，兩店自主停業清消，並提出退費、醫療給付、消費者慰問金三種關懷方案，全程沒有投放任何廣告。</p>
+    <p><b>教學重點：</b>危機時刻絕對不能打廣告——此時投放廣告會被解讀成「不思悔改、只想花錢蓋新聞」。可逐句拆解致歉信結構：認錯 → 說明處理進度 → 具體補償方案 → 感謝監督。</p>
+    <details class="w5-details">
+      <summary>教材附錄：王品 4/11 完整關懷聲明 5W 拆解（供第 6 週使用）</summary>
+      <div class="w5-body">
+        <p><b>Who：</b>王品集團官方粉專「家人生活圈」以集團名義發布，非單一分店。</p>
+        <p><b>What：</b>疾管署初步認定 4/2-4/6 停業期間疑似諾羅病毒群聚感染；公布三項關懷方案——①停業前有消費證明者全額退費 ②4/2-4/11 期間就醫可憑證明實報實付 ③消費者慰問金依個別狀況處理。</p>
+        <p><b>When：</b>事件發生於 4/2-4/6，這則更完整的聲明在 4/11 發布，退款預計 4/18 起以現金撥付且不設辦理期限。</p>
+        <p><b>Where：</b>初瓦、嚮辣捷運西門店；並提及已聯繫海外（香港）顧客討論退款方式。</p>
+        <p><b>Why：</b>衛生局持續接獲陳情、感染科醫師公開說明病程，集團需要用具體方案取代第一則聲明的口頭道歉。</p>
+        <p><b>How：</b>透過官方臉書自有管道（非付費廣告）發布，語氣強調「無論感染源為何都是我們的責任」，並歡迎持續監督。</p>
+      </div>
+    </details>
+    </div>
+  </div>
+
+  <div class="case-card c3">
+    <svg class="case-icon" viewBox="0 0 64 64"><path d="M32 10 L50 22 L50 40 Q50 50 32 56 Q14 50 14 40 L14 22 Z" fill="#6b4f8f" opacity=".12" stroke="#6b4f8f" stroke-width="2"/><path d="M24 26 Q32 20 40 26" stroke="#6b4f8f" stroke-width="2" fill="none"/><path d="M22 34 Q32 27 42 34" stroke="#6b4f8f" stroke-width="2" fill="none"/><path d="M24 42 Q32 36 40 42" stroke="#6b4f8f" stroke-width="2" fill="none"/></svg>
+    <div class="case-body">
+    <span class="case-tag">深度公關（關係經營）</span>
+    <h3>案例三：地方創生品牌的長期經營——甘樂文創（新北三峽）</h3>
+    <div class="sub">情境：地方創生品牌想花三年以上，建立「用心經營在地」的長期形象</div>
+    <p>從陪伴在地弱勢孩童、改造百年古厝，到串聯藍染、製鼓、打鐵等在地職人工藝，把真實地方生活轉化為品牌故事，長期與微笑台灣、天下雜誌等媒體及地方創生社群保持互動，透過媒體主動的專題報導，逐步建立深度信任，而不是靠付費廣告推銷。</p>
+    <p><b>教學重點：</b>資源有限的地方品牌無法靠砸廣告預算取勝，靠的是數年累積的第三方信任，這是短期廣告難以複製的護城河。</p>
+    </div>
+  </div>
+
+  <div class="section-title"><h2>延伸案例：MICE 產業裡的公關與廣告</h2><div class="rule"></div></div>
+  <p>MICE（會展產業）是高度依賴廣告與公關互相搭配的商務觀光領域，適合觀光／會展相關科系班級加開討論。</p>
+  <div class="mice-grid">
+    <div class="mice-card"><svg class="mice-icon" viewBox="0 0 40 40"><rect x="8" y="14" width="24" height="18" rx="2" fill="none" stroke="#0d2b45" stroke-width="1.6"/><line x1="8" y1="20" x2="32" y2="20" stroke="#0d2b45" stroke-width="1.6"/><circle cx="14" cy="16.8" r="1.2" fill="#0d2b45"/><path d="M12 27 L17 22 L21 25 L28 18" stroke="#c9962c" stroke-width="1.8" fill="none"/></svg><span class="tag">偏廣告</span><h4>SEMICON Taiwan 國際半導體展</h4><p>精準數位廣告鎖定 LinkedIn 與產業關鍵字，衝高特定族群的報名轉換率，邏輯與手搖飲新品上市類似。</p></div>
+    <div class="mice-card"><svg class="mice-icon" viewBox="0 0 40 40"><circle cx="14" cy="14" r="4" fill="none" stroke="#0d2b45" stroke-width="1.6"/><circle cx="26" cy="14" r="4" fill="none" stroke="#0d2b45" stroke-width="1.6"/><circle cx="20" cy="24" r="4" fill="none" stroke="#0d2b45" stroke-width="1.6"/><path d="M14 18 L18 22 M26 18 L22 22" stroke="#0d2b45" stroke-width="1.4"/><path d="M20 28 L20 32 M10 30 Q20 34 30 30" stroke="#c9962c" stroke-width="1.6" fill="none"/></svg><span class="tag">純公關</span><h4>跨國企業萬人獎勵旅遊</h4><p>與地方政府跨部會無縫協調，現場一旦出狀況須極短時間內平息爭議，邏輯接近王品危機處理。</p></div>
+    <div class="mice-card"><svg class="mice-icon" viewBox="0 0 40 40"><path d="M20 6 L20 34" stroke="#0d2b45" stroke-width="1.6"/><path d="M20 8 L32 12 L20 16 Z" fill="#c9962c" opacity=".8"/><rect x="12" y="34" width="16" height="3" rx="1" fill="#0d2b45"/><circle cx="20" cy="6" r="2" fill="#0d2b45"/></svg><span class="tag">深度公關</span><h4>MEET TAIWAN 國家會展品牌</h4><p>花數年參與國際專業展、爭取權威媒體報導，累積深度信任，邏輯與甘樂文創的三年深耕如出一轍。</p></div>
+  </div>
+
+  <div class="section-title"><h2>討論題</h2><div class="rule"></div></div>
+  <ul class="plain">
+    <li>五桐號、王品、甘樂文創三個案例，哪一個花的行銷成本最低、卻換來最深的長期信任？為什麼？</li>
+    <li>有沒有一種情境，公關跟廣告需要同時搭配使用，而不是二選一？（提示：回頭看五桐號案例）</li>
+    <li>對一間資源有限的小公司來說，為什麼常常是行銷人員兼著做公關，而不是一開始就設專職公關部門？</li>
+  </ul>
+
+  <div class="section-title"><h2>隨堂檢核</h2><div class="rule"></div></div>
+  <p style="font-size:13px;color:var(--mute);margin-top:-8px;">投影樣式模擬 Slido 現場投票的呈現方式；此頁面為單機示範，不連動真實 Slido 帳號，若要開放全班手機即時作答，建議把下方題目匯入實際的 Slido 投票。</p>
+
+  <div class="slido-card">
+    <div class="slido-top">
+      <span class="slido-badge">現場投票</span>
+      <div class="slido-dots" id="slidoDots"></div>
+    </div>
+    <p class="slido-q" id="slidoQ"></p>
+    <div class="slido-opts" id="slidoOpts"></div>
+    <div class="slido-nav">
+      <button class="slido-btn ghost" id="slidoPrev" onclick="slidoNav(-1)">上一題</button>
+      <span class="slido-count" id="slidoCount"></span>
+      <button class="slido-btn" id="slidoNext" onclick="slidoNav(1)">下一題</button>
+    </div>
+  </div>
+
+
+  <div class="section-title"><h2>與第 1-18 週課程的關聯性</h2><div class="rule"></div></div>
+  <div class="connect-block"><p><b>單元③（第 4 週）</b>：王品案例是完整的議題生命週期樣本——從個位數通報到破百人，可回頭問學生「通報只有 7 人時，看不看得出這會擴大成危機」。</p></div>
+  <div class="connect-block"><p><b>單元④（第 6 週）</b>：王品致歉信本身是現成的新聞稿範本，可用 5W 架構直接拆解。</p></div>
+  <div class="connect-block"><p><b>單元⑥（第 10 週）</b>：王品的責任歸屬爭議與三種關懷方案，是談判原則的先修案例。</p></div>
+  <div class="connect-block"><p><b>單元⑦（第 11 週）</b>：五桐號 IP 聯名與甘樂文創在地活動，是主動創造話題傳播的範例，與單元③的「防守議題」形成鏡像對照。</p></div>
+  <div class="connect-block"><p><b>單元⑧（第 12 週）</b>：五桐號在 Threads、Instagram 的操作，直接對應自媒體平台特性與內容策略。</p></div>
+  <div class="connect-block"><p><b>單元⑨（第 13 週）</b>：甘樂文創的多年關係經營，以及 MICE 案例二的跨部會協調，把「找異業夥伴」延伸到「找政府夥伴」。</p></div>
+  <div class="connect-block"><p><b>單元⑤／⑩（期中期末報告）</b>：觀光餐旅相關組別可直接參考 MICE 三個延伸案例作為企劃案架構模板。</p></div>
+
+  <div class="section-title"><h2>需要準備的教材</h2><div class="rule"></div></div>
+  <ul class="plain">
+    <li>黑板或投影片：公關 vs. 廣告對照表（先留白讓學生填，再公布答案）</li>
+    <li>三個真實案例的簡報頁（五桐號 IP 聯名廣告截圖、王品致歉信全文、甘樂文創活動照片或報導截圖）</li>
+    <li>選用：MICE 延伸段落的補充投影片（適合觀光/會展相關科系班級）</li>
+  </ul>
+
+</main>
+
+<footer>
+  資料來源：104學習・Storm.mg・中央社 CNA・潮健康 Cool Health・微笑台灣・roomie.tw・女人我最大・WooTea 官方，以及 492413 媒體公關實務課程主題關聯圖（授課教師 謝兆貞）
+</footer>
+
+<script>
+const slidoQuestions = [
+  {
+    q: "1. 以下哪一項最能區分公關與廣告？",
+    opts: [
+      { text: "公關一定比廣告便宜", pct: 12 },
+      { text: "廣告是付費且可控制媒體，公關是不可控制的新聞媒體", pct: 71, correct: true },
+      { text: "公關只能用在危機處理", pct: 17 }
+    ]
+  },
+  {
+    q: "2. 行銷（Marketing）與公關、廣告的關係是？",
+    opts: [
+      { text: "三者互相獨立、沒有關聯", pct: 8 },
+      { text: "行銷是上位概念，公關與廣告是行銷底下的兩種溝通管道", pct: 79, correct: true },
+      { text: "公關包含行銷與廣告", pct: 13 }
+    ]
+  },
+  {
+    q: "3. 一個品牌花錢請網紅業配產品，最接近下列哪一類？",
+    opts: [
+      { text: "典型的公關操作，因為透過第三方（網紅）發聲", pct: 34 },
+      { text: "較接近廣告／行銷傳播，因為內容付費且可控制", pct: 58, correct: true },
+      { text: "兩者都不算，業配是全新的第四種類別", pct: 8 }
+    ]
+  }
+];
+
+let slidoIdx = 0;
+
+function renderSlido(){
+  const item = slidoQuestions[slidoIdx];
+  document.getElementById('slidoQ').textContent = item.q;
+  document.getElementById('slidoCount').textContent = `第 ${slidoIdx+1} / ${slidoQuestions.length} 題`;
+  document.getElementById('slidoPrev').disabled = slidoIdx === 0;
+  document.getElementById('slidoNext').textContent = slidoIdx === slidoQuestions.length - 1 ? '完成' : '下一題';
+
+  const dots = document.getElementById('slidoDots');
+  dots.innerHTML = '';
+  slidoQuestions.forEach((_, i) => {
+    const d = document.createElement('span');
+    if (i === slidoIdx) d.classList.add('active');
+    dots.appendChild(d);
+  });
+
+  const opts = document.getElementById('slidoOpts');
+  opts.innerHTML = '';
+  item.opts.forEach((o, i) => {
+    const el = document.createElement('div');
+    el.className = 'slido-opt';
+    el.innerHTML = `<div class="fill"></div><div class="opt-row"><span>${o.text}</span><span class="pct">${o.pct}%</span></div>`;
+    el.onclick = () => voteSlido(el, item);
+    opts.appendChild(el);
+  });
+}
+
+function voteSlido(clickedEl, item){
+  const opts = document.querySelectorAll('#slidoOpts .slido-opt');
+  opts.forEach((el, i) => {
+    el.classList.add('disabled', 'voted');
+    el.onclick = null;
+    if (item.opts[i].correct) el.classList.add('correct');
+    requestAnimationFrame(() => { el.querySelector('.fill').style.width = item.opts[i].pct + '%'; });
+  });
+}
+
+function slidoNav(dir){
+  const next = slidoIdx + dir;
+  if (next < 0 || next >= slidoQuestions.length){
+    if (dir === 1) { slidoIdx = 0; renderSlido(); }
+    return;
+  }
+  slidoIdx = next;
+  renderSlido();
+}
+
+renderSlido();
+</script>
+
+</body>
+</html>
